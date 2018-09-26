@@ -1,43 +1,43 @@
 public class Cat {
-    private String _name;
-    private int _age;
-    private double _weight;
+    private String name;
+    private int age;
+    private double weight;
 
     /*===============================================
     Construtors
     ===============================================*/
     public Cat(String name, int age, double weight) {
-        _name = name;
-        _age = age;
-        _weight = weight;
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
     }
 
     public String getName() {
-        return _name;
+        return this.name;
     }
     public void setName(String name) {
-        _name = name;
+        this.name = name;
     }
 
     public int getAge() {
-        return _age;
+        return this.age;
     }
     public void setAge(int age) {
-        _age = age;
+        this.age = age;
     }
 
     public double getWeight() {
-        return _weight;
+        return this.weight;
     }
     public void setWeight(double weight) {
-        _weight = weight;
+        this.weight = weight;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o instanceof Cat) {
             Cat cat = (Cat) o;
-            return _name.equals(cat._name) && _age == cat._age && _weight == cat._weight;
+            return this.name.equals(cat.name) && this.age == cat.age && this.weight == cat.weight;
         }
         else {
             return false;
@@ -46,6 +46,6 @@ public class Cat {
 
     @Override
     public String toString() {
-        return _name + " is a " + _age + "yo cat with " + _weight + "kg";
+        return this.name + " is a " + this.age + "yo cat with " + this.weight + "kg";
     }
 }
