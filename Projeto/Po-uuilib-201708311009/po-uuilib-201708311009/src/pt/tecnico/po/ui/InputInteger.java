@@ -24,5 +24,4 @@ class InputInteger extends Input<Integer> {
     }
     return true;
   }
-
 }
