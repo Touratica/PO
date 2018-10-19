@@ -1,5 +1,6 @@
 package sth.app.main;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -15,7 +16,7 @@ import sth.SchoolManager;
 public class DoOpen extends Command<SchoolManager> {
 
   //FIXME add input fields if needed
-  
+  private BufferedReader _reader;
   /**
    * @param receiver
    */

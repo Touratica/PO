@@ -1,5 +1,7 @@
 package sth.app.person;
 
+import java.io.BufferedReader;
+
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Input;
 import sth.SchoolManager;
@@ -12,7 +14,7 @@ import sth.SchoolManager;
 public class DoChangePhoneNumber extends Command<SchoolManager> {
 
   //FIXME add input fields if needed
-
+  private BufferedReader _reader;
   /**
    * @param receiver
    */

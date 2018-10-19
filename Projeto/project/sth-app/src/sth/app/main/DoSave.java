@@ -1,5 +1,6 @@
 package sth.app.main;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 
 import pt.tecnico.po.ui.Command;
@@ -13,7 +14,7 @@ import sth.SchoolManager;
  */
 public class DoSave extends Command<SchoolManager> {
   //FIXME add input fields if needed
-
+  private BufferedWriter _writer;
   /**
    * @param receiver
    */
