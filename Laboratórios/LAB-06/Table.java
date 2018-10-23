@@ -18,18 +18,32 @@ public class Table implements Comparable<Table>, Iterable{
 		}
 	}
 
-	Iterator getIterator() {
-		return new TableIterator();
+	public Iterator getForwardIterator() {
+		return new ForwardIterator();
+	}
+	public Iterator getReverseIterator() {
+		return new ReverseIterator();
 	}
 
-	private class TableIterator implements Iterator {
-	
+	private class ForwardIterator implements Iterator {
 		int place = 0;
 		public boolean hasNext() {
-			return place < this.values.length;
+			return place < values.length;
 		}
 		public int next() {
-			return this.vector[place++];
+			return values[place++];
+		}
+	}
+
+	private class ReverseIterator implements Iterator {
+		int place = 0;
+
+		public boolean hasNext() {
+			return place < values.length;
+		}
+
+		public int next() {
+			return values[values.length - (1 + place++)];
 		}
 	}
 
@@ -49,7 +63,7 @@ public class Table implements Comparable<Table>, Iterable{
 	 * @return value at position
 	 */
 	public int getValue(int position) {
-		return this.vector[position];
+		return this.values[position];
 	}
 
 	/**
@@ -93,7 +107,7 @@ public class Table implements Comparable<Table>, Iterable{
 	}
 
 	public int getMax() {
-		max = this.values[0];
+		int max = this.values[0];
 		for (int i: this.values) {
 			if (i > max) {
 				max = i;

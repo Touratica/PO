@@ -1,3 +1,4 @@
 interface Iterable {
-	Iterator getIterator();
+	Iterator getForwardIterator();
+	Iterator getReverseIterator();
 }

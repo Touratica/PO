@@ -1,9 +1,9 @@
 public class App {
-
 	public static void main(String[] args) {
 		Table t = new Table(3); // table with 3 integers
 
 		t.setAll(90);
+		t.setValue(2, 2);
 
 		SelectionPredicate p1 = new GreaterThan(9);
 
@@ -19,6 +19,14 @@ public class App {
 		else
 			System.out.println("NO");
 		
-		Iterator it = t.getIterator();
+		Iterator it1 = t.getForwardIterator();
+		Iterator it2 = t.getReverseIterator();
+
+		while (it1.hasNext()) {
+			System.out.println(it1.next());
+		}
+		while (it2.hasNext()) {
+			System.out.println(it2.next());
+		}
 	}
 }
