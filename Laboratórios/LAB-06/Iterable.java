@@ -1,0 +1,3 @@
+interface Iterable {
+	Iterator getIterator();
+}
