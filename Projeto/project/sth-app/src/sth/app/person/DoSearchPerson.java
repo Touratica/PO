@@ -12,7 +12,8 @@ import sth.SchoolManager;
 public class DoSearchPerson extends Command<SchoolManager> {
 
   //FIXME add input fields if needed
-  
+  Input<String> _name;
+
   /**
    * @param receiver
    */

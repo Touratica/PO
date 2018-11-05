@@ -14,7 +14,8 @@ import sth.SchoolManager;
 public class DoChangePhoneNumber extends Command<SchoolManager> {
 
   //FIXME add input fields if needed
-  private BufferedReader _reader;
+  Input<Integer> _number;
+
   /**
    * @param receiver
    */
