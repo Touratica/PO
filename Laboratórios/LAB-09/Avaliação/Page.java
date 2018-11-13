@@ -1,12 +1,4 @@
-import java.util.ArrayList;
-
-public class Page extends Element {
-
-	private ArrayList<Element> _elements = new ArrayList<Element>();
-
-	public void addElement(Element e) {
-		_elements.add(e);
-	}
+public class Page extends Container {
 
 	@Override
 	public String render(int lvl, String identation) {

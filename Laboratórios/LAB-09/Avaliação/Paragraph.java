@@ -1,12 +1,4 @@
-import java.util.ArrayList;
-
-public class Paragraph extends Element {
-
-	private ArrayList<Element> _elements = new ArrayList<Element>();
-
-	public void addElement(Element e) {
-		_elements.add(e);
-	}
+public class Paragraph extends Container {
 
 	@Override
 	public String render(int lvl, String identation) {
@@ -15,7 +7,7 @@ public class Paragraph extends Element {
 			txt += identation;
 		}
 		txt += "<p>\n";
-		for (Element e : _elements) {
+		for (Element e: _elements) {
 			txt += e.render(lvl+1, identation) + "\n";
 		}
 		for (int i = 0; i < lvl; i++) {
