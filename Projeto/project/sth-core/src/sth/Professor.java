@@ -8,6 +8,6 @@ import java.util.ArrayList;
 public class Professor extends Person {
 
 	/** The disciplines lectured by the professor. */
-	private ArrayList<String> _disciplines = new ArrayList<String>();
+	private ArrayList<PairCourseDiscipline> _disciplines = new ArrayList<PairCourseDiscipline>();
 	
 }

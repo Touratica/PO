@@ -1,10 +1,12 @@
 package sth;
 
+import java.util.ArrayList;
+
 /**
  * Student
  */
 public class Student extends Person {
 
 	/** The disciplines taken by the student. */
-	private String[] _disciplines = new String[6]; 
+	private ArrayList<Discipline> _disciplines = new ArrayList<Discipline>(); 
 }

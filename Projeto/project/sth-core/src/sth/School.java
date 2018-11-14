@@ -2,14 +2,15 @@ package sth;
 
 //FIXME import other classes if needed
 
-import sth.exceptions.BadEntryException;
-import sth.exceptions.InvalidCourseSelectionException;
-import sth.exceptions.NoSuchPersonIdException;
-import sth.io.Serializable;
+import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
+import sth.exceptions.BadEntryException;
+import sth.exceptions.InvalidCourseSelectionException;
+import sth.exceptions.NoSuchPersonIdException;
+import sth.io.Serializable;
 
 /**
  * School implementation.
@@ -23,6 +24,9 @@ public class School implements Serializable {
 	
 	/** The school's people. */
 	private Map<Integer, Person> _people = new HashMap<Integer, Person>();
+
+	/** The school's disciplines */
+	private ArrayList<PairCourseDiscipline> _pairsCourseDiscipline = new ArrayList<PairCourseDiscipline>();
 
 	/** People counter. */
 	private int _peopleId = 0;
