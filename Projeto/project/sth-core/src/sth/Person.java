@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import sth.exceptions.BadEntryException;
 import sth.exceptions.DuplicateIdException;
-import sth.exceptions.NonSupportedIdException;
+import sth.exceptions.OutOfRangeIdException;
 
 /**
  * Every person in the school.
@@ -23,12 +23,12 @@ public abstract class Person implements Serializable {
 	private String _name;
 
 	
-	public void setId(int id) throws DuplicateIdException, NonSupportedIdException{
+	public void setId(int id) throws DuplicateIdException, OutOfRangeIdException{
 		if (IdExists(id)) 
 			throw new DuplicateIdException(id); 
 			//"Id Already Exists."
 		if (id < 100000)
-			throw new NonSupportedIdException(id);
+			throw new OutOfRangeIdException(id);
 			// "Id Lower than 100000."
 		_id = id;
 	}

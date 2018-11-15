@@ -20,7 +20,7 @@ public class RegularStudent extends Person implements Student {
 
 	/** Student's constructors */
 	
-	public RegularStudent(int id, int phone_nr, String name) throws DuplicateIdException, NonSupportedIdException{
+	public RegularStudent(int id, int phone_nr, String name) throws DuplicateIdException, OutOfRangeIdException{
 		this.setId(id);
 		this.setPhoneNumber(phone_nr);
 		this.setName(name);

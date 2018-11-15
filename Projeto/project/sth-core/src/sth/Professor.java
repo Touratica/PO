@@ -3,14 +3,12 @@ package sth;
 import java.util.Map;
 import java.util.TreeMap;
 
-import java.io.Serializable;
-
 import sth.exceptions.DuplicateDisciplineException;
 
 /**
  * Professor
  */
-public class Professor extends Person implements Serializable {
+public class Professor extends Person {
 
 	private static final long serialVersionUID = 201811151743L;
 
