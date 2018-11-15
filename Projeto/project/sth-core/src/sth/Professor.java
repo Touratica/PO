@@ -8,7 +8,7 @@ import sth.exceptions.DuplicateDisciplineException;
 /**
  * Professor
  */
-public class Professor extends Person {
+public class Professor extends Person{
 
 	private static final long serialVersionUID = 201811151743L;
 
@@ -16,9 +16,9 @@ public class Professor extends Person {
 	private Map <Course, Disciplines> _courses = new TreeMap<Course, Disciplines>();
 
 	//add Discipline may throw this exception from the addDiscipline
-	public void addCourseDiscipline(Course c, Discipline d) throws DuplicateDisciplineException{
+	public void addCourseDiscipline(Course c, Discipline discipline) throws DuplicateDisciplineException {
 		if (_courses.containsKey(c))
-			((Disciplines)(_courses.get(c))).addDiscipline(d);
-		else  _courses.put(c,new Disciplines(d));
+			((Disciplines)(_courses.get(c))).addDiscipline(discipline);
+		else  _courses.put(c,new Disciplines(discipline));
 	}
 }

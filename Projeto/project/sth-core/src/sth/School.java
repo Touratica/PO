@@ -48,32 +48,42 @@ public class School implements Serializable {
 	void importFile(String filename) throws IOException, BadEntryException {
 		//FIXME implement text file reader
 		int lineno = 0;
+		Person _lastImported;
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(filename));
 			String s;
+			String[] split; 
 
 			while ((s = in.readLine()) != null) {
 				String line  = new String(s.getBytes(), "UTF-8");
 				lineno++;
 				if (line.charAt(0) == '#') {
 					// FIXME: implement get disciplines agarrar o ponteiro para a ultima pessoa lida??
+					split = line.split("\\|");
+					split[0] = split[0].replaceAll("#\\ ", "");
+					try{
+					  addCourse(new Course(split[0]),new Discipline(split[1]));
+					} catch(DuplicateCourseException e){} //do nothing- its fine to import courses with the same name 
+
+					_lastImported.
+
 				}
-				String[] split = line.split("\\|");
+				split = line.split("\\|");
 				switch (split[0]) {
 					case "ALUNO":
-						addStudent(split);
+						_lastImported = addStudent(split);
 						break;
 				
 					case "DELEGADO":
-						addRepresentative(split);
+						_lastImported = addRepresentative(split);
 						break;
 				
 					case "FUNCIONÁRIO":
-						addAdministrative(split);
+						_lastImported = addAdministrative(split);
 						break;
 				
 					case "PROFESSOR":
-						addProfessor(split);
+						_lastImported = addProfessor(split);
 						break;
 				
 					default:
@@ -107,29 +117,28 @@ public class School implements Serializable {
 
 	/** addCourse: adds a course that doesn't exist in school */
 	public void addCourse(Course course, Disciplines disciplines)
-	throws DuplicateCourseException, NullPointerException{
+	throws NullPointerException{
 		if (!courseExists(course))
 			if(course != null)
 				_courses.put(course,disciplines);
-			else throw NullPointerException();
+			else throw new NullPointerException();
 		else throw new DuplicateCourseException(course);
-
 	}
 
-	public void addStudent(String[] s) throws NotMatchingCourseException, DuplicateIdException, OutOfRangeIdException {
+	public RegularStudent addStudent(String[] s) throws NotMatchingCourseException, DuplicateIdException, OutOfRangeIdException {
 		Student new_student = new RegularStudent(s[1],s[2],s[3]);
 		_people.put(new_student.getId(), new_student);
 
 	}
 
-	public void addRepresentative(String[] s){
+	public Student addRepresentative(String[] s){
 		
 	}
 
 	public void addAdministrative(String[] s){
 		
 	}
-	public void addProfessor(String[] s){
+	public Professor addProfessor(String[] s){
 		
 	}
 

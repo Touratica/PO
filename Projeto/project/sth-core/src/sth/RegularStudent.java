@@ -8,7 +8,7 @@ import sth.exceptions.NotMatchingCourseException;
 /**
  * The RegularStudent class.
  */
-public class RegularStudent extends Person implements Student {
+public class RegularStudent extends Person implements Student{
 
 	private static final long serialVersionUID = 201811151746L;
 
@@ -32,8 +32,8 @@ public class RegularStudent extends Person implements Student {
 		if (_course!=course) throw new NotMatchingCourseException();
 	}
 
-	
-	public void addDiscipline(Discipline discipline)throws DuplicateDisciplineException, DisciplineLimitExceeded{
+
+	public void addCourseDiscipline(Course c, Discipline discipline) throws DuplicateDisciplineException, DisciplineLimitExceeded{
 		for (Discipline d: _disciplines)
 			if (d.equals(discipline))
 				throw new DuplicateDisciplineException(discipline);
