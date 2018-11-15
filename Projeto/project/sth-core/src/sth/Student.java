@@ -6,9 +6,9 @@ import sth.exceptions.DuplicateDisciplineException;
 import sth.exceptions.NotMatchingCourseException;
 
 /**
- * The RegularStudent class.
+ * The Student class.
  */
-public class RegularStudent extends Person {
+public class Student extends Person {
 
 	private static final long serialVersionUID = 201811151746L;
 
@@ -20,7 +20,7 @@ public class RegularStudent extends Person {
 
 	/** Student's constructors */
 	
-	public RegularStudent(int id, int phone_nr, String name) throws DuplicateIdException, OutOfRangeIdException {
+	public Student(int id, int phone_nr, String name) throws DuplicateIdException, OutOfRangeIdException {
 		this.setId(id);
 		this.setPhoneNumber(phone_nr);
 		this.setName(name);

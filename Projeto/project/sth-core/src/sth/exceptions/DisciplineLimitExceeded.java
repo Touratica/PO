@@ -5,9 +5,9 @@ public class DisciplineLimitExceeded extends Exception{
   private static final long serialVersionUID = 201811151858L;
 
   private Discipline _discipline;
-  private RegularStudent _student;
+  private Student _student;
 
-  public DisciplineLimitExceeded(Discipline d, RegularStudent s){
+  public DisciplineLimitExceeded(Discipline d, Student s){
       _discipline = d;
       student = s;
   }

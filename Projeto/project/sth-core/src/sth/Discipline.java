@@ -17,7 +17,7 @@ public class Discipline implements Serializable{
 	private String _name;
 	private int _max_students = 300;
 	private List<Professor> _professors = new ArrayList<Professor>();
-	private List<RegularStudent> _students = new ArrayList<RegularStudent>();  
+	private List<Student> _students = new ArrayList<Student>();  
 
 	public Discipline(String name){
 			_name = name;
@@ -33,7 +33,7 @@ public class Discipline implements Serializable{
 		else throw new NoSuchPersonIdException(p.getId());
 	}
 
-	public addStudent(RegularStudent student) throws NoSuchPersonIdException, StudentLimitExceededException{
+	public addStudent(Student student) throws NoSuchPersonIdException, StudentLimitExceededException{
 		if (idExists(student.getId()))
 			if (_students.size() < _max_students)
 				_students.add(student);

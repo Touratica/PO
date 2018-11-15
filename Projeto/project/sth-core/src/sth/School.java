@@ -125,8 +125,8 @@ public class School implements Serializable {
 		else throw new DuplicateCourseException(course);
 	}
 
-	public RegularStudent addStudent(String[] s) throws NotMatchingCourseException, DuplicateIdException, OutOfRangeIdException {
-		Student new_student = new RegularStudent(s[1],s[2],s[3]);
+	public Student addStudent(String[] s) throws NotMatchingCourseException, DuplicateIdException, OutOfRangeIdException {
+		Student new_student = new Student(s[1],s[2],s[3]);
 		_people.put(new_student.getId(), new_student);
 
 	}
