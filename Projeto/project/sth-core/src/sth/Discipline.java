@@ -1,9 +1,48 @@
 package sth;
 
+import java.util.List;
+import java.util.ArrayList;
+
+import sth.exceptions.NoSuchPersonIdException;
+
 /**
  * The Discipline class.
  */
 public class Discipline {
 
 	private String _name;
+	private int _max_students = 300;
+	private List<Professor> _professors = new ArrayList<Professor>();
+	private List<RegularStudent> _students = new ArrayList<RegularStudent>();  
+
+	public Discipline(String name){
+			_name = name;
+	}
+
+	public String getDisciplineName(){
+		return _name;
+	}
+
+	public addProfessor(Professor prof) throws NoSuchPersonIdException{
+		if (idExists(p.getId()))
+			_professors.add(p);
+		else throw new NoSuchPersonIdException(p.getId());
+	}
+
+	public addStudent(RegularStudent student) throws NoSuchPersonIdException{
+		if (idExists(student.getId()))
+			if (_students.size() < _max_students)
+				_students.add(student);
+			 //FIXME else: throw Exception de limite excedido
+		else throw new NoSuchPersonIdException(student.getId());
+	}
+
+	@Override
+	public boolean equals(Object o){
+		if (o instanceof Discipline){
+			Discipline d = (Discipline) o;
+			return _name == o.getDisciplineName();
+		}
+		return false;
+	}
 }

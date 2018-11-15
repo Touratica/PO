@@ -2,11 +2,14 @@ package sth;
 
 //FIXME import other classes if needed
 
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.HashMap;
+
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.TreeMap;
+
 import sth.exceptions.BadEntryException;
 import sth.exceptions.InvalidCourseSelectionException;
 import sth.exceptions.NoSuchPersonIdException;
@@ -21,14 +24,15 @@ public class School implements Serializable {
 
 	//FIXME define object fields (attributes and, possibly, associations)
 	
-	/** The school's people. */
+	/** School's people. */
 	private Map<Integer, Person> _people = new HashMap<Integer, Person>();
 
-	/** The school's disciplines */
-	private ArrayList<PairCourseDiscipline> _pairsCourseDiscipline = new ArrayList<PairCourseDiscipline>();
+	/** School's disciplines */
+	//private ArrayList<PairCourseDiscipline> _pairsCourseDiscipline = new ArrayList<PairCourseDiscipline>();
+	private Map <Course, Disciplines> _courses = new TreeMap<Course, Disciplines>();
 
 	/** People counter. */
-	private int _peopleId = 0;
+	private int _nextId = 100000;
 
 	//FIXME implement constructors if needed
 	
@@ -75,12 +79,54 @@ public class School implements Serializable {
 						break;
 				}
 			}
-		} catch (Exeception e) {
+			in.close();
+		} catch (FileNotFoundExeception e) {
+
+		} catch (IOException e){
 
 		}
+
 
 	}
 	
 	//FIXME implement other methods
+
+	/** idExists : checks if  the given id already exists in school */
+	public bollean idExists(int id){
+		if (_people.get(id) == null)
+			return False;
+		return True;
+	}
+	/** courseExists : checks if  the given course already exists in school */
+	public bollean courseExists(Course course){
+		if (_courses.get(couse) == null)
+			return False;
+		return True;
+	}
+	/** addCourse: adds a course that doesn't exist in school */
+	public void addCourse(Course course, Disciplines disciplines)
+	throws BadEntryException{
+		if (!courseExists(course) && course != null)
+			_courses.put(course,disciplines);
+		else throw new BadEntryException("Course");
+
+	}
+
+	public void addStudent(String[] s){
+
+	}
+
+	public void addRepresentative(String[] s){
+		
+	}
+
+	public void addAdministrative(String[] s){
+		
+	}
+	public void addProfessor(String[] s){
+		
+	}
+
+
 
 }

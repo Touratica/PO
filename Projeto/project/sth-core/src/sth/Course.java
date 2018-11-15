@@ -6,4 +6,8 @@ package sth;
 public class Course {
 
 	private String _name;
+
+	public Course(String name){
+		
+	}
 }
