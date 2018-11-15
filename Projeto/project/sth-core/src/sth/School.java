@@ -10,7 +10,10 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+import java.io.Serializable;
+
 import sth.exceptions.BadEntryException;
+import sth.exceptions.DuplicateCourseException;
 import sth.exceptions.InvalidCourseSelectionException;
 import sth.exceptions.NoSuchPersonIdException;
 
@@ -20,7 +23,7 @@ import sth.exceptions.NoSuchPersonIdException;
 public class School implements Serializable {
 
 	/** Serial number for serialization. */
-	private static final long serialVersionUID = 201810051538L;
+	private static final long serialVersionUID = 201811151733L;
 
 	//FIXME define object fields (attributes and, possibly, associations)
 	
@@ -28,7 +31,6 @@ public class School implements Serializable {
 	private Map<Integer, Person> _people = new HashMap<Integer, Person>();
 
 	/** School's disciplines */
-	//private ArrayList<PairCourseDiscipline> _pairsCourseDiscipline = new ArrayList<PairCourseDiscipline>();
 	private Map <Course, Disciplines> _courses = new TreeMap<Course, Disciplines>();
 
 	/** People counter. */
@@ -105,10 +107,12 @@ public class School implements Serializable {
 	}
 	/** addCourse: adds a course that doesn't exist in school */
 	public void addCourse(Course course, Disciplines disciplines)
-	throws BadEntryException{
-		if (!courseExists(course) && course != null)
-			_courses.put(course,disciplines);
-		else throw new BadEntryException("Course");
+	throws DuplicateCourseException, NullPointerException{
+		if (!courseExists(course))
+			if(course != null)
+				_courses.put(course,disciplines);
+			else throw NullPointerException();
+		else throw new DuplicateCourseException("Course");
 
 	}
 

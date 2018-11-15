@@ -7,6 +7,8 @@ import java.util.ArrayList;
  */
 public class RegularStudent extends Person implements Student {
 
+	private static final long serialVersionUID = 201811151746L;
+
 	/** Students's course */
 	private Course _course;
 

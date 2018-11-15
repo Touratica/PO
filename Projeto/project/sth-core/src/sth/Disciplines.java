@@ -1,20 +1,30 @@
 package sth;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
+
+import sth.exceptions.DuplicateDisciplineException;
 
 /**
  * The Disciplines class.
  */
-public class Disciplines {
+public class Disciplines implements Serializable{
 
-    private List<Discipline> _disciplines = new ArrayList<Discipline>();
+    private static final long serialVersionUID = 201811151740L;
+
+    private List<Discipline> _disciplines;
+
+    public Disciplines(Discipline d){
+        _disciplines = new ArrayList<Discipline>();
+        _disciplines.add(d);
+
+    }
     
-    //FIXME add discipline throws DuplicateDisciplineException
-    public void addDiscipline(Discipline discipline){
+    public void addDiscipline(Discipline discipline) throws DuplicateDisciplineException{
         for(Discipline d: _disciplines)
-            if  (d.equals(discipline))
-                //FIXME throw exception 
+            if (d.equals(discipline))
+                throw new DuplicateDisciplineException(discipline);
         _disciplines.add(d);
     }
 

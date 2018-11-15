@@ -3,13 +3,17 @@ package sth;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.io.Serializable;
+
 import sth.exceptions.NoSuchPersonIdException;
+import sth.exceptions.StudentLimitExceededException;
 
 /**
  * The Discipline class.
  */
-public class Discipline {
+public class Discipline implements Serializable{
 
+	private static final long serialVersionUID = 201811151734L;
 	private String _name;
 	private int _max_students = 300;
 	private List<Professor> _professors = new ArrayList<Professor>();
@@ -29,11 +33,11 @@ public class Discipline {
 		else throw new NoSuchPersonIdException(p.getId());
 	}
 
-	public addStudent(RegularStudent student) throws NoSuchPersonIdException{
+	public addStudent(RegularStudent student) throws NoSuchPersonIdException, StudentLimitExceededException{
 		if (idExists(student.getId()))
 			if (_students.size() < _max_students)
 				_students.add(student);
-			 //FIXME else: throw Exception de limite excedido
+			else throw new StudentLimitExceededException(student);
 		else throw new NoSuchPersonIdException(student.getId());
 	}
 

@@ -3,7 +3,9 @@ package sth;
 /**
  * StudentDecorator
  */
-public abstract class StudentDecorator implements Student {
+public abstract class StudentDecorator extends Person implements Student {
+
+	private static final long serialVersionUID = 201811151750L;
 
 	/** The student that will get decorated. */
 	private Student _student;
