@@ -1,11 +1,74 @@
 package sth;
 
+import java.util.ArrayList;
+
+import sth.exceptions.DuplicateDisciplineException;
+import sth.exceptions.NotMatchingCourseException;
+
 /**
- * The Student interface
+ * The RegularStudent class.
  */
+public class RegularStudent extends Person {
 
+	private static final long serialVersionUID = 201811151746L;
 
-public interface Student {
+	/** Students's course */
+	private Course _course;
 
+	/** Disciplines taken by the student. */
+	private ArrayList<Discipline> _disciplines = new ArrayList<Discipline>(); 
+
+	/** Student's constructors */
 	
+	public RegularStudent(int id, int phone_nr, String name) throws DuplicateIdException, OutOfRangeIdException {
+		this.setId(id);
+		this.setPhoneNumber(phone_nr);
+		this.setName(name);
+	}
+
+	/**
+	 * @param course the course to set
+	 */
+	public void setCourse(Course course) throws NotMatchingCourseException {
+		if (_course == null)
+			_course = course;
+		if (_course != course) throw new NotMatchingCourseException();
+	}
+
+	/**
+	 * @return the student's course.
+	 */
+	public Course getCourse() {
+		return _course;
+	}
+	
+	public void addDiscipline(Discipline discipline) throws DuplicateDisciplineException, DisciplineLimitExceeded {
+		for (Discipline d: _disciplines) {
+			if (d.equals(discipline)) {
+				throw new DuplicateDisciplineException(discipline);
+			}
+		}
+		if (_disciplines.size() < 6) {
+			_disciplines.add(discipline);
+		}
+		else {
+			throw new DisciplineLimitExceeded(discipline,this);
+		}
+	}
+	
+	void createSurvey(Project project) {
+		// FIXME
+	}
+
+	void deleteSurvey(Survey survey) {
+		// FIXME
+	}
+
+	void openSurvey(Survey survey) {
+		// FIXME
+	}
+
+	void closeSurvey(Survey survey) {
+		// FIXME
+	}
 }
