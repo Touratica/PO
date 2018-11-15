@@ -1,12 +1,9 @@
 package sth;
 
-import java.util.ArrayList;
-
 /**
- * Student
+ * The Student interface
  */
-public class Student extends Person {
+public interface Student extends Person {
 
-	/** The disciplines taken by the student. */
-	private ArrayList<Discipline> _disciplines = new ArrayList<Discipline>(); 
+	
 }

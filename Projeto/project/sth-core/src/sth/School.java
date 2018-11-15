@@ -10,7 +10,6 @@ import java.util.Map;
 import sth.exceptions.BadEntryException;
 import sth.exceptions.InvalidCourseSelectionException;
 import sth.exceptions.NoSuchPersonIdException;
-import sth.io.Serializable;
 
 /**
  * School implementation.
