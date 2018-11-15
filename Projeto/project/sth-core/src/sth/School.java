@@ -56,7 +56,7 @@ public class School implements Serializable {
 				String line  = new String(s.getBytes(), "UTF-8");
 				lineno++;
 				if (line.charAt(0) == '#') {
-					// FIXME: implement get disciplines
+					// FIXME: implement get disciplines agarrar o ponteiro para a ultima pessoa lida??
 				}
 				String[] split = line.split("\\|");
 				switch (split[0]) {
@@ -91,7 +91,6 @@ public class School implements Serializable {
 
 	}
 	
-	//FIXME implement other methods
 
 	/** idExists : checks if  the given id already exists in school */
 	public bollean idExists(int id){
@@ -105,6 +104,7 @@ public class School implements Serializable {
 			return False;
 		return True;
 	}
+
 	/** addCourse: adds a course that doesn't exist in school */
 	public void addCourse(Course course, Disciplines disciplines)
 	throws DuplicateCourseException, NullPointerException{
@@ -116,7 +116,9 @@ public class School implements Serializable {
 
 	}
 
-	public void addStudent(String[] s){
+	public void addStudent(String[] s) throws NotMatchingCourseException, DuplicateIdException, NonSupportedIdException{
+		Student new_student = new RegularStudent(s[1],s[2],s[3]);
+		_people.put(new_student.getId(), new_student);
 
 	}
 

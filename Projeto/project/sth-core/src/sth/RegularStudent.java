@@ -2,6 +2,9 @@ package sth;
 
 import java.util.ArrayList;
 
+import sth.exceptions.DuplicateDisciplineException;
+import sth.exceptions.NotMatchingCourseException;
+
 /**
  * The RegularStudent class.
  */
@@ -17,22 +20,26 @@ public class RegularStudent extends Person implements Student {
 
 	/** Student's constructors */
 	
-	public Student(int id, int phone_nr, String name){
+	public RegularStudent(int id, int phone_nr, String name) throws DuplicateIdException, NonSupportedIdException{
 		this.setId(id);
 		this.setPhoneNumber(phone_nr);
 		this.setName(name);
 	}
 
-	//FIXME adicionar excecoes aqui
-	public void setCourse(Course course){
+	public void setCourse(Course course) throws NotMatchingCourseException{
 		if (_course == null)
 			_course = course;
+		if (_course!=course) throw new NotMatchingCourseException();
 	}
 
-	//FIXME adicionar excecoes aqui
-	public void addDiscipline(Discipline d){
+	
+	public void addDiscipline(Discipline discipline)throws DuplicateDisciplineException, DisciplineLimitExceeded{
+		for (Discipline d: _disciplines)
+			if (d.equals(discipline))
+				throw new DuplicateDisciplineException(discipline);
 		if (_disciplines.size() < 6)
-        	_disciplines.add(d);
+			_disciplines.add(discipline);
+		else throw new DisciplineLimitExceeded(discipline,this);
 	}
 	
 	/**
