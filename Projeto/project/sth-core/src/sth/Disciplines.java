@@ -1,6 +1,5 @@
 package sth;
 
-import java.util.List;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -13,7 +12,7 @@ public class Disciplines implements Serializable{
 
     private static final long serialVersionUID = 201811151740L;
 
-    private List<Discipline> _disciplines;
+    private ArrayList<Discipline> _disciplines;
 
     public Disciplines(){
         _disciplines = new ArrayList<Discipline>();
@@ -31,7 +30,10 @@ public class Disciplines implements Serializable{
 	 * @return disciplines - this function is used 
      * only within a corresponding course.
  	 */
-	public Discipline getDisciplines() {
+	public ArrayList<Discipline> getDisciplines() {
 		return _disciplines;
-	}
+    }
+    
+   
+    
 }

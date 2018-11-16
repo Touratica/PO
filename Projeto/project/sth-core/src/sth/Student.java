@@ -1,6 +1,8 @@
 package sth;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import sth.exceptions.DuplicateDisciplineException;
 import sth.exceptions.NotMatchingCourseException;
@@ -74,4 +76,22 @@ public class Student extends Person {
 	public Boolean isRepresentative() {
 		return _course.getRepresentatives().contains(this);
 	}
+
+	@Override
+	public String toString() {
+		String s = "";
+		ArrayList<String> disciplines = new ArrayList<String>();
+		for (Discipline d : _disciplines){
+			disciplines.add(d.toString());
+		}
+		Collections.sort(disciplines, Collator.getInstance(locale));
+		if (this.isRepresentative())
+			s+= "DELEGADO|" + super.toString();
+		else s+= "ALUNO|" + super.toString();
+		for (String d : disciplines) //disciplines is already sorted
+			s+= "\n* " + _course.toString() + " - " + d;
+		return s; 
+
+	}
+    
 }

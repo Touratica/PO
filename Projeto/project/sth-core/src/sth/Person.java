@@ -58,5 +58,10 @@ public abstract class Person implements Serializable {
 
 	}
 
+	@Override
+	public String toString() {
+		return  _id + "|" + _phoneNumber + "|" +  _name;
+	}
+
 	
 }

@@ -22,7 +22,7 @@ public class Professor extends Person {
 	//add Discipline may throw this exception from the addDiscipline
 	public void addCourseDiscipline(Course c, Discipline discipline) throws DuplicateDisciplineException {
 		if (_disciplines.containsKey(c))
-			((Disciplines)(_disciplines.get(c))).addDiscipline(discipline);
+			_disciplines.get(c).addDiscipline(discipline);
 		else  _disciplines.put(c,new Disciplines(discipline));
 	}
 
@@ -32,5 +32,15 @@ public class Professor extends Person {
 	public Map<Course, Disciplines> getCourses() {
 		return _disciplines;
 	}
+
+	@Override
+	public String toString() {
+		String s = "DOCENTE|" + super.toString() ;
+		for (Map.Entry<Course,Disciplines> entry : _disciplines.entrySet())
+			for (Discipline d : entry.getValue().getDisciplines())
+				s+= "\n* " + entry.getKey() + " - " + d.toString();
+		return s;
+	}
+    
 
 }

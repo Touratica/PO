@@ -33,13 +33,6 @@ public class Discipline implements Serializable{
 		return _name;
 	}
 
-	/**
-	 * @return the course to which the discipline is associated
-	 */
-	public Course getCourse() {
-		return _course;
-	}
-
 	public addProfessor(Professor prof) throws NoSuchPersonIdException{
 		if (idExists(p.getId()))
 			_professors.add(p);
@@ -71,4 +64,10 @@ public class Discipline implements Serializable{
 		}
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return  _name;
+	}
+    
 }

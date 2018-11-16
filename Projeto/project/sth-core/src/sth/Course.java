@@ -44,4 +44,10 @@ public class Course	implements Serializable {
 			_representatives.add(student);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return _name ;
+	}
+    
 }
