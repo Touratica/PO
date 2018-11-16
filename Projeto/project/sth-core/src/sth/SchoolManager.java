@@ -5,8 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-import com.sun.tools.javac.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
 
 import sth.exceptions.BadEntryException;
 import sth.exceptions.ImportFileException;
@@ -119,6 +120,14 @@ public class SchoolManager {
 	}
 
 	public ArrayList<Person> searchPerson(String name) {
-		
+		ArrayList<Person> filteredPeople = new ArrayList<Person>();
+		for (Map.Entry<Integer, Person> entry: _school.getPeople().entrySet()) {
+			if (entry.getValue().getName().toLowerCase().contains(name.toLowerCase())) {
+				filteredPeople.add(entry.getValue());
+			}
+		}
+		Collections.sort(filteredPeople, Person.NAME_COMPARATOR);
+
+		return filteredPeople;
 	}
 }

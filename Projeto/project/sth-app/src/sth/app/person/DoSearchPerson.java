@@ -31,7 +31,7 @@ public class DoSearchPerson extends Command<SchoolManager> {
 	public final void execute() {
 		try {
 			_form.parse();
-			Collection<Person> people = _receiver.searchPerson(_name);
+			Collection<Person> people = _receiver.searchPerson(_name.value());
 			for (Person person: people) {
 				_display.addLine(person.toString());
 			}

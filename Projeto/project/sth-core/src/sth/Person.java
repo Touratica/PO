@@ -1,6 +1,8 @@
 package sth;
 
 import java.io.Serializable;
+import java.text.Collator;
+import java.util.Comparator;
 
 import sth.exceptions.BadEntryException;
 import sth.exceptions.DuplicateIdException;
@@ -21,6 +23,10 @@ public abstract class Person implements Serializable {
 
 	/** The person's name. */
 	private String _name;
+
+	/** The Person class comparators. */
+	public final static Comparator<Person> NAME_COMPARATOR = new NameComparator();
+	public final static Comparator<Person> ID_COMPARATOR = new IdComparator();
 
 	/**
 	 * The 
@@ -58,5 +64,33 @@ public abstract class Person implements Serializable {
 
 	}
 
+	/**
+	 * @return the person's name.
+	 */
+	public String getName() {
+		return _name;
+	}
+
+	/**
+	 * @return the person's id.
+	 */
+	public int getId() {
+		return _id;
+	}
+
+	private static class NameComparator implements Comparator<Person> {
 	
+		@Override
+		public int compare(Person person1, Person person2) {
+			return Collator.getInstance(locale).compare(person1.getName(), person2.getName());
+		}
+	}
+
+	private static class IdComparator implements Comparator<Person> {
+
+		@Override
+		public int compare(Person person1, Person person2) {
+			return person1.getId() - person2.getId();
+		}
+	}
 }
