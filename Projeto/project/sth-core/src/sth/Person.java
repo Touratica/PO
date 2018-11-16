@@ -22,7 +22,21 @@ public abstract class Person implements Serializable {
 	/** The person's name. */
 	private String _name;
 
-	
+	/**
+	 * The 
+	 * 
+	 * @param id
+	 * @param phoneNumber
+	 * @param name
+	 * @throws DuplicateIdException
+	 * @throws OutOfRangeIdException
+	 */
+	public Person(int id, int phoneNumber, String name) throws DuplicateIdException, OutOfRangeIdException {
+		this.setId(id);
+		this.setPhoneNumber(phoneNumber);
+		this.setName(name);
+	}
+
 	public void setId(int id) throws DuplicateIdException, OutOfRangeIdException{
 		if (IdExists(id)) 
 			throw new DuplicateIdException(id); 

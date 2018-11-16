@@ -15,7 +15,7 @@ public class Discipline implements Serializable{
 
 	private static final long serialVersionUID = 201811151734L;
 	private String _name;
-	private int _max_students = 300;
+	private static final int MAX_STUDENTS = 300;
 	private List<Professor> _professors = new ArrayList<Professor>();
 	private List<Student> _students = new ArrayList<Student>();  
 
@@ -27,6 +27,13 @@ public class Discipline implements Serializable{
 		return _name;
 	}
 
+	/**
+	 * @return the course to which the discipline is associated
+	 */
+	public Course getCourse() {
+		return _course;
+	}
+
 	public addProfessor(Professor prof) throws NoSuchPersonIdException{
 		if (idExists(p.getId()))
 			_professors.add(p);
@@ -35,7 +42,7 @@ public class Discipline implements Serializable{
 
 	public addStudent(Student student) throws NoSuchPersonIdException, StudentLimitExceededException{
 		if (idExists(student.getId()))
-			if (_students.size() < _max_students)
+			if (_students.size() < MAX_STUDENTS)
 				_students.add(student);
 			else throw new StudentLimitExceededException(student);
 		else throw new NoSuchPersonIdException(student.getId());

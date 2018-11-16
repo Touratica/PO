@@ -15,9 +15,8 @@ public class Disciplines implements Serializable{
 
     private List<Discipline> _disciplines;
 
-    public Disciplines(Discipline d){
+    public Disciplines(){
         _disciplines = new ArrayList<Discipline>();
-        _disciplines.add(d);
 
     }
     

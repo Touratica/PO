@@ -3,6 +3,9 @@ package sth;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import sth.exceptions.AlreadyRepresentativeException;
+import sth.exceptions.RepresentativeNumberExceeded;
+
 /**
  * The Course class.
  */
@@ -25,5 +28,17 @@ public class Course	implements Serializable {
 	 */
 	public ArrayList<Student> getRepresentatives() {
 		return _representatives;
+	}
+
+	public void setRepresentative(Student student) throws AlreadyRepresentativeException, RepresentativeNumberExceeded {
+		if (_representatives.contains(student)) {
+			throw new AlreadyRepresentativeException();
+		}
+		else if (_representatives.size() >= 6) {
+			throw new RepresentativeNumberExceeded();
+		}
+		else {
+			_representatives.add(student);
+		}
 	}
 }

@@ -18,12 +18,9 @@ public class Student extends Person {
 	/** Disciplines taken by the student. */
 	private ArrayList<Discipline> _disciplines = new ArrayList<Discipline>(); 
 
-	/** Student's constructors */
 	
-	public Student(int id, int phone_nr, String name) throws DuplicateIdException, OutOfRangeIdException {
-		this.setId(id);
-		this.setPhoneNumber(phone_nr);
-		this.setName(name);
+	public Student(int id, int phoneNumber, String name) throws DuplicateIdException, OutOfRangeIdException {
+		super(id, phoneNumber, name);
 	}
 
 	/**
@@ -56,19 +53,23 @@ public class Student extends Person {
 		}
 	}
 	
-	void createSurvey(Project project) {
+	public void createSurvey(Project project) {
 		// FIXME
 	}
 
-	void deleteSurvey(Survey survey) {
+	public void deleteSurvey(Survey survey) {
 		// FIXME
 	}
 
-	void openSurvey(Survey survey) {
+	public void openSurvey(Survey survey) {
 		// FIXME
 	}
 
-	void closeSurvey(Survey survey) {
+	public void closeSurvey(Survey survey) {
 		// FIXME
+	}
+
+	public Boolean isRepresentative() {
+		return _course.getRepresentatives().contains(this);
 	}
 }
