@@ -1,5 +1,8 @@
 package sth;
 
+import sth.exceptions.DuplicateIdException;
+import sth.exceptions.OutOfRangeIdException;
+
 /**
  * Any non-student, non-professor person.
  */

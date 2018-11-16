@@ -25,7 +25,11 @@ public class Professor extends Person {
 	public void addCourseDiscipline(Course c, Discipline discipline) throws DuplicateDisciplineException {
 		if (_disciplines.containsKey(c))
 			_disciplines.get(c).addDiscipline(discipline);
-		else  _disciplines.put(c,new Disciplines(discipline));
+		else {
+			Disciplines disciplines = new Disciplines();
+			disciplines.addDiscipline(discipline);
+			_disciplines.put(c, disciplines);
+		}
 	}
 
 	/**

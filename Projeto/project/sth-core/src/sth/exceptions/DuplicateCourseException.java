@@ -1,5 +1,7 @@
 package sth.exceptions;
 
+import sth.Course;
+
 public class DuplicateCourseException extends Exception{
 
     private static final long serialVersionUID = 201811151638L;

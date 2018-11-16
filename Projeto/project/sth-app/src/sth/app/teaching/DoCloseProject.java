@@ -6,6 +6,7 @@ import pt.tecnico.po.ui.Input;
 import sth.SchoolManager;
 import sth.app.exceptions.NoSuchProjectException;
 import sth.exceptions.NoSuchProjectNameException;
+import sth.exceptions.ProjectAlreadyClosedException;
 
 //FIXME import other classes if needed
 
@@ -31,10 +32,12 @@ public class DoCloseProject extends Command<SchoolManager> {
 	public final void execute() throws DialogException {
 		_form.parse();
 		try {
-			_receiver.closeProject(_discipline, _project);
+			_receiver.closeProject(_discipline.value(), _project.value());
 		} catch (NoSuchProjectNameException e) {
-			throw new NoSuchProjectException(_discipline, _project);
-		}	
+			throw new NoSuchProjectException(_discipline.value(), _project.value());
+		} catch (ProjectAlreadyClosedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

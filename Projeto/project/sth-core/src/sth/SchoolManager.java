@@ -1,7 +1,10 @@
 package sth;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -10,8 +13,23 @@ import java.util.Collections;
 import java.util.Map;
 
 import sth.exceptions.BadEntryException;
+import sth.exceptions.DuplicateProjectNameException;
 import sth.exceptions.ImportFileException;
 import sth.exceptions.NoSuchPersonIdException;
+import sth.exceptions.NoSuchProjectNameException;
+
+
+import sth.exceptions.AlreadyRepresentativeException;
+import sth.exceptions.DisciplineLimitExceededException;
+import sth.exceptions.DuplicateCourseException;
+import sth.exceptions.DuplicateDisciplineException;
+import sth.exceptions.DuplicateIdException;
+import sth.exceptions.DuplicateProjectException;
+import sth.exceptions.InexistentCourseException;
+import sth.exceptions.NotMatchingCourseException;
+import sth.exceptions.OutOfRangeIdException;
+import sth.exceptions.ProjectAlreadyClosedException;
+import sth.exceptions.RepresentativeNumberExceeded;
 
 //FIXME import other classes if needed
 
@@ -40,8 +58,10 @@ public class SchoolManager {
 	public void importFile(String datafile) throws ImportFileException {
 		try {
 			_school.importFile(datafile);
-		} catch (IOException | BadEntryException e) {
+		} catch (IOException | BadEntryException  e) {
 			throw new ImportFileException(e);
+		} catch (Exception e) {
+
 		}
 	}
 
@@ -53,32 +73,51 @@ public class SchoolManager {
 		_loggedId = id;
 	}
 
+	
 	/**
 	 * @return true when the currently logged in person is an administrative
 	 */
 	public boolean hasAdministrative() {
-		//FIXME implement predicate
+		if (_school.getPeople().get(_loggedId).getClass() == Administrative.class) {
+			return true;
+		}
+		return false;
+
 	}
 
 	/**
 	 * @return true when the currently logged in person is a professor
 	 */
 	public boolean hasProfessor() {
-		//FIXME implement predicate
+		if (_school.getPeople().get(_loggedId).getClass() == Professor.class) {
+			return true;
+		}
+		return false;
+
 	}
 
 	/**
 	 * @return true when the currently logged in person is a student
 	 */
 	public boolean hasStudent() {
-		//FIXME implement predicate
+		if (_school.getPeople().get(_loggedId).getClass() == Student.class) {
+			return true;
+		}
+		return false;
+
 	}
 
 	/**
 	 * @return true when the currently logged in person is a representative
 	 */
 	public boolean hasRepresentative() {
-		//FIXME implement predicate
+		if (_school.getPeople().get(_loggedId).getClass() == Student.class) {
+			Student student = (Student) _school.getPeople().get(_loggedId);
+			if (student.getCourse().getRepresentatives().contains(student)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	//FIXME implement other methods (in general, one for each command in sth-app)
@@ -98,18 +137,13 @@ public class SchoolManager {
 		_filename = filename;
 	}
 
-	public void open(String _filename) {
-		try {
-			ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(_filename)));
-			_school = (School) in.readObject();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void open(String _filename) throws ClassNotFoundException, FileNotFoundException, IOException {
+		ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(_filename)));
+		_school = (School) in.readObject();
 		
 	}
 	
-	public void save() {
+	public void save() throws IOException{
 		ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(_filename)));
 		out.writeObject(_school);
 		out.close();
@@ -144,8 +178,9 @@ public class SchoolManager {
 		return peopleList;
 	}
 
-	public void closeProject(String discipline, String project) throws NoSuchProjectNameException {
-		for (Map.Entry<Course, Disciplines> entry: _school.getPeople().get(_loggedId).getDisciplines().entrySet()) {
+	public void closeProject(String discipline, String project) throws NoSuchProjectNameException, ProjectAlreadyClosedException {
+		Professor prof = (Professor) _school.getPeople().get(_loggedId);
+		for (Map.Entry<Course, Disciplines> entry: prof.getDisciplines().entrySet()) {
 			for (Discipline d: entry.getValue().getDisciplines()) {
 				if (discipline == d.getDisciplineName()) {
 					for (Project p: d.getProjects()) {
@@ -161,12 +196,14 @@ public class SchoolManager {
 	}
 
 	public void createProject(String discipline, String project) throws DuplicateProjectNameException {
-		for (Map.Entry<Course, Disciplines> entry : _school.getPeople().get(_loggedId).getDisciplines().entrySet()) {
+
+		Professor prof = (Professor) _school.getPeople().get(_loggedId);
+		for (Map.Entry<Course, Disciplines> entry : prof.getDisciplines().entrySet()) {
 			for (Discipline d : entry.getValue().getDisciplines()) {
 				if (discipline == d.getDisciplineName()) {
 					for (Project p : d.getProjects()) {
 						if (p.getName() == project) {
-							throw new NoSuchProjectNameException();
+							throw new DuplicateProjectNameException();
 							
 						}
 					}

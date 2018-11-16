@@ -15,7 +15,7 @@ public class Course	implements Serializable {
 	private static final long serialVersionUID = 201811152338L;
 	
 	private String _name;
-	private ArrayList<Student> _representatives = new ArrayList<Students>();
+	private ArrayList<Student> _representatives = new ArrayList<Student>();
 	private static final int MAX_REPRESENTATIVES = 7;
 
 	public Course(String name){

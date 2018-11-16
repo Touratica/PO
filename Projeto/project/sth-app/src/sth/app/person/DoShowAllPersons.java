@@ -1,5 +1,7 @@
 package sth.app.person;
 
+import java.util.Collection;
+
 import pt.tecnico.po.ui.Command;
 import sth.Person;
 import sth.SchoolManager;

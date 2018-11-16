@@ -4,7 +4,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import sth.exceptions.DisciplineLimitExceeded;
+import sth.exceptions.DisciplineLimitExceededException;
 import sth.exceptions.DuplicateDisciplineException;
 import sth.exceptions.DuplicateIdException;
 import sth.exceptions.NotMatchingCourseException;
@@ -26,6 +26,14 @@ public class Student extends Person {
 	/** The maximum number of disciplines per student. */
 	private static final int MAX_DISCIPLINES = 6;
 
+	/**
+	 * 
+	 * @param id
+	 * @param phoneNumber
+	 * @param name
+	 * @throws DuplicateIdException
+	 * @throws OutOfRangeIdException
+	 */
 	public Student(int id, int phoneNumber, String name) throws DuplicateIdException, OutOfRangeIdException {
 		super(id, phoneNumber, name);
 	}
@@ -46,7 +54,7 @@ public class Student extends Person {
 		return _course;
 	}
 	
-	public void addDiscipline(Discipline discipline) throws DuplicateDisciplineException, DisciplineLimitExceeded {
+	public void addDiscipline(Discipline discipline) throws DuplicateDisciplineException, DisciplineLimitExceededException {
 		for (Discipline d: _disciplines) {
 			if (d.equals(discipline)) {
 				throw new DuplicateDisciplineException(discipline);
@@ -56,7 +64,7 @@ public class Student extends Person {
 			_disciplines.add(discipline);
 		}
 		else {
-			throw new DisciplineLimitExceeded(discipline,this);
+			throw new DisciplineLimitExceededException(discipline,this);
 		}
 	}
 	
@@ -87,7 +95,7 @@ public class Student extends Person {
 		for (Discipline d : _disciplines){
 			disciplines.add(d.toString());
 		}
-		Collections.sort(disciplines, Collator.getInstance(locale));
+		Collections.sort(disciplines, Collator.getInstance());
 		if (this.isRepresentative())
 			s+= "DELEGADO|" + super.toString();
 		else s+= "ALUNO|" + super.toString();

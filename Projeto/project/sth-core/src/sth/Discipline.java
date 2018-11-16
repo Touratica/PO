@@ -33,26 +33,17 @@ public class Discipline implements Serializable{
 		return _name;
 	}
 
-	public void addProfessor(Professor prof) throws NoSuchPersonIdException{
-		if (idExists(p.getId()))
-			_professors.add(p);
-		else throw new NoSuchPersonIdException(p.getId());
+	public void addProfessor(Professor prof) {
+			_professors.add(prof);
 	}
 
-	public void addStudent(Student student) throws NoSuchPersonIdException, StudentLimitExceededException{
-		if (idExists(student.getId()))
-			if (_students.size() < MAX_STUDENTS)
-				_students.add(student);
-			else throw new StudentLimitExceededException(student);
-		else throw new NoSuchPersonIdException(student.getId());
+	public void addStudent(Student student) throws StudentLimitExceededException{
+		if (_students.size() < MAX_STUDENTS)
+			_students.add(student);
+		else throw new StudentLimitExceededException(student);
 	}
 
-	public void addProject(Project project) throws DuplicateProjectException {
-		for (Project existentProject: _projects) {
-			if (project.equals(existentProject)) {
-				throw new DuplicateProjectException();
-			}
-		}
+	public void addProject(Project project) {
 		_projects.add(project);
 	}
 
@@ -67,7 +58,7 @@ public class Discipline implements Serializable{
 	public boolean equals(Object o){
 		if (o instanceof Discipline){
 			Discipline d = (Discipline) o;
-			return _name == o.getDisciplineName();
+			return _name == d.getDisciplineName();
 		}
 		return false;
 	}

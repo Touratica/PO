@@ -23,7 +23,7 @@ public class Disciplines implements Serializable{
         for(Discipline d: _disciplines)
             if (d.equals(discipline))
                 throw new DuplicateDisciplineException(discipline);
-        _disciplines.add(d);
+        _disciplines.add(discipline);
     }
 
 	/**

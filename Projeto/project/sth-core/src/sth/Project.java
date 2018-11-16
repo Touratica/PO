@@ -2,6 +2,9 @@ package sth;
 
 import java.io.Serializable;
 import java.util.Map;
+
+import sth.exceptions.ProjectAlreadyClosedException;
+
 import java.util.HashMap;
 
 /**
@@ -55,7 +58,7 @@ public class Project implements Serializable {
 	/**
 	 * Closes project.
 	 */
-	public void close() {
+	public void close() throws ProjectAlreadyClosedException {
 		if (!isOpen()) {
 			throw new ProjectAlreadyClosedException();
 		} else {

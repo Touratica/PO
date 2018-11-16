@@ -43,13 +43,7 @@ public abstract class Person implements Serializable {
 		this.setName(name);
 	}
 
-	public void setId(int id) throws DuplicateIdException, OutOfRangeIdException{
-		if (IdExists(id)) 
-			throw new DuplicateIdException(id); 
-			//"Id Already Exists."
-		if (id < 100000)
-			throw new OutOfRangeIdException(id);
-			// "Id Lower than 100000."
+	public void setId(int id) throws DuplicateIdException, OutOfRangeIdException {
 		_id = id;
 	}
 
@@ -87,7 +81,7 @@ public abstract class Person implements Serializable {
 
 		@Override
 		public int compare(Person person1, Person person2) {
-			return Collator.getInstance(locale).compare(person1.getName(), person2.getName());
+			return Collator.getInstance().compare(person1.getName(), person2.getName());
 		}
 	}
 

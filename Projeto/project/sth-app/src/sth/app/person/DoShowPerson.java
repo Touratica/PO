@@ -1,6 +1,5 @@
 package sth.app.person;
 
-import jdk.internal.util.xml.impl.Input;
 import pt.tecnico.po.ui.Command;
 import sth.SchoolManager;
 
