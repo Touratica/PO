@@ -78,8 +78,13 @@ public abstract class Person implements Serializable {
 		return _id;
 	}
 
-	private static class NameComparator implements Comparator<Person> {
+	@Override
+	public String toString() {
+		return  _id + "|" + _phoneNumber + "|" +  _name;
+	}
 	
+	private static class NameComparator implements Comparator<Person> {
+
 		@Override
 		public int compare(Person person1, Person person2) {
 			return Collator.getInstance(locale).compare(person1.getName(), person2.getName());
