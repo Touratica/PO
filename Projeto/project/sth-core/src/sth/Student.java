@@ -18,7 +18,9 @@ public class Student extends Person {
 	/** Disciplines taken by the student. */
 	private ArrayList<Discipline> _disciplines = new ArrayList<Discipline>(); 
 
-	
+	/** The maximum number of disciplines per student. */
+	private static final int MAX_DISCIPLINES = 6;
+
 	public Student(int id, int phoneNumber, String name) throws DuplicateIdException, OutOfRangeIdException {
 		super(id, phoneNumber, name);
 	}
@@ -45,7 +47,7 @@ public class Student extends Person {
 				throw new DuplicateDisciplineException(discipline);
 			}
 		}
-		if (_disciplines.size() < 6) {
+		if (_disciplines.size() < MAX_DISCIPLINES) {
 			_disciplines.add(discipline);
 		}
 		else {

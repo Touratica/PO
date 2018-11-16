@@ -131,16 +131,14 @@ public class School implements Serializable {
 	 * 	@param courseName
 	 */
 	public Course addCourse(String courseName) throws DuplicateCourseException {
-		if(courseName != null) {
-			for (Map.Entry<Course, Disciplines> entry: _courses.entrySet()) {
-				if (entry.getKey().getNameCourse() == courseName) {
-					return entry.getKey();
-				}
+		for (Map.Entry<Course, Disciplines> entry: _courses.entrySet()) {
+			if (entry.getKey().getNameCourse() == courseName) {
+				return entry.getKey();
 			}
-			Course course = new Course(courseName);
-			_courses.put(course, new Disciplines());
-			return course;
 		}
+		Course course = new Course(courseName);
+		_courses.put(course, new Disciplines());
+		return course;
 	}
 
 	public Discipline addDiscipline(String courseName, String disciplineName) throws DuplicateDisciplineException {
@@ -205,5 +203,12 @@ public class School implements Serializable {
 		}
 		in.reset();
 		return student;
+	}
+
+	/**
+	 * @return the people associated with the school.
+	 */
+	public Map<Integer, Person> getPeople() {
+		return _people;
 	}
 }

@@ -11,9 +11,12 @@ import sth.exceptions.RepresentativeNumberExceeded;
  */
 public class Course	implements Serializable {
 
+	/** Serial number for serialization. */
 	private static final long serialVersionUID = 201811152338L;
+	
 	private String _name;
 	private ArrayList<Student> _representatives = new ArrayList<Students>();
+	private static final int MAX_REPRESENTATIVES = 7;
 
 	public Course(String name){
 		_name = name;
@@ -34,7 +37,7 @@ public class Course	implements Serializable {
 		if (_representatives.contains(student)) {
 			throw new AlreadyRepresentativeException();
 		}
-		else if (_representatives.size() >= 6) {
+		else if (_representatives.size() >= MAX_REPRESENTATIVES) {
 			throw new RepresentativeNumberExceeded();
 		}
 		else {
