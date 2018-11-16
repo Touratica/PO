@@ -33,13 +33,13 @@ public class Discipline implements Serializable{
 		return _name;
 	}
 
-	public addProfessor(Professor prof) throws NoSuchPersonIdException{
+	public void addProfessor(Professor prof) throws NoSuchPersonIdException{
 		if (idExists(p.getId()))
 			_professors.add(p);
 		else throw new NoSuchPersonIdException(p.getId());
 	}
 
-	public addStudent(Student student) throws NoSuchPersonIdException, StudentLimitExceededException{
+	public void addStudent(Student student) throws NoSuchPersonIdException, StudentLimitExceededException{
 		if (idExists(student.getId()))
 			if (_students.size() < MAX_STUDENTS)
 				_students.add(student);
@@ -54,6 +54,13 @@ public class Discipline implements Serializable{
 			}
 		}
 		_projects.add(project);
+	}
+
+	/**
+	 * @return the discipline associated projects
+	 */
+	public ArrayList<Project> getProjects() {
+		return _projects;
 	}
 
 	@Override

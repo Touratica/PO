@@ -4,7 +4,7 @@ package sth;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
@@ -15,7 +15,6 @@ import java.io.Serializable;
 import sth.exceptions.BadEntryException;
 import sth.exceptions.DuplicateCourseException;
 import sth.exceptions.DuplicateDisciplineException;
-import sth.exceptions.InvalidCourseSelectionException;
 import sth.exceptions.NoSuchPersonIdException;
 import sth.exceptions.NotMatchingCourseException;
 

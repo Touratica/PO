@@ -1,5 +1,7 @@
 package sth.exceptions;
 
+import sth.Discipline;
+
 public class DuplicateDisciplineException extends Exception{
 
     private static final long serialVersionUID = 201811151706L;

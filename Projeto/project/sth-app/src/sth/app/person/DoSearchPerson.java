@@ -35,6 +35,7 @@ public class DoSearchPerson extends Command<SchoolManager> {
 			for (Person person: people) {
 				_display.addLine(person.toString());
 			}
+			_display.display();
 			
 		} catch (NoSuchPersonException e) {
 			e.printStackTrace();

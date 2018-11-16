@@ -130,4 +130,50 @@ public class SchoolManager {
 
 		return filteredPeople;
 	}
+
+	public String showPerson() {
+		return _school.getPeople().get(_loggedId).toString();
+	}
+
+	public ArrayList<Person> showAllPeople() {
+		ArrayList<Person> peopleList = new ArrayList<Person>();
+		for (Map.Entry<Integer, Person> entry: _school.getPeople().entrySet()) {
+			peopleList.add(entry.getValue());
+		}
+		Collections.sort(peopleList, Person.ID_COMPARATOR);
+		return peopleList;
+	}
+
+	public void closeProject(String discipline, String project) throws NoSuchProjectNameException {
+		for (Map.Entry<Course, Disciplines> entry: _school.getPeople().get(_loggedId).getDisciplines().entrySet()) {
+			for (Discipline d: entry.getValue().getDisciplines()) {
+				if (discipline == d.getDisciplineName()) {
+					for (Project p: d.getProjects()) {
+						if (p.getName() == project) {
+							p.close();
+							return;
+						}
+					}
+				}
+			}
+		}
+		throw new NoSuchProjectNameException();
+	}
+
+	public void createProject(String discipline, String project) throws DuplicateProjectNameException {
+		for (Map.Entry<Course, Disciplines> entry : _school.getPeople().get(_loggedId).getDisciplines().entrySet()) {
+			for (Discipline d : entry.getValue().getDisciplines()) {
+				if (discipline == d.getDisciplineName()) {
+					for (Project p : d.getProjects()) {
+						if (p.getName() == project) {
+							throw new NoSuchProjectNameException();
+							
+						}
+					}
+					d.addProject(new Project(project, d.getDisciplineName() + " - " + project));
+					return;
+				}
+			}
+		}
+	}
 }

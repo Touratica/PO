@@ -4,8 +4,11 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import sth.exceptions.DisciplineLimitExceeded;
 import sth.exceptions.DuplicateDisciplineException;
+import sth.exceptions.DuplicateIdException;
 import sth.exceptions.NotMatchingCourseException;
+import sth.exceptions.OutOfRangeIdException;
 
 /**
  * The Student class.

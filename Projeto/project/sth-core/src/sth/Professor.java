@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import sth.exceptions.DuplicateDisciplineException;
+import sth.exceptions.DuplicateIdException;
+import sth.exceptions.OutOfRangeIdException;
 
 /**
  * Professor
@@ -29,7 +31,7 @@ public class Professor extends Person {
 	/**
 	 * @return the courses lectured by the professor.
 	 */
-	public Map<Course, Disciplines> getCourses() {
+	public Map<Course, Disciplines> getDisciplines() {
 		return _disciplines;
 	}
 
