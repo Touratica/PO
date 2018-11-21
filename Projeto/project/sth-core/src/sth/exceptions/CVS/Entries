@@ -1,4 +1,18 @@
 /BadEntryException.java/1.1/Sun Oct  7 10:12:12 2018//
 /ImportFileException.java/1.1/Sun Oct  7 10:12:12 2018//
 /NoSuchPersonIdException.java/1.1/Sun Oct  7 10:12:12 2018//
+/AlreadyRepresentativeException.java/1.1/Fri Nov 16 00:06:34 2018//
+/DisciplineLimitExceededException.java/1.1/Fri Nov 16 08:09:25 2018//
+/DuplicateCourseException.java/1.1/Fri Nov 16 07:17:43 2018//
+/DuplicateDisciplineException.java/1.1/Fri Nov 16 07:10:42 2018//
+/DuplicateIdException.java/1.1/Thu Nov 15 21:40:28 2018//
+/DuplicateProjectException.java/1.1/Fri Nov 16 03:30:12 2018//
+/DuplicateProjectNameException.java/1.1/Fri Nov 16 06:55:15 2018//
+/InexistentCourseException.java/1.1/Fri Nov 16 02:45:21 2018//
+/NoSuchProjectNameException.java/1.1/Fri Nov 16 06:55:26 2018//
+/NotMatchingCourseException.java/1.1/Thu Nov 15 21:40:28 2018//
+/OutOfRangeIdException.java/1.1/Thu Nov 15 21:50:27 2018//
+/ProjectAlreadyClosedException.java/1.1/Fri Nov 16 03:30:41 2018//
+/RepresentativeNumberExceeded.java/1.1/Fri Nov 16 02:39:44 2018//
+/StudentLimitExceededException.java/1.1/Fri Nov 16 07:11:03 2018//
 D
