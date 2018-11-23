@@ -44,6 +44,14 @@ public class Course	implements Serializable {
 			_representatives.add(student);
 		}
 	}
+	@Override 
+	public boolean equals(Object o) {
+		if (o instanceof Course){
+			Course course = (Course) o;
+			return course.getNameCourse() == _name;
+		}
+		return false;
+	}
 
 	@Override
 	public String toString() {
