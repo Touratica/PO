@@ -240,6 +240,7 @@ public class School implements Serializable {
 		while (true) {
 			c = in.read();
 			if (c == '#') {
+				System.out.println(c);
 				in.reset();
 				s = in.readLine();
 				line = new String(s.getBytes(), "UTF-8");
@@ -247,7 +248,7 @@ public class School implements Serializable {
 				split[0] = split[0].replaceAll("#\\ ", "");
 
 				try {
-					if (student.getCourse() != null && split[0].equals(student.getCourse().getName())) {
+					if (student.getCourse() != null && !split[0].equals(student.getCourse().getName())) {
 						throw new NotMatchingCourseException();
 					}
 					Course course = addCourse(split[0]);
