@@ -11,15 +11,11 @@ Escolha uma opção: Portal do Docente
 4 - Ver alunos de disciplina leccionada
 5 - Ver resultados de um inquérito
 0 - Sair
-Escolha uma opção: Nome da disciplina: Operação inválida: A disciplina 'Compiladores' não existe ou não é válida para o utilizador em causa.
-Portal do Docente
-1 - Criar projecto
-2 - Fechar projecto
-3 - Ver submissões de um projecto
-4 - Ver alunos de disciplina leccionada
-5 - Ver resultados de um inquérito
-0 - Sair
-Escolha uma opção: Nome da disciplina: Operação inválida: A disciplina 'Mais uma' não existe ou não é válida para o utilizador em causa.
+Escolha uma opção: Nome da disciplina: DELEGADO|100011|123456789|João Manuel
+* Informática - Algoritmos e Estruturas de Dados
+* Informática - Compiladores
+* Informática - Fundamentos da Programação
+* Informática - Programação com Objectos
 Portal do Docente
 1 - Criar projecto
 2 - Fechar projecto
