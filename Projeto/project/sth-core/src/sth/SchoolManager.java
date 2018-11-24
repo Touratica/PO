@@ -201,8 +201,8 @@ public class SchoolManager {
 
 	public void closeProject(String discipline, String project) throws NoSuchProjectNameException, ProjectAlreadyClosedException {
 		Professor prof = (Professor) _school.getProfessors().get(_loggedId);
-		for (Map.Entry<Course, Disciplines> entry: prof.getDisciplines().entrySet()) {
-			for (Discipline d: entry.getValue().getDisciplines()) {
+		for (Map.Entry<String, ArrayList<Discipline>> entry: prof.getDisciplines().entrySet()) {
+			for (Discipline d: entry.getValue()) {
 				if (discipline == d.getDisciplineName()) {
 					for (Project p: d.getProjects()) {
 						if (p.getName() == project) {
@@ -219,8 +219,8 @@ public class SchoolManager {
 	public void createProject(String discipline, String project) throws DuplicateProjectNameException {
 
 		Professor prof = (Professor) _school.getProfessors().get(_loggedId);
-		for (Map.Entry<Course, Disciplines> entry : prof.getDisciplines().entrySet()) {
-			for (Discipline d : entry.getValue().getDisciplines()) {
+		for (Map.Entry<String, ArrayList<Discipline>> entry : prof.getDisciplines().entrySet()) {
+			for (Discipline d : entry.getValue()) {
 				if (discipline == d.getDisciplineName()) {
 					for (Project p : d.getProjects()) {
 						if (p.getName() == project) {

@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-
 import java.io.Serializable;
-
 import sth.exceptions.AlreadyRepresentativeException;
 import sth.exceptions.BadEntryException;
 import sth.exceptions.DisciplineLimitExceededException;
@@ -40,7 +38,7 @@ public class School implements Serializable {
 	private Map<Integer, Administrative> _administratives = new HashMap<Integer, Administrative>();
 
 	/** School's disciplines */
-	private Map <Course, Disciplines> _courses = new TreeMap<Course, Disciplines>();
+	private Map <String, Course> _courses = new TreeMap<String, Course>();
 
 	/** People counter. */
 	private int _nextId = 100000;
@@ -71,7 +69,6 @@ public class School implements Serializable {
 		while ((s = in.readLine()) != null) {
 			String line  = new String(s.getBytes(), "UTF-8");				
 			split = line.split("\\|");
-			System.out.println(split[1]);
 			
 			switch (split[0]) {
 				
@@ -104,7 +101,7 @@ public class School implements Serializable {
 							try {
 								Course course = addCourse(split[0]);
 								Discipline discipline = addDiscipline(split[0], split[1]);
-								professor.addCourseDiscipline(course, discipline);
+								professor.addDiscipline(course, discipline);
 
 							} catch (DuplicateCourseException e) {
 								// do nothing- it's fine to import courses with the same name, as they won't be added twice
@@ -137,14 +134,15 @@ public class School implements Serializable {
 	 * @return the course 
 	 */
 	public Course addCourse(String courseName) throws DuplicateCourseException {
-		for (Map.Entry<Course, Disciplines> entry: _courses.entrySet()) {
-			if (entry.getKey().getNameCourse() == courseName) {
-				return entry.getKey();
+		for (Map.Entry<String, Course> entry: _courses.entrySet()) {
+			if (entry.getKey() == courseName) {
+				return entry.getValue();
 			}	
 		}
 		
 		Course course = new Course(courseName);
-		_courses.put(course, new Disciplines());
+		_courses.put(courseName, course);
+		// FIXME _courses.put isn't working
 		return course;
 	}
 
@@ -157,8 +155,8 @@ public class School implements Serializable {
 	 * @throws InexistentCourseException
 	 */
 	public Discipline addDiscipline(String courseName, String disciplineName) throws DuplicateDisciplineException, InexistentCourseException {
-		for (Map.Entry<Course, Disciplines> entry: _courses.entrySet()) {
-			if (entry.getKey().getNameCourse() == courseName) {
+		for (Map.Entry<String, Course> entry: _courses.entrySet()) {
+			if (entry.getKey() == courseName) {
 				Discipline discipline = new Discipline(disciplineName);
 				entry.getValue().addDiscipline(discipline);
 				return discipline;
@@ -247,8 +245,9 @@ public class School implements Serializable {
 				line = new String(s.getBytes(), "UTF-8");
 				split = line.split("\\|");
 				split[0] = split[0].replaceAll("#\\ ", "");
+
 				try {
-					if (student.getCourse() != null && split[0] != student.getCourse().getNameCourse()) {
+					if (student.getCourse() != null && split[0] != student.getCourse().getName()) {
 						throw new NotMatchingCourseException();
 					}
 					Course course = addCourse(split[0]);
