@@ -1,7 +1,8 @@
 package sth;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import sth.exceptions.AlreadyRepresentativeException;
 import sth.exceptions.RepresentativeNumberExceeded;
@@ -15,33 +16,33 @@ public class Course	implements Serializable {
 	private static final long serialVersionUID = 201811152338L;
 	
 	private String _name;
-	private ArrayList<Student> _representatives = new ArrayList<Student>();
+	private Map<Integer, Student> _representatives = new HashMap<Integer, Student>();
 	private static final int MAX_REPRESENTATIVES = 7;
 
-	public Course(String name){
+	public Course(String name) {
 		_name = name;
 	}
 
-	public String getNameCourse(){
+	public String getNameCourse() {
 		return _name;
 	}
 
 	/**
 	 * @return the the course's representatives list
 	 */
-	public ArrayList<Student> getRepresentatives() {
+	public Map<Integer, Student> getRepresentatives() {
 		return _representatives;
 	}
 
 	public void setRepresentative(Student student) throws AlreadyRepresentativeException, RepresentativeNumberExceeded {
-		if (_representatives.contains(student)) {
+		if (_representatives.containsKey(student.getId())) {
 			throw new AlreadyRepresentativeException();
 		}
 		else if (_representatives.size() >= MAX_REPRESENTATIVES) {
 			throw new RepresentativeNumberExceeded();
 		}
 		else {
-			_representatives.add(student);
+			_representatives.put(student.getId(), student);
 		}
 	}
 	@Override 

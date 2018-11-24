@@ -35,7 +35,9 @@ public class School implements Serializable {
 	//FIXME define object fields (attributes and, possibly, associations)
 	
 	/** School's people. */
-	private Map<Integer, Person> _people = new HashMap<Integer, Person>();
+	private Map<Integer, Student> _students = new HashMap<Integer, Student>();
+	private Map<Integer, Professor> _professors = new HashMap<Integer, Professor>();
+	private Map<Integer, Administrative> _administratives = new HashMap<Integer, Administrative>();
 
 	/** School's disciplines */
 	private Map <Course, Disciplines> _courses = new TreeMap<Course, Disciplines>();
@@ -70,7 +72,7 @@ public class School implements Serializable {
 			String line  = new String(s.getBytes(), "UTF-8");				
 			split = line.split("\\|");
 			System.out.println(split[1]);
-
+			
 			switch (split[0]) {
 				
 				case "ALUNO":
@@ -125,9 +127,7 @@ public class School implements Serializable {
 	 * @return true if there's someone with that id already.
 	 */
 	public Boolean idExists(int id){
-		if (_people.containsKey(id))
-			return true;
-		return false;
+		return _students.containsKey(id) || _professors.containsKey(id) || _administratives.containsKey(id);
 	}
 
 	/** 
@@ -180,7 +180,7 @@ public class School implements Serializable {
 		int id;
 		if (verifyId(id = Integer.parseInt(s[1]))) {
 			Student newStudent = new Student(id, Integer.parseInt(s[2]), s[3]);
-			_people.put(newStudent.getId(), newStudent);
+			_students.put(newStudent.getId(), newStudent);
 			return newStudent;
 		}
 		return null;
@@ -197,7 +197,7 @@ public class School implements Serializable {
 		int id;
 		if (verifyId(id = Integer.parseInt(s[1]))) {
 			Administrative newAdministrative = new Administrative(id, Integer.parseInt(s[2]), s[3]);
-			_people.put(newAdministrative.getId(), newAdministrative);
+			_administratives.put(newAdministrative.getId(), newAdministrative);
 			return newAdministrative;
 		}
 		return null;
@@ -214,7 +214,7 @@ public class School implements Serializable {
 		int id;
 		if (verifyId(id = Integer.parseInt(s[1]))) {
 			Professor newProfessor = new Professor(id, Integer.parseInt(s[2]), s[3]);
-			_people.put(newProfessor.getId(), newProfessor);
+			_professors.put(newProfessor.getId(), newProfessor);
 			return newProfessor;
 		}
 		return null;
@@ -270,10 +270,24 @@ public class School implements Serializable {
 	}
 
 	/**
-	 * @return the people associated with the school.
+	 * @return the school administratives
 	 */
-	public Map<Integer, Person> getPeople() {
-		return _people;
+	public Map<Integer, Administrative> getAdministratives() {
+		return _administratives;
+	}
+
+	/**
+	 * @return the school professors
+	 */
+	public Map<Integer, Professor> getProfessors() {
+		return _professors;
+	}
+
+	/**
+	 * @return the school students
+	 */
+	public Map<Integer, Student> getStudents() {
+		return _students;
 	}
 
 	/**

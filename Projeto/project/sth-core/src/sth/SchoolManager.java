@@ -78,10 +78,7 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is an administrative
 	 */
 	public boolean hasAdministrative() {
-		if (_school.getPeople().get(_loggedId).getClass() == Administrative.class) {
-			return true;
-		}
-		return false;
+		return _school.getAdministratives().containsKey(_loggedId);
 
 	}
 
@@ -89,10 +86,7 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is a professor
 	 */
 	public boolean hasProfessor() {
-		if (_school.getPeople().get(_loggedId).getClass() == Professor.class) {
-			return true;
-		}
-		return false;
+		return _school.getProfessors().containsKey(_loggedId);
 
 	}
 
@@ -100,10 +94,7 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is a student
 	 */
 	public boolean hasStudent() {
-		if (_school.getPeople().get(_loggedId).getClass() == Student.class) {
-			return true;
-		}
-		return false;
+		return _school.getStudents().containsKey(_loggedId);
 
 	}
 
@@ -111,13 +102,7 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is a representative
 	 */
 	public boolean hasRepresentative() {
-		if (_school.getPeople().get(_loggedId).getClass() == Student.class) {
-			Student student = (Student) _school.getPeople().get(_loggedId);
-			if (student.getCourse().getRepresentatives().contains(student)) {
-				return true;
-			}
-		}
-		return false;
+		return _school.getStudents().get(_loggedId).getCourse().getRepresentatives().containsKey(_loggedId);
 	}
 
 	//FIXME implement other methods (in general, one for each command in sth-app)
@@ -150,12 +135,30 @@ public class SchoolManager {
 	}
 
 	public void changePhoneNumber(int phoneNumber) {
-		_school.getPeople().get(_loggedId).setPhoneNumber(phoneNumber);
+		if (hasStudent()) {
+			_school.getStudents().get(_loggedId).setPhoneNumber(phoneNumber);
+		}
+		else if (hasProfessor()){
+			_school.getProfessors().get(_loggedId).setPhoneNumber(phoneNumber);
+		}
+		else if (hasAdministrative()) {
+			_school.getAdministratives().get(_loggedId).setPhoneNumber(phoneNumber);
+		}
 	}
 
 	public ArrayList<Person> searchPerson(String name) {
 		ArrayList<Person> filteredPeople = new ArrayList<Person>();
-		for (Map.Entry<Integer, Person> entry: _school.getPeople().entrySet()) {
+		for (Map.Entry<Integer, Administrative> entry: _school.getAdministratives().entrySet()) {
+			if (entry.getValue().getName().toLowerCase().contains(name.toLowerCase())) {
+				filteredPeople.add(entry.getValue());
+			}
+		}
+		for (Map.Entry<Integer, Professor> entry : _school.getProfessors().entrySet()) {
+			if (entry.getValue().getName().toLowerCase().contains(name.toLowerCase())) {
+				filteredPeople.add(entry.getValue());
+			}
+		}
+		for (Map.Entry<Integer, Student> entry : _school.getStudents().entrySet()) {
 			if (entry.getValue().getName().toLowerCase().contains(name.toLowerCase())) {
 				filteredPeople.add(entry.getValue());
 			}
@@ -166,12 +169,29 @@ public class SchoolManager {
 	}
 
 	public String showPerson() {
-		return _school.getPeople().get(_loggedId).toString();
+		if (_school.getStudents().containsKey(_loggedId)) {
+			return _school.getStudents().get(_loggedId).toString();
+		}
+		else if (_school.getProfessors().containsKey(_loggedId)) {
+			return _school.getProfessors().get(_loggedId).toString();
+		}
+		else if (_school.getAdministratives().containsKey(_loggedId)) {
+			return _school.getAdministratives().get(_loggedId).toString();
+		}
+		else {
+			return null;
+		}
 	}
 
 	public ArrayList<Person> showAllPeople() {
 		ArrayList<Person> peopleList = new ArrayList<Person>();
-		for (Map.Entry<Integer, Person> entry: _school.getPeople().entrySet()) {
+		for (Map.Entry<Integer, Administrative> entry: _school.getAdministratives().entrySet()) {
+			peopleList.add(entry.getValue());
+		}
+		for (Map.Entry<Integer, Professor> entry : _school.getProfessors().entrySet()) {
+			peopleList.add(entry.getValue());
+		}
+		for (Map.Entry<Integer, Student> entry : _school.getStudents().entrySet()) {
 			peopleList.add(entry.getValue());
 		}
 		Collections.sort(peopleList, Person.ID_COMPARATOR);
@@ -179,7 +199,7 @@ public class SchoolManager {
 	}
 
 	public void closeProject(String discipline, String project) throws NoSuchProjectNameException, ProjectAlreadyClosedException {
-		Professor prof = (Professor) _school.getPeople().get(_loggedId);
+		Professor prof = (Professor) _school.getProfessors().get(_loggedId);
 		for (Map.Entry<Course, Disciplines> entry: prof.getDisciplines().entrySet()) {
 			for (Discipline d: entry.getValue().getDisciplines()) {
 				if (discipline == d.getDisciplineName()) {
@@ -197,7 +217,7 @@ public class SchoolManager {
 
 	public void createProject(String discipline, String project) throws DuplicateProjectNameException {
 
-		Professor prof = (Professor) _school.getPeople().get(_loggedId);
+		Professor prof = (Professor) _school.getProfessors().get(_loggedId);
 		for (Map.Entry<Course, Disciplines> entry : prof.getDisciplines().entrySet()) {
 			for (Discipline d : entry.getValue().getDisciplines()) {
 				if (discipline == d.getDisciplineName()) {

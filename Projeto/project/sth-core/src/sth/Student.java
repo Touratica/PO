@@ -85,7 +85,7 @@ public class Student extends Person {
 	}
 
 	public Boolean isRepresentative() {
-		return _course.getRepresentatives().contains(this);
+		return _course.getRepresentatives().containsKey(this.getId());
 	}
 
 	@Override
