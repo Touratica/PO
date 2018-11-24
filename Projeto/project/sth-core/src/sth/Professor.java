@@ -22,9 +22,11 @@ public class Professor extends Person {
 	}
 
 	//add Discipline may throw this exception from the addDiscipline
-	public void addDiscipline(Course course, Discipline discipline) throws DuplicateDisciplineException {
+	public void addDiscipline(Course course, Discipline discipline) {
 		if (_disciplines.containsKey(course.getName())) {
-			_disciplines.get(course.getName()).add(discipline);
+			if (!_disciplines.get(course.getName()).contains(discipline)) {
+				_disciplines.get(course.getName()).add(discipline);
+			}
 		}
 		else {
 			ArrayList<Discipline> disciplines = new ArrayList<Discipline>();

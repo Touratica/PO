@@ -67,9 +67,8 @@ public class School implements Serializable {
 		String[] split; 
 
 		while ((s = in.readLine()) != null) {
-			String line  = new String(s.getBytes(), "UTF-8");				
+			String line  = new String(s.getBytes(), "UTF-8");
 			split = line.split("\\|");
-			
 			switch (split[0]) {
 				
 				case "ALUNO":
@@ -88,9 +87,9 @@ public class School implements Serializable {
 			
 				case "DOCENTE":
 					Professor professor = addProfessor(split);
-					in.mark(1);
 					int c;
 					while (true) {
+						in.mark(1);
 						c = in.read();
 						if (c == '#') {
 							in.reset();
@@ -98,14 +97,16 @@ public class School implements Serializable {
 							line = new String(s.getBytes(), "UTF-8");
 							split = line.split("\\|");
 							split[0] = split[0].replaceAll("#\\ ", "");
+							Course course = addCourse(split[0]);
+							Discipline discipline = new Discipline(split[1]);
 							try {
-								Course course = addCourse(split[0]);
-								Discipline discipline = addDiscipline(split[0], split[1]);
-								professor.addDiscipline(course, discipline);
-
-							} catch (DuplicateCourseException e) {
-								// do nothing- it's fine to import courses with the same name, as they won't be added twice
+								course.addDiscipline(discipline);
+							} catch (DuplicateDisciplineException e) {
+								// do nothing- its fine to import disciplines with the same name
 							}
+							// grabs the discipline from the course with this name
+							discipline = course.getDisciplines().get(discipline.getDisciplineName());
+							professor.addDiscipline(course, discipline);
 						} else {
 							break;
 						}
@@ -133,36 +134,15 @@ public class School implements Serializable {
 	 * @param courseName
 	 * @return the course 
 	 */
-	public Course addCourse(String courseName) throws DuplicateCourseException {
+	public Course addCourse(String courseName) {
 		for (Map.Entry<String, Course> entry: _courses.entrySet()) {
 			if (entry.getKey().equals(courseName)) {
 				return entry.getValue();
 			}	
 		}
-		
 		Course course = new Course(courseName);
 		_courses.put(courseName, course);
-		// FIXME _courses.put isn't working
 		return course;
-	}
-
-	/**
-	 * Adds a discipline to course where it didn't exist.
-	 * @param courseName
-	 * @param disciplineName
-	 * @return the discipline
-	 * @throws DuplicateDisciplineException
-	 * @throws InexistentCourseException
-	 */
-	public Discipline addDiscipline(String courseName, String disciplineName) throws DuplicateDisciplineException, InexistentCourseException {
-		for (Map.Entry<String, Course> entry: _courses.entrySet()) {
-			if (entry.getKey().equals(courseName)) {
-				Discipline discipline = new Discipline(disciplineName);
-				entry.getValue().addDiscipline(discipline);
-				return discipline;
-			}
-		}
-		throw new InexistentCourseException();
 	}
 
 	/**
@@ -218,9 +198,7 @@ public class School implements Serializable {
 		return null;
 	}
 
-	/**
-	 * Reads information about a student to be added
-	 * 
+	/**	
 	 * @param in input from file
 	 * @param split the array with the student's type, id, phone number and name
 	 * @return the student 
@@ -235,12 +213,12 @@ public class School implements Serializable {
 	public Student readStudent(BufferedReader in, String[] split) throws NotMatchingCourseException, DuplicateIdException, OutOfRangeIdException, IOException, DuplicateDisciplineException,InexistentCourseException, DisciplineLimitExceededException{
 		Student student = addStudent(split);
 		String s, line;
-		in.mark(1);
 		int c;
+		
 		while (true) {
+			in.mark(1);
 			c = in.read();
 			if (c == '#') {
-				System.out.println(c);
 				in.reset();
 				s = in.readLine();
 				line = new String(s.getBytes(), "UTF-8");
@@ -252,12 +230,17 @@ public class School implements Serializable {
 						throw new NotMatchingCourseException();
 					}
 					Course course = addCourse(split[0]);
-					Discipline discipline = addDiscipline(split[0], split[1]);
+					Discipline discipline = new Discipline(split[1]);
+					try {
+						course.addDiscipline(discipline);
+					} catch (DuplicateDisciplineException e) {
+						// do nothing- its fine to import disciplines with the same name
+					}
 					student.setCourse(course);
+					// grabs the discipline from the course with this name
+					discipline = course.getDisciplines().get(discipline.getDisciplineName());
 					student.addDiscipline(discipline);
 		
-				} catch (DuplicateCourseException e) {
-					// do nothing- its fine to import courses with the same name
 				} catch (NotMatchingCourseException e) {
 					e.printStackTrace();
 					break;
