@@ -33,6 +33,13 @@ public class Discipline implements Serializable{
 		return _name;
 	}
 
+	/**
+	 * @return the _students
+	 */
+	public ArrayList<Student> getStudents() {
+		return _students;
+	}
+
 	public void addProfessor(Professor prof) {
 			_professors.add(prof);
 	}

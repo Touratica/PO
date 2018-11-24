@@ -239,4 +239,14 @@ public class SchoolManager {
 			}
 		}
 	}
+
+	public ArrayList<Student> showDisciplineStudents(String disciplineName) {
+		for (Map.Entry<String, ArrayList<Discipline>> entry: _school.getProfessors().get(_loggedId).getDisciplines().entrySet()) {
+			for (Discipline discipline: entry.getValue()) {
+				if (discipline.getDisciplineName().equals(disciplineName)) {
+					return discipline.getStudents();
+				}
+			}
+		}
+	}
 }

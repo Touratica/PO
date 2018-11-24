@@ -1,5 +1,7 @@
 package sth.app.teaching;
 
+import java.util.Collection;
+
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
@@ -12,20 +14,25 @@ import sth.SchoolManager;
  */
 public class DoShowDisciplineStudents extends Command<SchoolManager> {
 
-  //FIXME add input fields if needed
+	private Input<String> _discipline;
 
-  /**
-   * @param receiver
-   */
-  public DoShowDisciplineStudents(SchoolManager receiver) {
-    super(Label.SHOW_COURSE_STUDENTS, receiver);
-    //FIXME initialize input fields if needed
-  }
+	/**
+	 * @param receiver
+	 */
+	public DoShowDisciplineStudents(SchoolManager receiver) {
+		super(Label.SHOW_COURSE_STUDENTS, receiver);
+		_discipline = _form.addStringInput(Message.requestDisciplineName());
+	}
 
-  /** @see pt.tecnico.po.ui.Command#execute() */
-  @Override
-  public final void execute() throws DialogException {
-    //FIXME implement command
-  }
+	/** @see pt.tecnico.po.ui.Command#execute() */
+	@Override
+	public final void execute() throws DialogException {
+		try {
+			_form.parse();
+			Collection students = _receiver.showDisciplineStudents(_discipline.value());
+		} catch (Exception e) {
+
+		}
+	}
 
 }
