@@ -6,6 +6,8 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.SchoolManager;
+import sth.Student;
+import sth.app.exceptions.NoSuchDisciplineException;
 
 //FIXME import other classes if needed
 
@@ -29,10 +31,19 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 	public final void execute() throws DialogException {
 		try {
 			_form.parse();
-			Collection students = _receiver.showDisciplineStudents(_discipline.value());
-		} catch (Exception e) {
-
+			Collection<Student> students = _receiver.showDisciplineStudents(_discipline.value());
+			if (students != null){
+				for (Student s : students){
+					_display.addLine(s.toString());
+				}
+			}else {
+				throw new NoSuchDisciplineException(_discipline.value());
+			}
+			
+		} catch (NoSuchDisciplineException e) {
+			_display.addLine(e.getMessage());
 		}
+		_display.display();
 	}
 
 }
