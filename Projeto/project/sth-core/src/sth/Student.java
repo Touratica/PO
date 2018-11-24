@@ -84,7 +84,7 @@ public class Student extends Person {
 		// FIXME
 	}
 
-	public Boolean isRepresentative() {
+	public boolean isRepresentative() {
 		return _course.getRepresentatives().containsKey(this.getId());
 	}
 

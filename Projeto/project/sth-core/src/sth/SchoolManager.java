@@ -102,7 +102,7 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is a representative
 	 */
 	public boolean hasRepresentative() {
-		return _school.getStudents().get(_loggedId).getCourse().getRepresentatives().containsKey(_loggedId);
+		return _school.getStudents().get(_loggedId).isRepresentative();
 	}
 
 	//FIXME implement other methods (in general, one for each command in sth-app)
