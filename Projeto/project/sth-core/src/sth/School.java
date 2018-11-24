@@ -247,7 +247,7 @@ public class School implements Serializable {
 				split[0] = split[0].replaceAll("#\\ ", "");
 
 				try {
-					if (student.getCourse() != null && split[0] != student.getCourse().getName()) {
+					if (student.getCourse() != null && split[0].equals(student.getCourse().getName())) {
 						throw new NotMatchingCourseException();
 					}
 					Course course = addCourse(split[0]);
@@ -259,6 +259,7 @@ public class School implements Serializable {
 					// do nothing- its fine to import courses with the same name
 				} catch (NotMatchingCourseException e) {
 					e.printStackTrace();
+					break;
 				}
 			} else {
 				break;
