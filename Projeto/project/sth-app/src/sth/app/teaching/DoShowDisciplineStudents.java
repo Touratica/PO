@@ -5,6 +5,7 @@ import java.util.Collection;
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
+import pt.tecnico.po.ui.Messages;
 import sth.SchoolManager;
 import sth.Student;
 import sth.app.exceptions.NoSuchDisciplineException;
@@ -32,16 +33,17 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 		try {
 			_form.parse();
 			Collection<Student> students = _receiver.showDisciplineStudents(_discipline.value());
-			if (students != null){
-				for (Student s : students){
+			if (students != null) {
+				for (Student s: students) {
 					_display.addLine(s.toString());
 				}
-			}else {
+			}
+			else {
 				throw new NoSuchDisciplineException(_discipline.value());
 			}
 			
 		} catch (NoSuchDisciplineException e) {
-			_display.addLine(e.getMessage());
+			_display.addLine(Messages.invalidOperation(e.getMessage()));
 		}
 		_display.display();
 	}
