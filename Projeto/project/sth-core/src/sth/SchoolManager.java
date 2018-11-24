@@ -203,9 +203,9 @@ public class SchoolManager {
 		Professor prof = (Professor) _school.getProfessors().get(_loggedId);
 		for (Map.Entry<String, ArrayList<Discipline>> entry: prof.getDisciplines().entrySet()) {
 			for (Discipline d: entry.getValue()) {
-				if (discipline == d.getDisciplineName()) {
+				if (discipline.equals(d.getDisciplineName())) {
 					for (Project p: d.getProjects()) {
-						if (p.getName() == project) {
+						if (p.getName().equals(project)) {
 							p.close();
 							return;
 						}
@@ -221,9 +221,9 @@ public class SchoolManager {
 		Professor prof = (Professor) _school.getProfessors().get(_loggedId);
 		for (Map.Entry<String, ArrayList<Discipline>> entry : prof.getDisciplines().entrySet()) {
 			for (Discipline d : entry.getValue()) {
-				if (discipline == d.getDisciplineName()) {
+				if (discipline.equals(d.getDisciplineName())) {
 					for (Project p : d.getProjects()) {
-						if (p.getName() == project) {
+						if (p.getName().equals(project)) {
 							throw new DuplicateProjectNameException();
 							
 						}

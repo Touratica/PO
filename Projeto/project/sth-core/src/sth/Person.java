@@ -52,8 +52,6 @@ public abstract class Person implements Serializable {
 	}
 
 	public void setName(String name){
-		if (name == null) 
-			throw new NullPointerException();
 		_name = name;
 
 	}

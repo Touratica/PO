@@ -70,7 +70,7 @@ public class Project implements Serializable {
 	public boolean equals(Object obj) {
 		if (obj instanceof Project) {
 			Project project = (Project) obj;
-			return _name == project.getName();
+			return _name.equals(project.getName());
 		}
 		return false;
 	}

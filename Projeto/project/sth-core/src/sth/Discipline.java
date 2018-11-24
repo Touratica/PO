@@ -58,7 +58,7 @@ public class Discipline implements Serializable{
 	public boolean equals(Object o){
 		if (o instanceof Discipline){
 			Discipline d = (Discipline) o;
-			return _name == d.getDisciplineName();
+			return _name.equals(d.getDisciplineName());
 		}
 		return false;
 	}

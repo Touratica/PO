@@ -1,4 +1,4 @@
-package sth;
+kpackage sth;
 
 /**
  * The project Survey class.

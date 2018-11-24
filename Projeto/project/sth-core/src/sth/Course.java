@@ -66,7 +66,7 @@ public class Course	implements Serializable {
 
 	public boolean hasDiscipline(Discipline discipline) {
 		for (Map.Entry<String, Discipline> entry: _disciplines.entrySet()) {
-			if (entry.getKey() == discipline.getDisciplineName()) {
+			if (entry.getKey().equals(discipline.getDisciplineName())) {
 				return true;
 			}
 		}
@@ -77,7 +77,7 @@ public class Course	implements Serializable {
 	public boolean equals(Object o) {
 		if (o instanceof Course){
 			Course course = (Course) o;
-			return course.getName() == _name;
+			return course.getName().equals(_name);
 		}
 		return false;
 	}

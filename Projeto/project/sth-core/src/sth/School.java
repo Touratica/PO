@@ -135,7 +135,7 @@ public class School implements Serializable {
 	 */
 	public Course addCourse(String courseName) throws DuplicateCourseException {
 		for (Map.Entry<String, Course> entry: _courses.entrySet()) {
-			if (entry.getKey() == courseName) {
+			if (entry.getKey().equals(courseName)) {
 				return entry.getValue();
 			}	
 		}
@@ -156,7 +156,7 @@ public class School implements Serializable {
 	 */
 	public Discipline addDiscipline(String courseName, String disciplineName) throws DuplicateDisciplineException, InexistentCourseException {
 		for (Map.Entry<String, Course> entry: _courses.entrySet()) {
-			if (entry.getKey() == courseName) {
+			if (entry.getKey().equals(courseName)) {
 				Discipline discipline = new Discipline(disciplineName);
 				entry.getValue().addDiscipline(discipline);
 				return discipline;
