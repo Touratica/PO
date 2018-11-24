@@ -125,6 +125,7 @@ public class SchoolManager {
 	public void open(String _filename) throws ClassNotFoundException, FileNotFoundException, IOException {
 		ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(_filename)));
 		_school = (School) in.readObject();
+		in.close();
 		
 	}
 	
@@ -138,7 +139,7 @@ public class SchoolManager {
 		if (hasStudent()) {
 			_school.getStudents().get(_loggedId).setPhoneNumber(phoneNumber);
 		}
-		else if (hasProfessor()){
+		else if (hasProfessor()) {
 			_school.getProfessors().get(_loggedId).setPhoneNumber(phoneNumber);
 		}
 		else if (hasAdministrative()) {
