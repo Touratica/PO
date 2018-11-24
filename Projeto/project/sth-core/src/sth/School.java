@@ -107,7 +107,7 @@ public class School implements Serializable {
 								professor.addCourseDiscipline(course, discipline);
 
 							} catch (DuplicateCourseException e) {
-								// do nothing- its fine to import courses with the same name
+								// do nothing- it's fine to import courses with the same name, as they won't be added twice
 							}
 						} else {
 							break;
