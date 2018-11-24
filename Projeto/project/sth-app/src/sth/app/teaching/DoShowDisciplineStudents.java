@@ -30,20 +30,15 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 	/** @see pt.tecnico.po.ui.Command#execute() */
 	@Override
 	public final void execute() throws DialogException {
-		try {
-			_form.parse();
-			Collection<Student> students = _receiver.showDisciplineStudents(_discipline.value());
-			if (students != null) {
-				for (Student student: students) {
-					_display.addLine(student.toString());
-				}
+		_form.parse();
+		Collection<Student> students = _receiver.showDisciplineStudents(_discipline.value());
+		if (students != null) {
+			for (Student student: students) {
+				_display.addLine(student.toString());
 			}
-			else {
-				throw new NoSuchDisciplineException(_discipline.value());
-			}
-			
-		} catch (NoSuchDisciplineException e) {
-			_display.addLine(Messages.invalidOperation(e.getMessage()));
+		}
+		else {
+			throw new NoSuchDisciplineException(_discipline.value());
 		}
 		_display.display();
 	}
