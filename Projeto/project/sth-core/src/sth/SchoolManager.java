@@ -255,30 +255,22 @@ public class SchoolManager {
 
 	
 	public ArrayList<Student> showDisciplineStudents (String disciplineName){
-		ArrayList<Student> disciplineStudents =new ArrayList<Student>();
+		ArrayList<Student> disciplineStudents = new ArrayList<Student>();
+		
 		for (Map.Entry<String, ArrayList<Discipline>> entry: _school.getProfessors().get(_loggedId).getDisciplines().entrySet()) {
 			for (Discipline discipline: entry.getValue()) {
-				if (discipline.getDisciplineName().equals(disciplineName)) 
+				if (discipline.getDisciplineName().equals(disciplineName)){ 
 					for (Map.Entry<Integer,Student> s : discipline.getStudents().entrySet()){
 						disciplineStudents.add(s.getValue());
 					}
-			}
-		}
-		if (disciplineStudents != null)
-			Collections.sort(disciplineStudents, Person.ID_COMPARATOR);	
-
-		return disciplineStudents;
-	}
-	/*public Map<Integer, Student> showDisciplineStudents(String disciplineName) {
-		for (Map.Entry<String, ArrayList<Discipline>> entry: _school.getProfessors().get(_loggedId).getDisciplines().entrySet()) {
-			for (Discipline discipline: entry.getValue()) {
-				if (discipline.getDisciplineName().equals(disciplineName)) {
-					return discipline.getStudents();
+					Collections.sort(disciplineStudents, Person.ID_COMPARATOR);
+					return disciplineStudents;	
 				}
 			}
-		}
-		return null;
-	}*/
+		} return null;
+		
+	}
+
 
 	public void deliverProject(String discipline, String project, String submission) throws NoSuchDisciplineNameException, NoSuchProjectNameException, ProjectAlreadyClosedException {
 		if (_school.getStudents().get(_loggedId).getCourse().getDisciplines().containsKey(discipline)) {
