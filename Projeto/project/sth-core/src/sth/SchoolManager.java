@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
+import javax.sound.midi.SysexMessage;
+
 import sth.exceptions.BadEntryException;
 import sth.exceptions.DuplicateProjectNameException;
 import sth.exceptions.ImportFileException;
@@ -120,7 +122,7 @@ public class SchoolManager {
 	 * 
 	 * @return true if the save file has been set already. 
 	 */
-	public Boolean isFileSet() {
+	public boolean isFileSet() {
 		return _filename != null;
 	}
 
@@ -131,8 +133,9 @@ public class SchoolManager {
 		_filename = filename;
 	}
 
-	public void open(String _filename) throws ClassNotFoundException, FileNotFoundException, IOException, NoSuchPersonIdException {
-		ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(_filename)));
+	public void open(String filename) throws ClassNotFoundException, FileNotFoundException, IOException, NoSuchPersonIdException {
+		ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)));
+		setFilename(filename);
 		School newSchool = (School) in.readObject();
 		in.close();
 		if (newSchool.getStudents().containsKey(_loggedId) || newSchool.getProfessors().containsKey(_loggedId) || newSchool.getAdministratives().containsKey(_loggedId)) {
@@ -143,6 +146,7 @@ public class SchoolManager {
 		}
 		
 	}
+	
 	
 	public void save() throws IOException{
 		ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(_filename)));
