@@ -12,26 +12,26 @@ import sth.exceptions.NoSuchPersonIdException;
  */
 public class DoLogin extends Command<SchoolManager> {
 
-  /** Login identifier. */
-  Input<Integer> _login;
+	/** Login identifier. */
+	Input<Integer> _login;
 
-  /**
-   * @param receiver
-   */
-  public DoLogin(SchoolManager receiver) {
-    super(Label.LOGIN, receiver);
-    _login = _form.addIntegerInput(Message.requestLoginId());
-  }
+	/**
+	 * @param receiver
+	 */
+	public DoLogin(SchoolManager receiver) {
+		super(Label.LOGIN, receiver);
+		_login = _form.addIntegerInput(Message.requestLoginId());
+	}
 
-  /** @see pt.tecnico.po.ui.Command#execute() */
-  @Override
-  public final void execute() throws DialogException {
-    _form.parse();
-    try {
-      _receiver.login(_login.value());
-    } catch (NoSuchPersonIdException e) {
-      throw new NoSuchPersonException(_login.value());
-    }
-  }
+	/** @see pt.tecnico.po.ui.Command#execute() */
+	@Override
+	public final void execute() throws DialogException {
+		_form.parse();
+		try {
+			_receiver.login(_login.value());
+		} catch (NoSuchPersonIdException e) {
+			throw new NoSuchPersonException(_login.value());
+		}
+	}
 
 }

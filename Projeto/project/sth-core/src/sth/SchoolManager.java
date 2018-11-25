@@ -71,6 +71,9 @@ public class SchoolManager {
 	 */
 	public void login(int id) throws NoSuchPersonIdException {
 		_loggedId = id;
+		if (!(_school.getStudents().containsKey(_loggedId) || _school.getProfessors().containsKey(_loggedId) || _school.getAdministratives().containsKey(_loggedId))) {
+			throw new NoSuchPersonIdException(_loggedId);
+		}
 	}
 
 	
