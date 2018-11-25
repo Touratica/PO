@@ -41,10 +41,10 @@ DELEGADO|100073|123456789|José Manuel
 * Matemática - Métodos Numéricos
 * Matemática - Probabilidades e Estatística
 DOCENTE|100100|987654321|Ana Maria
-* Informática - Engenharia de Software
 * Informática - Algoritmos e Estruturas de Dados
-* Informática - Sistemas Operativos
 * Informática - Compiladores
+* Informática - Engenharia de Software
+* Informática - Sistemas Operativos
 FUNCIONÁRIO|100101|123789456|Maria José
 FUNCIONÁRIO|101010|789456123|José Carlos
 Portal Pessoal

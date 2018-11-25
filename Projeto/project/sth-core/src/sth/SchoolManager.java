@@ -131,10 +131,16 @@ public class SchoolManager {
 		_filename = filename;
 	}
 
-	public void open(String _filename) throws ClassNotFoundException, FileNotFoundException, IOException {
+	public void open(String _filename) throws ClassNotFoundException, FileNotFoundException, IOException, NoSuchPersonIdException {
 		ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(_filename)));
-		_school = (School) in.readObject();
+		School newSchool = (School) in.readObject();
 		in.close();
+		if (newSchool.getStudents().containsKey(_loggedId) || newSchool.getProfessors().containsKey(_loggedId) || newSchool.getAdministratives().containsKey(_loggedId)) {
+			_school = newSchool;
+		}
+		else {
+			throw new NoSuchPersonIdException(_loggedId);
+		}
 		
 	}
 	

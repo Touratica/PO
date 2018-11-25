@@ -10,3 +10,5 @@ do
 	echo ""
 done
 
+echo ""
+(cd project && make clean)

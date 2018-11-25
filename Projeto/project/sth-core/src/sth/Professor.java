@@ -1,6 +1,8 @@
 package sth;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 import sth.exceptions.DuplicateDisciplineException;
@@ -44,10 +46,20 @@ public class Professor extends Person {
 
 	@Override
 	public String toString() {
-		String s = "DOCENTE|" + super.toString() ;
-		for (Map.Entry<String, ArrayList<Discipline>> entry : _disciplines.entrySet())
-			for (Discipline discipline : entry.getValue())
-				s+= "\n* " + entry.getKey() + " - " + discipline.toString();
+		String s = "DOCENTE|" + super.toString();
+		
+		
+		ArrayList<String> disciplines = new ArrayList<String>();
+		for (Map.Entry<String, ArrayList<Discipline>> entry: _disciplines.entrySet()) {
+			for (Discipline discipline: entry.getValue()) {
+				disciplines.add("* " + entry.getKey() + " - " + discipline.getDisciplineName());
+			}
+		}
+		Collections.sort(disciplines, Collator.getInstance());
+		for (String str: disciplines) {
+			s += "\n" + str;
+		}
+
 		return s;
 	}
     
