@@ -26,6 +26,7 @@ import sth.exceptions.DuplicateDisciplineException;
 import sth.exceptions.DuplicateIdException;
 import sth.exceptions.DuplicateProjectException;
 import sth.exceptions.InexistentCourseException;
+import sth.exceptions.NoSuchDisciplineNameException;
 import sth.exceptions.NotMatchingCourseException;
 import sth.exceptions.OutOfRangeIdException;
 import sth.exceptions.ProjectAlreadyClosedException;
@@ -207,43 +208,42 @@ public class SchoolManager {
 		return peopleList;
 	}
 
-	public void closeProject(String discipline, String project) throws NoSuchProjectNameException, ProjectAlreadyClosedException {
+	public void closeProject(String discipline, String project) throws NoSuchProjectNameException, ProjectAlreadyClosedException, NoSuchDisciplineNameException {
 		Professor prof = (Professor) _school.getProfessors().get(_loggedId);
 		for (Map.Entry<String, ArrayList<Discipline>> entry: prof.getDisciplines().entrySet()) {
 			for (Discipline d: entry.getValue()) {
-				if (discipline.equals(d.getDisciplineName())) {
-					for (Project p: d.getProjects()) {
-						if (p.getName().equals(project)) {
-							p.close();
+				if (d.getDisciplineName().equals(discipline)) {
+					if (d.getProjects().containsKey(project)) {
+							d.getProjects().get(project).close();
 							return;
+						} else {
+							throw new NoSuchProjectNameException();
 						}
-					}
 				}
 			}
 		}
-		throw new NoSuchProjectNameException();
+		throw new NoSuchDisciplineNameException();
 	}
 
-	public void createProject(String discipline, String project) throws DuplicateProjectNameException {
+	public void createProject(String discipline, String project) throws DuplicateProjectNameException, NoSuchDisciplineNameException {
 
 		Professor prof = (Professor) _school.getProfessors().get(_loggedId);
 		for (Map.Entry<String, ArrayList<Discipline>> entry : prof.getDisciplines().entrySet()) {
 			for (Discipline d : entry.getValue()) {
-				if (discipline.equals(d.getDisciplineName())) {
-					for (Project p : d.getProjects()) {
-						if (p.getName().equals(project)) {
-							throw new DuplicateProjectNameException();
-							
-						}
+				if (d.getDisciplineName().equals(discipline)) {
+					if (d.getProjects().containsKey(project)) {
+						throw new DuplicateProjectNameException();
+					} else {
+						d.addProject(new Project(project, d.getDisciplineName() + " - " + project));;
+						return;
 					}
-					d.addProject(new Project(project, d.getDisciplineName() + " - " + project));
-					return;
 				}
 			}
 		}
+		throw new NoSuchDisciplineNameException();
 	}
 
-	public ArrayList<Student> showDisciplineStudents(String disciplineName) {
+	public Map<Integer, Student> showDisciplineStudents(String disciplineName) {
 		for (Map.Entry<String, ArrayList<Discipline>> entry: _school.getProfessors().get(_loggedId).getDisciplines().entrySet()) {
 			for (Discipline discipline: entry.getValue()) {
 				if (discipline.getDisciplineName().equals(disciplineName)) {
@@ -252,6 +252,24 @@ public class SchoolManager {
 			}
 		}
 		return null;
+	}
 
+	public void deliverProject(String discipline, String project, String submission) throws NoSuchDisciplineNameException, NoSuchProjectNameException, ProjectAlreadyClosedException {
+		if (_school.getStudents().get(_loggedId).getCourse().getDisciplines().containsKey(discipline)) {
+			if (_school.getStudents().get(_loggedId).getCourse().getDisciplines().get(discipline).getStudents().containsKey(_loggedId)) {
+				if (_school.getStudents().get(_loggedId).getCourse().getDisciplines().get(discipline).getProjects().containsKey(project)) {
+					_school.getStudents().get(_loggedId).getCourse().getDisciplines().get(discipline).getProjects().get(project).submitProject(_loggedId, submission);
+				}
+				else {
+					throw new NoSuchProjectNameException();
+				}
+			}
+			else {
+				throw new NoSuchDisciplineNameException();
+			}
+		}
+		else {
+			throw new NoSuchDisciplineNameException();
+		}
 	}
 }

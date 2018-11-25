@@ -4,7 +4,9 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.SchoolManager;
+import sth.app.exceptions.NoSuchDisciplineException;
 import sth.app.exceptions.NoSuchProjectException;
+import sth.exceptions.NoSuchDisciplineNameException;
 import sth.exceptions.NoSuchProjectNameException;
 import sth.exceptions.ProjectAlreadyClosedException;
 
@@ -35,6 +37,8 @@ public class DoCloseProject extends Command<SchoolManager> {
 			_receiver.closeProject(_discipline.value(), _project.value());
 		} catch (NoSuchProjectNameException e) {
 			throw new NoSuchProjectException(_discipline.value(), _project.value());
+		} catch (NoSuchDisciplineNameException e) {
+			throw new NoSuchDisciplineException(_discipline.value());
 		} catch (ProjectAlreadyClosedException e) {
 			e.printStackTrace();
 		}

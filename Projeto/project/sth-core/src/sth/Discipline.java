@@ -1,7 +1,9 @@
 package sth;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 import java.io.Serializable;
 
 import sth.exceptions.DuplicateProjectException;
@@ -21,9 +23,9 @@ public class Discipline implements Serializable{
 
 	/** The maximum number of students per discipline. */
 	private static final int MAX_STUDENTS = 300;
-	private ArrayList<Professor> _professors = new ArrayList<Professor>();
-	private ArrayList<Student> _students = new ArrayList<Student>();
-	private ArrayList<Project> _projects = new ArrayList<Project>();
+	private Map<Integer, Professor> _professors = new HashMap<Integer, Professor>();
+	private Map<Integer, Student> _students = new HashMap<Integer, Student>();
+	private Map<String, Project> _projects = new TreeMap<String, Project>();
 
 	public Discipline(String name){
 			_name = name;
@@ -36,28 +38,28 @@ public class Discipline implements Serializable{
 	/**
 	 * @return the _students
 	 */
-	public ArrayList<Student> getStudents() {
+	public Map<Integer, Student> getStudents() {
 		return _students;
 	}
 
 	public void addProfessor(Professor prof) {
-			_professors.add(prof);
+			_professors.put(prof.getId(), prof);
 	}
 
 	public void addStudent(Student student) throws StudentLimitExceededException{
 		if (_students.size() < MAX_STUDENTS)
-			_students.add(student);
+			_students.put(student.getId(), student);
 		else throw new StudentLimitExceededException(student);
 	}
 
 	public void addProject(Project project) {
-		_projects.add(project);
+		_projects.put(project.getName(), project);
 	}
 
 	/**
 	 * @return the discipline associated projects
 	 */
-	public ArrayList<Project> getProjects() {
+	public Map<String, Project> getProjects() {
 		return _projects;
 	}
 

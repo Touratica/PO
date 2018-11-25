@@ -1,6 +1,7 @@
 package sth.app.teaching;
 
 import java.util.Collection;
+import java.util.Map;
 
 import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
@@ -31,10 +32,10 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 	@Override
 	public final void execute() throws DialogException {
 		_form.parse();
-		Collection<Student> students = _receiver.showDisciplineStudents(_discipline.value());
+		Map<Integer, Student> students = _receiver.showDisciplineStudents(_discipline.value());
 		if (students != null) {
-			for (Student student: students) {
-				_display.addLine(student.toString());
+			for (Map.Entry<Integer, Student> entry: students.entrySet()) {
+				_display.addLine(entry.getValue().toString());
 			}
 		}
 		else {

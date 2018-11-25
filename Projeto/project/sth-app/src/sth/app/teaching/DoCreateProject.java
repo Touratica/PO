@@ -5,7 +5,9 @@ import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.SchoolManager;
 import sth.app.exceptions.DuplicateProjectException;
+import sth.app.exceptions.NoSuchDisciplineException;
 import sth.exceptions.DuplicateProjectNameException;
+import sth.exceptions.NoSuchDisciplineNameException;
 
 //FIXME import other classes if needed
 
@@ -28,12 +30,14 @@ public class DoCreateProject extends Command<SchoolManager> {
 
 	/** @see pt.tecnico.po.ui.Command#execute() */
 	@Override
-	public final void execute() throws DialogException, DuplicateProjectException {
+	public final void execute() throws DialogException {
 		_form.parse();
 		try {
 			_receiver.createProject(_discipline.value(), _project.value());
 		} catch (DuplicateProjectNameException e) {
 			throw new DuplicateProjectException(_discipline.value(), _project.value());
+		} catch (NoSuchDisciplineNameException e) {
+			throw new NoSuchDisciplineException(_discipline.value());
 		}
 	}
 

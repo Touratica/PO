@@ -44,7 +44,7 @@ public class Project implements Serializable {
 	/**
 	 * @return the project's submissions
 	 */
-	public Map<Integer, String> get_submissions() {
+	public Map<Integer, String> getSubmissions() {
 		return _submissions;
 	}
 
@@ -64,6 +64,20 @@ public class Project implements Serializable {
 		} else {
 			_open = false;
 		}
+	}
+
+	public void submitProject(int id, String submission) throws ProjectAlreadyClosedException {
+		if (!isOpen()) {
+			throw new ProjectAlreadyClosedException();
+		}
+		else {
+			if (_submissions.containsKey(id)) {
+				_submissions.replace(id, submission);
+			}
+			else {
+				_submissions.put(id, submission);
+			}
+		} 
 	}
 
 	@Override
