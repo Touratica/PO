@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+
+import javax.naming.LimitExceededException;
+
 import java.io.Serializable;
 import sth.exceptions.AlreadyRepresentativeException;
 import sth.exceptions.BadEntryException;
@@ -21,6 +24,7 @@ import sth.exceptions.NoSuchPersonIdException;
 import sth.exceptions.NotMatchingCourseException;
 import sth.exceptions.OutOfRangeIdException;
 import sth.exceptions.RepresentativeNumberExceeded;
+import sth.exceptions.StudentLimitExceededException;
 
 /**
  * School implementation.
@@ -240,6 +244,9 @@ public class School implements Serializable {
 					// grabs the discipline from the course with this name
 					discipline = course.getDisciplines().get(discipline.getDisciplineName());
 					student.addDiscipline(discipline);
+					try{
+						discipline.addStudent(student);
+					}catch (StudentLimitExceededException e){}
 		
 				} catch (NotMatchingCourseException e) {
 					e.printStackTrace();
