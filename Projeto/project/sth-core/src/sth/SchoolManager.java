@@ -214,7 +214,7 @@ public class SchoolManager {
 		for (Map.Entry<Integer, Student> entry : _school.getStudents().entrySet()) {
 			peopleList.add(entry.getValue());
 		}
-		Collections.sort(peopleList, Person.ID_COMPARATOR);
+		Collections.sort(peopleList, Person.ID_COMPARATOR);	
 		return peopleList;
 	}
 
@@ -253,7 +253,23 @@ public class SchoolManager {
 		throw new NoSuchDisciplineNameException();
 	}
 
-	public Map<Integer, Student> showDisciplineStudents(String disciplineName) {
+	
+	public ArrayList<Student> showDisciplineStudents (String disciplineName){
+		ArrayList<Student> disciplineStudents =new ArrayList<Student>();
+		for (Map.Entry<String, ArrayList<Discipline>> entry: _school.getProfessors().get(_loggedId).getDisciplines().entrySet()) {
+			for (Discipline discipline: entry.getValue()) {
+				if (discipline.getDisciplineName().equals(disciplineName)) 
+					for (Map.Entry<Integer,Student> s : discipline.getStudents().entrySet()){
+						disciplineStudents.add(s.getValue());
+					}
+			}
+		}
+		if (disciplineStudents != null)
+			Collections.sort(disciplineStudents, Person.ID_COMPARATOR);	
+
+		return disciplineStudents;
+	}
+	/*public Map<Integer, Student> showDisciplineStudents(String disciplineName) {
 		for (Map.Entry<String, ArrayList<Discipline>> entry: _school.getProfessors().get(_loggedId).getDisciplines().entrySet()) {
 			for (Discipline discipline: entry.getValue()) {
 				if (discipline.getDisciplineName().equals(disciplineName)) {
@@ -262,7 +278,7 @@ public class SchoolManager {
 			}
 		}
 		return null;
-	}
+	}*/
 
 	public void deliverProject(String discipline, String project, String submission) throws NoSuchDisciplineNameException, NoSuchProjectNameException, ProjectAlreadyClosedException {
 		if (_school.getStudents().get(_loggedId).getCourse().getDisciplines().containsKey(discipline)) {
