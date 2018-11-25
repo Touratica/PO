@@ -10,7 +10,12 @@ Escolha uma opção: Portal Pessoal
 3 - Mostrar pessoas
 4 - Procurar pessoa
 0 - Sair
-Escolha uma opção: Número de telefone: Portal Pessoal
+Escolha uma opção: Número de telefone: DOCENTE|100100|123456987|Ana Maria
+* Informática - Análise e Síntese de Algoritmos
+* Informática - Compiladores
+* Informática - Engenharia de Software
+* Informática - Sistemas Operativos
+Portal Pessoal
 1 - Mostrar pessoa
 2 - Alterar número de telefone
 3 - Mostrar pessoas

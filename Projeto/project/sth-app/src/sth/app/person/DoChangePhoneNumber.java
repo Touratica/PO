@@ -28,6 +28,8 @@ public class DoChangePhoneNumber extends Command<SchoolManager> {
   public final void execute() {
     _form.parse();
     _receiver.changePhoneNumber(_phoneNumber.value());
+    _display.addLine(_receiver.showPerson());
+    _display.display();
   }
 
 }
