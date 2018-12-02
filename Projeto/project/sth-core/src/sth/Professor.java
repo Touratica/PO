@@ -12,7 +12,7 @@ import sth.exceptions.OutOfRangeIdException;
 /**
  * Professor
  */
-public class Professor extends Person {
+public class Professor extends Person implements Observer {
 
 	private static final long serialVersionUID = 201811151743L;
 

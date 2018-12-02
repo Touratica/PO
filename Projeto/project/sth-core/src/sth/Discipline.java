@@ -63,6 +63,12 @@ public class Discipline implements Serializable{
 		return _projects;
 	}
 
+	public void registerSurveyObserver(Observer o) {
+		for (Map.Entry<String, Project> entry: _projects.entrySet()) {
+			entry.getValue().registerSurveyObserver(o);
+		}
+	}
+
 	@Override
 	public boolean equals(Object o){
 		if (o instanceof Discipline){

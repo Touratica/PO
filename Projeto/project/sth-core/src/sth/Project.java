@@ -82,7 +82,7 @@ public class Project implements Serializable {
 	}
 
 	public void registerSurveyObserver(Observer o) {
-		_survey.
+		_survey.registerObserver(o);
 	}
 
 	@Override
