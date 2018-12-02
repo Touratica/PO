@@ -17,7 +17,8 @@ public class Project implements Serializable {
 	private String _name;
 	private String _description;
 	private Map<Integer, String> _submissions = new HashMap<Integer, String>();
-	private Boolean _open = true; 
+	private Boolean _open = true;
+	private Survey _survey;
 
 
 	public Project(String name, String description){
@@ -78,6 +79,10 @@ public class Project implements Serializable {
 				_submissions.put(id, submission);
 			}
 		} 
+	}
+
+	public void registerSurveyObserver(Observer o) {
+		_survey.
 	}
 
 	@Override
