@@ -1,8 +1,9 @@
 package sth;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The project Survey class.
@@ -11,8 +12,7 @@ public class Survey implements Subject {
 
 	// FIXME: Implement Survey class
 	private List<Observer> _observers = new ArrayList<Observer>();
-	private int _totalWorkHours;
-	private String _comment;
+	private Map<Student,SurveyAnswer> _results = new TreeMap<Student,SurveyAnswer>();
 	private State _state;
 	
 	public abstract class State{
@@ -50,13 +50,12 @@ public class Survey implements Subject {
 		_state.finalize();
 	}
 
-	public void submitAnswer(int hours, String comment){
-		_totalWorkHours = hours;
-		_comment = comment;
+	public void submitAnswer(Student student, SurveyAnswer answer){
+		_results.put(student, answer);	
 	}
 	
-	public void getResults(){
-		//FIXME
+	public Map<Student, SurveyAnswer> getResults(){
+		return _results;
 	}
 
 	@Override

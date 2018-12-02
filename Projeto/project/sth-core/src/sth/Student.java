@@ -54,6 +54,16 @@ public class Student extends Person implements Observer {
 		return _course;
 	}
 	
+
+	public Discipline getDiscipline(String discipline){
+		for (Discipline d : _disciplines){
+			if (discpline.equals(d.getDisciplineName())) {
+				return d;
+			}
+		}
+		return null;
+	}
+
 	public void addDiscipline(Discipline discipline) throws DuplicateDisciplineException, DisciplineLimitExceededException {
 		for (Discipline d: _disciplines) {
 			if (d.equals(discipline)) {
@@ -68,6 +78,14 @@ public class Student extends Person implements Observer {
 		}
 	}
 	
+	public void submitSurveyAnswer(String discipline, String project, int hours, String comment){
+		Discipline d = getDiscipline(discipline);
+		SurveyAnswer answer = new SurveyAnswer(hours, comment);
+		d.submitSurveyAnswer(this, project, answer);
+
+		//FIXME se o student nao tiver disciplina mandar excecao
+	}
+
 	public void createSurvey(Project project) {
 		// FIXME
 	}

@@ -63,10 +63,22 @@ public class Discipline implements Serializable{
 		return _projects;
 	}
 
+	public Project getProject(String project){
+		return _projects.get(project);
+
+	}
+
 	public void registerSurveyObserver(Observer o) {
 		for (Map.Entry<String, Project> entry: _projects.entrySet()) {
 			entry.getValue().registerSurveyObserver(o);
 		}
+	}
+
+	public void submitSurveyAnswer(Student student, String project, SurveyAnswer answer){ 
+		// FIXME se a disciplina nao tiver o projeto
+		Project p = getProject(project);
+		p.submitSurveyAnswer(student, answer);
+
 	}
 
 	@Override

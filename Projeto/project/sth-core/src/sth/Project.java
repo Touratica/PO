@@ -81,6 +81,10 @@ public class Project implements Serializable {
 		} 
 	}
 
+	public void submitSurveyAnswer(Student student, SurveyAnswer answer){
+
+	}
+
 	public void registerSurveyObserver(Observer o) {
 		_survey.registerObserver(o);
 	}
