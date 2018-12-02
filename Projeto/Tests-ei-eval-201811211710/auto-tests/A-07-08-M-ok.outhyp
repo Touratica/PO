@@ -66,25 +66,25 @@ Escolha uma opção: Portal do Docente
 4 - Ver alunos de disciplina leccionada
 5 - Ver resultados de um inquérito
 0 - Sair
-Escolha uma opção: Nome da disciplina: DELEGADO|100051|123456789|João Manuel
-* Informática - Algoritmos e Estruturas de Dados
-* Informática - Fundamentos da Programação
-DELEGADO|100021|123456789|João Manuel
-* Informática - Algoritmos e Estruturas de Dados
-* Informática - Fundamentos da Programação
-DELEGADO|100041|123456789|João Manuel
+Escolha uma opção: Nome da disciplina: DELEGADO|100010|123456789|João Maria
 * Informática - Algoritmos e Estruturas de Dados
 * Informática - Fundamentos da Programação
 DELEGADO|100011|123456789|João Manuel
 * Informática - Algoritmos e Estruturas de Dados
 * Informática - Fundamentos da Programação
-DELEGADO|100010|123456789|João Maria
-* Informática - Algoritmos e Estruturas de Dados
-* Informática - Fundamentos da Programação
-DELEGADO|100061|123456789|João Manuel
+DELEGADO|100021|123456789|João Manuel
 * Informática - Algoritmos e Estruturas de Dados
 * Informática - Fundamentos da Programação
 DELEGADO|100031|123456789|João Manuel
+* Informática - Algoritmos e Estruturas de Dados
+* Informática - Fundamentos da Programação
+DELEGADO|100041|123456789|João Manuel
+* Informática - Algoritmos e Estruturas de Dados
+* Informática - Fundamentos da Programação
+DELEGADO|100051|123456789|João Manuel
+* Informática - Algoritmos e Estruturas de Dados
+* Informática - Fundamentos da Programação
+DELEGADO|100061|123456789|João Manuel
 * Informática - Algoritmos e Estruturas de Dados
 * Informática - Fundamentos da Programação
 ALUNO|100062|123456789|João A. Manuel
