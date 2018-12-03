@@ -13,7 +13,7 @@ import sth.exceptions.OutOfRangeIdException;
 /**
  * Every person in the school.
  */
-public abstract class Person implements Serializable {
+public abstract class Person implements Serializable, Comparable<Person> {
 
 	private static final long serialVersionUID = 201811151741L;
 	
@@ -89,6 +89,14 @@ public abstract class Person implements Serializable {
 	public String toString() {
 		return  _id + "|" + _phoneNumber + "|" +  _name;
 	}
+
+	@Override
+	public int compareTo(Person person) {
+		if (person == null) {
+			throw new NullPointerException();
+		}
+		return _id - person.getId();
+	}
 	
 	private static class NameComparator implements Comparator<Person> {
 
@@ -103,6 +111,11 @@ public abstract class Person implements Serializable {
 		@Override
 		public int compare(Person person1, Person person2) {
 			return person1.getId() - person2.getId();
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			return super.equals(obj);
 		}
 	}
 }

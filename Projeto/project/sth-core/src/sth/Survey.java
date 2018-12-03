@@ -91,7 +91,7 @@ public class Survey implements Subject {
 
 	public void submitAnswer(Student student, SurveyAnswer answer) {
 		for (Student s : _students)
-			if (student.ID_COMPARATOR(s)) //FIXME nao se usa assim...
+			if (student.compareTo(s) == 0) 
 				return ; //posterior answers should be ignored
 		_state.submitAnswer(student, answer);
 	}
