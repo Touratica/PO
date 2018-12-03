@@ -110,12 +110,7 @@ public abstract class Person implements Serializable, Comparable<Person> {
 
 		@Override
 		public int compare(Person person1, Person person2) {
-			return person1.getId() - person2.getId();
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			return super.equals(obj);
+			return person1.compareTo(person2);
 		}
 	}
 }
