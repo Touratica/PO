@@ -33,13 +33,6 @@ public class Survey implements Subject {
 
 	}
 
-<<<<<<< HEAD
-	public Survey() {
-		_state = new CreatedState(this);
-	}
-
-	public void cancel() {
-=======
 	public Survey(String discipline, String project){
 		_discipline = discipline;
 		_project = project;
@@ -51,7 +44,6 @@ public class Survey implements Subject {
 	}
 
 	public void cancel(){
->>>>>>> cd623015646d8a0fa3545373a0e0ecb6f4389164
 		_state.cancel();
 	}
 
