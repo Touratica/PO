@@ -85,6 +85,22 @@ public abstract class Person implements Serializable, Observer {
 		_notifications.add(notification);
 	}
 
+	public boolean isAdministrative() {
+		return false;
+	}
+
+	public boolean isProfessor() {
+		return false;
+	}
+
+	public boolean isRepresentative() {
+		return false;
+	}
+
+	public boolean isStudent() {
+		return false;
+	}
+
 	@Override
 	public void update(String discipline, String project, Survey survey) {
 		String notification = "";
@@ -96,6 +112,14 @@ public abstract class Person implements Serializable, Observer {
 			throw new UnsupportedOperationException();
 		}
 		addNotification(notification);
+	}
+
+	public String showNotifications() {
+		String notifications = "";
+		for (String str: _notifications) {
+			notifications += str + "\n";
+		}
+		return notifications;
 	}
 
 	@Override

@@ -47,6 +47,11 @@ public class Professor extends Person implements Observer {
 	}
 
 	@Override
+	public boolean isProfessor() {
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		String s = "DOCENTE|" + super.toString();
 		

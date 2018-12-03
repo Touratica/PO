@@ -13,9 +13,14 @@ public class Administrative extends Person {
 
     public Administrative(int id, int phoneNumber, String name) throws DuplicateIdException, OutOfRangeIdException {
 		super(id, phoneNumber, name);
-	  }
+	}
   
- 	 @Override
+	@Override
+	public boolean isAdministrative() {
+		return true;
+	}
+	
+	@Override
 	public String toString() {
 		return  "FUNCIONÁRIO|" + super.toString() ;
 	}

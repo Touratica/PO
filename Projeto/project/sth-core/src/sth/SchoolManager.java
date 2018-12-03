@@ -48,8 +48,8 @@ public class SchoolManager {
 	/** The default file to save the school's state. */
 	private String _filename;
 
-	/** */
-	private int _loggedId;
+	/** The logged in person */
+	private Person _loggedPerson;
 
 	//FIXME implement constructors if needed
 	
@@ -73,9 +73,17 @@ public class SchoolManager {
 	 * @throws NoSuchPersonIdException
 	 */
 	public void login(int id) throws NoSuchPersonIdException {
-		_loggedId = id;
-		if (!(_school.getStudents().containsKey(_loggedId) || _school.getProfessors().containsKey(_loggedId) || _school.getAdministratives().containsKey(_loggedId))) {
-			throw new NoSuchPersonIdException(_loggedId);
+		if ((_loggedPerson = _school.getStudents().get(id)) != null) {
+			return;
+		}
+		else if ((_loggedPerson = _school.getProfessors().get(id)) != null) {
+			return;
+		}
+		else if ((_loggedPerson = _school.getAdministratives().get(id)) != null) {
+			return;
+		}
+		else {
+			throw new NoSuchPersonIdException(id);
 		}
 	}
 
@@ -84,7 +92,7 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is an administrative
 	 */
 	public boolean hasAdministrative() {
-		return _school.getAdministratives().containsKey(_loggedId);
+		return _loggedPerson.isAdministrative();
 
 	}
 
@@ -92,7 +100,7 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is a professor
 	 */
 	public boolean hasProfessor() {
-		return _school.getProfessors().containsKey(_loggedId);
+		return _loggedPerson.isProfessor();
 
 	}
 
@@ -100,7 +108,7 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is a student
 	 */
 	public boolean hasStudent() {
-		return _school.getStudents().containsKey(_loggedId);
+		return _loggedPerson.isStudent();
 
 	}
 
@@ -108,15 +116,8 @@ public class SchoolManager {
 	 * @return true when the currently logged in person is a representative
 	 */
 	public boolean hasRepresentative() {
-		if (_school.getStudents().containsKey(_loggedId)) {
-			return _school.getStudents().get(_loggedId).isRepresentative();
-		}
-		else {
-			return false;
-		}
+		return _loggedPerson.isRepresentative();
 	}
-
-	//FIXME implement other methods (in general, one for each command in sth-app)
 
 	/**
 	 * 
@@ -146,7 +147,6 @@ public class SchoolManager {
 		}
 		
 	}
-	
 	
 	public void save() throws IOException{
 		ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(_filename)));
@@ -253,7 +253,6 @@ public class SchoolManager {
 		throw new NoSuchDisciplineNameException();
 	}
 
-	
 	public ArrayList<Student> showDisciplineStudents (String disciplineName){
 		ArrayList<Student> disciplineStudents = new ArrayList<Student>();
 		
@@ -270,7 +269,6 @@ public class SchoolManager {
 		} return null;
 		
 	}
-
 
 	public void deliverProject(String discipline, String project, String submission) throws NoSuchDisciplineNameException, NoSuchProjectNameException, ProjectAlreadyClosedException {
 		if (_school.getStudents().get(_loggedId).getCourse().getDisciplines().containsKey(discipline)) {
@@ -289,5 +287,10 @@ public class SchoolManager {
 		else {
 			throw new NoSuchDisciplineNameException();
 		}
+	}
+
+	public String showNotifications() {
+		
+		return _loggedPerson.showNotifications();
 	}
 }

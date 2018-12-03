@@ -95,6 +95,7 @@ public class Survey implements Subject {
 
 	public void finalize() throws SurveyNotClosedException {
 		_state.finalize();
+		notifyObservers();
 	}
 
 	public boolean isOpen() {
@@ -135,7 +136,9 @@ public class Survey implements Subject {
 			for (Observer observer: _observers) {
 				observer.update(_discipline.getDisciplineName(), _project.getName(), this);
 			}
-		} catch (UnsupportedOperationException e) {
+		}
+		// Exception thrown whenever administrative tries to update
+		catch (UnsupportedOperationException e) {
 			e.printStackTrace();
 		}
 	}

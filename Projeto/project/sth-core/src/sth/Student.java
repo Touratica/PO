@@ -111,8 +111,14 @@ public class Student extends Person {
 		survey.close();
 	}
 
+	@Override
 	public boolean isRepresentative() {
 		return _course.getRepresentatives().containsKey(this.getId());
+	}
+
+	@Override
+	public boolean isStudent() {
+		return true;
 	}
 
 	@Override
