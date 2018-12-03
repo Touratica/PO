@@ -18,4 +18,8 @@ public class FinalState extends Survey.State{
         // do nothing, already finalized
     }
 
+    @Override
+    public String notifyState() {
+        return "final";
+    }
 }

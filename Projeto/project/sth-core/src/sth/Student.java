@@ -14,7 +14,7 @@ import sth.exceptions.OutOfRangeIdException;
 /**
  * The Student class.
  */
-public class Student extends Person implements Observer {
+public class Student extends Person {
 
 	private static final long serialVersionUID = 201811151746L;
 
@@ -92,10 +92,10 @@ public class Student extends Person implements Observer {
 		SurveyAnswer answer = new SurveyAnswer(hours, comment);
 		d.submitSurveyAnswer(this, project, answer);
 
-		//FIXME se o student nao tiver disciplina mandar excecao 
+		// FIXME se o student nao tiver disciplina mandar excecao 
 	}
 
-	public void createSurvey(String discipline, Project project) {
+	public void createSurvey(Discipline discipline, Project project) {
 		project.createSurvey(discipline, project);
 	}
 
@@ -113,11 +113,6 @@ public class Student extends Person implements Observer {
 
 	public boolean isRepresentative() {
 		return _course.getRepresentatives().containsKey(this.getId());
-	}
-
-	@Override
-	public void update(String discipline, String project, Survey.State state) {
-		addNotification(notification);
 	}
 
 	@Override

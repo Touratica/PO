@@ -13,7 +13,7 @@ import sth.exceptions.StudentLimitExceededException;
 /**
  * The Discipline class.
  */
-public class Discipline implements Serializable{
+public class Discipline implements Serializable {
 
 	/** Serial number for serialization. */
 	private static final long serialVersionUID = 201811151734L;
@@ -40,6 +40,13 @@ public class Discipline implements Serializable{
 	 */
 	public Map<Integer, Student> getStudents() {
 		return _students;
+	}
+	
+	/**
+	 * @return the _professors
+	 */
+	public Map<Integer, Professor> getProfessors() {
+		return _professors;
 	}
 
 	public void addProfessor(Professor prof) {

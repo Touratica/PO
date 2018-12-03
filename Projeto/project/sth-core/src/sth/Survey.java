@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.TreeMap;
 
+import sth.exceptions.SurveyAlreadyOpenedException;
 import sth.exceptions.SurveyWithAnswersException;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class Survey implements Subject {
 	private List<SurveyAnswer> _results = new ArrayList<SurveyAnswer>();
 	private List<Student> _students = new ArrayList<Student>();
 	private Project _project; 
-	private String _discipline;
+	private Discipline _discipline;
 	private State _state;
 	
 	public abstract class State {
@@ -37,13 +38,19 @@ public class Survey implements Subject {
 		public abstract void open();
 		public abstract void close();
 		public abstract void finalize();
-
+		public abstract String notifyState();
 	}
 
-	public Survey(String discipline, String project){
+	public Survey(Discipline discipline, String project){
 		_discipline = discipline;
 		_project = project;
 		_state = new CreatedState(this);
+		for (Map.Entry<Integer, Student> entry: discipline.getStudents().entrySet()) {
+			registerObserver(entry.getValue());
+		}
+		for (Map.Entry<Integer, Professor> entry : discipline.getProfessors().entrySet()) {
+			registerObserver(entry.getValue());
+		}
 	}
 
 	protected void setState(State s){
@@ -65,7 +72,7 @@ public class Survey implements Subject {
 		_students.add(student);
 	}
 
-	public void remove() throws SurveyWithAnswersException{
+	public void remove() throws SurveyWithAnswersException {
 		if (_results.size() == 0){
 			_project.removeSurvey();
 		} else {
@@ -77,16 +84,25 @@ public class Survey implements Subject {
 		_state.cancel();
 	}
 
-	public void open() {
+	public void open() throws SurveyAlreadyOpenedException {
 		_state.open();
+		notifyObservers();
 	}
 
 	public void close() {
 		_state.close();
 	}
 
-	public void finalize() {
+	public void finalize() throws SurveyNotClosedException {
 		_state.finalize();
+	}
+
+	public boolean isOpen() {
+		return _state.notifyState().equals("open");
+	}
+
+	public boolean isFinal() {
+		return _state.notifyState().equals("final");
 	}
 
 	public void submitAnswer(Student student, SurveyAnswer answer) {
@@ -115,8 +131,12 @@ public class Survey implements Subject {
 
 	@Override
 	public void notifyObservers() {
-		for (Observer observer: _observers) {
-			observer.update(_discipline, _project.getName(), _state); // FIXME Add arguments to update method
+		try {
+			for (Observer observer: _observers) {
+				observer.update(_discipline.getDisciplineName(), _project.getName(), this);
+			}
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
 		}
 	}
 }

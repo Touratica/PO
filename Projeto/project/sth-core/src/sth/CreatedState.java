@@ -4,7 +4,7 @@ import sth.exceptions.SurveyWithAnswersException;
 
 public class CreatedState extends Survey.State{
     public CreatedState(Survey survey){
-        survey.super();
+        survey.super(); 
     }
 
     public void cancel(){
@@ -15,13 +15,20 @@ public class CreatedState extends Survey.State{
 		}     //FIXME isto pode dar erro 
     }
     public void open(){ // FIXME mandar throw;ler enunciado   
-
+        
     }
+
     public void close(){ // FIXME mandar throw
 
     }
+    
     public void finalize(){ //FIXME mandar throw
 
+    }
+
+    @Override
+    public String notifyState() {
+        return "created";
     }
     
 }

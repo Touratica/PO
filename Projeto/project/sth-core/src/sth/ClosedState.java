@@ -20,4 +20,8 @@ public class ClosedState extends Survey.State{
         setState(new FinalState(getSurvey()));
     }
     
+    @Override
+    public String notifyState() {
+        return "closed";
+    }
 }

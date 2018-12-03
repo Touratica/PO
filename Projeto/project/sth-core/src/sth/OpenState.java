@@ -1,5 +1,7 @@
 package sth;
 
+import sth.exceptions.SurveyAlreadyOpenedException;
+
 public class OpenState extends Survey.State{
     public OpenState(Survey survey){
         survey.super();
@@ -18,7 +20,7 @@ public class OpenState extends Survey.State{
     }
 
     public void open(){ // FIXME mandar throw de already open
-
+        throw new SurveyAlreadyOpenedException();
     }
 
     public void close(){
@@ -29,5 +31,8 @@ public class OpenState extends Survey.State{
         // FIXME mandar throw 
     }
 
-    
+    @Override
+    public String notifyState() {
+        return "open";
+    }
 }

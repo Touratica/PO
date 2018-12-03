@@ -13,7 +13,7 @@ import sth.exceptions.OutOfRangeIdException;
 /**
  * Every person in the school.
  */
-public abstract class Person implements Serializable {
+public abstract class Person implements Serializable, Observer {
 
 	private static final long serialVersionUID = 201811151741L;
 	
@@ -83,6 +83,19 @@ public abstract class Person implements Serializable {
 
 	public void addNotification(String notification) {
 		_notifications.add(notification);
+	}
+
+	@Override
+	public void update(String discipline, String project, Survey survey) {
+		String notification = "";
+		if (survey.isOpen()) {
+			notification += "Pode preencher inquérito do projecto " + project + " da disciplina " + discipline;
+		} else if (survey.isFinal()) {
+			notification += "Resultados do inquérito do projecto " + project + " da disciplina " + discipline;
+		} else {
+			throw new UnsupportedOperationException();
+		}
+		addNotification(notification);
 	}
 
 	@Override

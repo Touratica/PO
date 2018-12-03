@@ -66,7 +66,7 @@ public class Project implements Serializable {
 		return _submissions.containsKey(id);
 	}
 
-	public void createSurvey(String discipline, Project project){
+	public void createSurvey(Discipline discipline, Project project){
 		_survey = new Survey(discipline, project);
 	}
 
