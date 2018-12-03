@@ -67,6 +67,11 @@ public class Discipline implements Serializable{
 		return _projects.get(project);
 
 	}
+	public void submitProject(Student student, String project, String submission){
+		getProject(project).submitProject(id, submission);
+		// FIXME se o projeto nao existir manda excecao
+
+	}
 
 	public void registerSurveyObserver(Observer o) {
 		for (Map.Entry<String, Project> entry: _projects.entrySet()) {

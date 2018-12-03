@@ -78,29 +78,37 @@ public class Student extends Person implements Observer {
 			throw new DisciplineLimitExceededException(discipline,this);
 		}
 	}
+
+	public void submitProject(String discipline, String project, String submission){
+		for (Discipline d : disciplines)
+			if (discipline.equals(d.getDisciplineName())){
+				d.submitProject(this, project, submission);
+			}
+		// FIXME throw exception NAO INSCRITO
+	}
 	
 	public void submitSurveyAnswer(String discipline, String project, int hours, String comment){
 		Discipline d = getDiscipline(discipline);
 		SurveyAnswer answer = new SurveyAnswer(hours, comment);
 		d.submitSurveyAnswer(this, project, answer);
 
-		//FIXME se o student nao tiver disciplina mandar excecao
+		//FIXME se o student nao tiver disciplina mandar excecao 
 	}
 
 	public void createSurvey(String discipline, Project project) {
-		project.createSurvey(discipline, project.getName());
+		project.createSurvey(discipline, project);
 	}
 
-	public void deleteSurvey(Survey survey) {
-		// FIXME
+	public void cancelSurvey(Survey survey) {
+		survey.cancel();
 	}
 
 	public void openSurvey(Survey survey) {
-		// FIXME
+		survey.open();
 	}
 
 	public void closeSurvey(Survey survey) {
-		// FIXME
+		survey.close();
 	}
 
 	public boolean isRepresentative() {

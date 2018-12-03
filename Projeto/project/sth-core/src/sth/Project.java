@@ -26,7 +26,6 @@ public class Project implements Serializable {
 		_description = description;
 	}
 	
-	// FIXME: Implement Project class
 	
 	/**
 	 * @return the project's name
@@ -60,7 +59,14 @@ public class Project implements Serializable {
 		_survey = survey;
 	}
 
-	public void createSurvey(String discipline, String project){
+	public void removeSurvey(){
+		_survey = null;
+	}
+	public boolean submittedProject(int id){
+		return _submissions.containsKey(id);
+	}
+
+	public void createSurvey(String discipline, Project project){
 		_survey = new Survey(discipline, project);
 	}
 
@@ -81,7 +87,7 @@ public class Project implements Serializable {
 			throw new ProjectAlreadyClosedException();
 		}
 		else {
-			if (_submissions.containsKey(id)) {
+			if (submittedProject(id)) {
 				_submissions.replace(id, submission);
 			}
 			else {
@@ -91,7 +97,9 @@ public class Project implements Serializable {
 	}
 
 	public void submitSurveyAnswer(Student student, SurveyAnswer answer){
-		_survey.submitAnswer(student, answer);
+		if (submittedProject(student.getId()))
+			_survey.submitAnswer(student, answer);
+		// FIXME mandar execao para o aluno que tenta responder a um projeto q nao fez
 	}
 
 	public void registerSurveyObserver(Observer o) {

@@ -37,6 +37,8 @@ public class Professor extends Person implements Observer {
 		}
 	}
 
+	// FIXME create project ?
+
 	/**
 	 * @return the courses lectured by the professor.
 	 */
