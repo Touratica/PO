@@ -86,8 +86,8 @@ public class Student extends Person implements Observer {
 		//FIXME se o student nao tiver disciplina mandar excecao
 	}
 
-	public void createSurvey(Project project) {
-		// FIXME
+	public void createSurvey(String discipline, Project project) {
+		project.createSurvey(discipline, project.getName());
 	}
 
 	public void deleteSurvey(Survey survey) {

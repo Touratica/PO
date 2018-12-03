@@ -56,6 +56,14 @@ public class Project implements Serializable {
 		return _open;
 	}
 
+	public void setSurvey(Survey survey){
+		_survey = survey;
+	}
+
+	public void createSurvey(String discipline, String project){
+		_survey = new Survey(discipline, project);
+	}
+
 	/**
 	 * Closes project.
 	 */
@@ -64,6 +72,7 @@ public class Project implements Serializable {
 			throw new ProjectAlreadyClosedException();
 		} else {
 			_open = false;
+			_survey.setState(new OpenState(this));
 		}
 	}
 
@@ -82,7 +91,7 @@ public class Project implements Serializable {
 	}
 
 	public void submitSurveyAnswer(Student student, SurveyAnswer answer){
-
+		_survey.submitAnswer(student, answer);
 	}
 
 	public void registerSurveyObserver(Observer o) {
