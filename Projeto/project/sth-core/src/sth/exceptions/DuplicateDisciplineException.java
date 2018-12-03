@@ -2,8 +2,9 @@ package sth.exceptions;
 
 import sth.Discipline;
 
-public class DuplicateDisciplineException extends Exception{
+public class DuplicateDisciplineException extends Exception {
 
+    /** Serial number for serialization. */
     private static final long serialVersionUID = 201811151706L;
 
     private Discipline _discipline;

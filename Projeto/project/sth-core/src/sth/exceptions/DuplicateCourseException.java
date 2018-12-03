@@ -2,8 +2,9 @@ package sth.exceptions;
 
 import sth.Course;
 
-public class DuplicateCourseException extends Exception{
+public class DuplicateCourseException extends Exception {
 
+    /** Serial number for serialization. */
     private static final long serialVersionUID = 201811151638L;
 
     private Course _course;
