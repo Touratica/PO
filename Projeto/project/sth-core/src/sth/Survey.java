@@ -13,6 +13,8 @@ public class Survey implements Subject {
 	// FIXME: Implement Survey class
 	private List<Observer> _observers = new ArrayList<Observer>();
 	private Map<Student,SurveyAnswer> _results = new TreeMap<Student,SurveyAnswer>();
+	private String _project;
+	private String _discipline;
 	private State _state;
 	
 	public abstract class State {
@@ -28,13 +30,28 @@ public class Survey implements Subject {
 		public abstract void open();
 		public abstract void close();
 		public abstract void finalize();
+
 	}
 
+<<<<<<< HEAD
 	public Survey() {
 		_state = new CreatedState(this);
 	}
 
 	public void cancel() {
+=======
+	public Survey(String discipline, String project){
+		_discipline = discipline;
+		_project = project;
+		_state = new CreatedState(this);
+	}
+
+	protected void setState(State s){
+		_state.setState(s);
+	}
+
+	public void cancel(){
+>>>>>>> cd623015646d8a0fa3545373a0e0ecb6f4389164
 		_state.cancel();
 	}
 
