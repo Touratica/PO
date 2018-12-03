@@ -2,7 +2,9 @@ package sth;
 
 import java.io.Serializable;
 import java.text.Collator;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import sth.exceptions.BadEntryException;
 import sth.exceptions.DuplicateIdException;
@@ -23,6 +25,8 @@ public abstract class Person implements Serializable {
 
 	/** The person's name. */
 	private String _name;
+
+	private List<String> _notifications = new ArrayList<String>();
 
 	/** The Person class comparators. */
 	public final static Comparator<Person> NAME_COMPARATOR = new NameComparator();
@@ -68,6 +72,17 @@ public abstract class Person implements Serializable {
 	 */
 	public int getId() {
 		return _id;
+	}
+
+	/**
+	 * @return the _notifications
+	 */
+	public List<String> getNotifications() {
+		return _notifications;
+	}
+
+	public void addNotification(String notification) {
+		_notifications.add(notification);
 	}
 
 	@Override

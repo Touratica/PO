@@ -5,5 +5,5 @@ package sth;
  */
 public interface Observer {
 
-	public void update(); // FIXME Add arguments to update method
+	public void update(String discipline, String project, Survey.State state); // FIXME Add arguments to update method
 }

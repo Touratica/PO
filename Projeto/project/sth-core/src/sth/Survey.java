@@ -15,12 +15,12 @@ public class Survey implements Subject {
 	private Map<Student,SurveyAnswer> _results = new TreeMap<Student,SurveyAnswer>();
 	private State _state;
 	
-	public abstract class State{
+	public abstract class State {
 
 		protected void setState(State state){
 			_state = state;
 		}
-		protected getSurvey(){
+		protected getSurvey() {
 			return Survey.this;
 		}
 
@@ -30,31 +30,31 @@ public class Survey implements Subject {
 		public abstract void finalize();
 	}
 
-	public Survey(){
+	public Survey() {
 		_state = new CreatedState(this);
 	}
 
-	public void cancel(){
+	public void cancel() {
 		_state.cancel();
 	}
 
-	public void open(){
+	public void open() {
 		_state.open();
 	}
 
-	public void close(){
+	public void close() {
 		_state.close();
 	}
 
-	public void finalize(){
+	public void finalize() {
 		_state.finalize();
 	}
 
-	public void submitAnswer(Student student, SurveyAnswer answer){
+	public void submitAnswer(Student student, SurveyAnswer answer) {
 		_results.put(student, answer);	
 	}
 	
-	public Map<Student, SurveyAnswer> getResults(){
+	public Map<Student, SurveyAnswer> getResults() {
 		return _results;
 	}
 
@@ -74,7 +74,7 @@ public class Survey implements Subject {
 	@Override
 	public void notifyObservers() {
 		for (Observer observer: _observers) {
-			observer.update(); // FIXME Add arguments to update method
+			observer.update(_discipline, _project, _state); // FIXME Add arguments to update method
 		}
 	}
 }

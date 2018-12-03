@@ -4,6 +4,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import sth.Survey.State;
 import sth.exceptions.DisciplineLimitExceededException;
 import sth.exceptions.DuplicateDisciplineException;
 import sth.exceptions.DuplicateIdException;
@@ -104,6 +105,11 @@ public class Student extends Person implements Observer {
 
 	public boolean isRepresentative() {
 		return _course.getRepresentatives().containsKey(this.getId());
+	}
+
+	@Override
+	public void update(String discipline, String project, Survey.State state) {
+		addNotification(notification);
 	}
 
 	@Override
