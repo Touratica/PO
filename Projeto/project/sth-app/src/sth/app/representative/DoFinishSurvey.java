@@ -5,8 +5,6 @@ import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.SchoolManager;
 
-//FIXME import other classes if needed
-
 /**
  * 4.5.5. Finish survey.
  */
@@ -28,6 +26,7 @@ public class DoFinishSurvey extends Command<SchoolManager> {
   @Override
   public final void execute() throws DialogException {
     _form.parse();
+    _receiver.finalizeSurvey(_discipline.value(), _project.value());
   }
 
 }

@@ -37,8 +37,11 @@ public class Survey implements Subject {
 		public abstract void open();
 		public abstract void close();
 		public abstract void finalize();
-		public String render(Person p){
+		public String renderResults(Person p){
 			return _project.getName() + " - " + _discipline.getDisciplineName();
+		}
+		public String renderSurvey(Person p){
+			return renderResults(p);
 		}
 		public abstract String notifyState();
 	}
@@ -62,8 +65,8 @@ public class Survey implements Subject {
 		_state.setState(s);
 	}
 
-	public String render(Person p){
-		return _state.render(p);
+	public String renderResults(Person p){
+		return _state.renderResults(p);
 	}
 
 	public int getAnswersNumber(){
@@ -72,6 +75,10 @@ public class Survey implements Subject {
 	
 	public SurveyAnswer getAnswer(int i){
 		return _results.get(i);
+	}
+
+	public String getDisciplineName(){
+		return _discipline.getDisciplineName();
 	}
 
 	public int getMaxHours(){
@@ -165,6 +172,9 @@ public class Survey implements Subject {
 	
 	public List<SurveyAnswer> getResults() {
 		return _results;
+	}
+	public String renderSurvey(Person p){
+		return _state.renderSurvey(p);
 	}
 
 	@Override

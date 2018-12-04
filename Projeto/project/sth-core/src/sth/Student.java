@@ -59,13 +59,13 @@ public class Student extends Person {
 	}
 	
 
-	public Discipline getDiscipline(String discipline){
+	public Discipline getDiscipline(String discipline)throws NoSuchDisciplineNameException{
 		for (Discipline d : _disciplines){
 			if (discpline.equals(d.getDisciplineName())) {
 				return d;
 			}
 		}
-		return null;
+		throw new NoSuchDisciplineNameException();
 	}
 
 	public Discipline getDiscipline(int i){
@@ -107,35 +107,46 @@ public class Student extends Person {
 	}
 
 	@Override
-	public void createSurvey(String discipline, String project) throws UnsupportedOperationException {
+	public void createSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException{
 		Discipline dis = getDiscipline(discipline);
-		if (dis != null) {
-			dis.createSurvey(_course, project);
+		dis.createSurvey(_course, project);
+	}
+
+	public void cancelSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException{
+		Discipline dis = getDiscipline(discipline);
+		dis.cancelSurvey(project);	
+	}
+
+	public void openSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException{
+		Discipline dis = getDiscipline(discipline);
+		dis.openSurvey(project);	
+	}
+
+	public void closeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException{
+		Discipline dis = getDiscipline(discipline);
+		dis.closeSurvey(project);	
+	}
+
+	public void finalizeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException{
+		Discipline dis = getDiscipline(discipline);
+		dis.finalizeSurvey(project);	
+	}
+
+	@Override
+	public String showDisciplineSurveys(String discipline) throws UnsupportedOperationException, NoSuchDisciplineNameException {
+		if (isRepresentative()) {
+			Discipline d = getDiscipline(discipline);
+			return d.showDisciplineSurveys(this);
 		}
 		else {
-			throw new NoSuchDisciplineNameException();
+			return super.showDisciplineSurveys(discipline);
 		}
 	}
 
-	public void cancelSurvey(Discipline discipline, Project project) {
-		survey.cancel();
-	}
-
-	public void openSurvey(Discipline discipline, Project project) {
-		survey.open();
-	}
-
-	public void closeSurvey(Discipline discipline, Project project) {
-		survey.close();
-	}
-
-	public String showSurveyResults(String discipline, String project){
+	public String showSurveyResults(String discipline, String project) throws NoSuchDisciplineNameException {
 		Discipline d = getDiscipline(discipline);
-		if (d != null){
-			Project p = d.getProject(project); 
-			return p.showSurveyResults(this);
-		}
-		return null; // FIXME em vez de retornar null mandar excecao q disciplina n existe	
+		Project p = d.getProject(project); 
+		return p.showSurveyResults(this);
 
 	}
 

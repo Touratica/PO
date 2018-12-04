@@ -150,23 +150,31 @@ public abstract class Person implements Serializable, Observer {
 		throw new UnsupportedOperationException();
 	}
 
-	public void createSurvey(String discipline, String project) throws UnsupportedOperationException {
+	public void createSurvey(String discipline, String project) throws UnsupportedOperationException{
 		throw new UnsupportedOperationException();
 	}
 
-	public void cancelSurvey(Discipline discipline, Project project) throws UnsupportedOperationException{
+	public void cancelSurvey(Discipline discipline, Project project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException{
 		throw new UnsupportedOperationException();
 	}
 
-	public void openSurvey(Discipline discipline, Project project) throws UnsupportedOperationException{
+	public void openSurvey(Discipline discipline, Project project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException{
 		throw new UnsupportedOperationException();
 	}
 
-	public void closeSurvey(Discipline discipline, Project project)throws UnsupportedOperationException{
+	public void closeSurvey(Discipline discipline, Project project)throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException{
+		throw new UnsupportedOperationException();
+	}
+
+	public void finalizeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException{
 		throw new UnsupportedOperationException();
 	}
 
 	public String showSubmissions(String discipline, String project) throws UnsupportedOperationException{
+		throw new UnsopportedOperationException();
+	}
+
+	public String showDisciplineSurveys(String discipline) throws UnsupportedOperationException, NoSuchDisciplineNameException{
 		throw new UnsopportedOperationException();
 	}
 

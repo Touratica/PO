@@ -12,23 +12,24 @@ import sth.SchoolManager;
  */
 public class DoShowDisciplineSurveys extends Command<SchoolManager> {
 
-  private Input<String> _discipline;
-	private Input<String> _project; 
+	private Input<String> _discipline;
 
-  /**
-   * @param receiver
-   */
-  public DoShowDisciplineSurveys(SchoolManager receiver) {
-    super(Label.SHOW_DISCIPLINE_SURVEYS, receiver);
-    _discipline = _form.addStringInput(Message.requestDisciplineName());
-		_project = _form.addStringInput(Message.requestProjectName());
-  }
+	/**
+	 * @param receiver
+	 */
+	public DoShowDisciplineSurveys(SchoolManager receiver) {
+		super(Label.SHOW_DISCIPLINE_SURVEYS, receiver);
+		_discipline = _form.addStringInput(Message.requestDisciplineName());
+	}
 
-  /** @see pt.tecnico.po.ui.Command#execute() */
-  @Override
-  public final void execute() throws DialogException {
-    _form.parse();
-    
-  }
+	/** @see pt.tecnico.po.ui.Command#execute() */
+	@Override
+	public final void execute() throws DialogException {
+		_form.parse();
+		String s =_receiver.showDisciplineSurveys(_discipline.value()); 
+		_display.addLine(s);
+		_display.display();
+
+	}
 
 }

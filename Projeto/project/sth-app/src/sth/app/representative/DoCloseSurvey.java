@@ -28,6 +28,7 @@ public class DoCloseSurvey extends Command<SchoolManager> {
   @Override
   public final void execute() throws DialogException {
     _form.parse();
+    _receiver.closeSurvey(_discipline.value(), _project.value());
   }
 
 }

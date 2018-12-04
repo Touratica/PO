@@ -28,6 +28,7 @@ public class DoCancelSurvey extends Command<SchoolManager> {
   @Override
   public final void execute() throws DialogException {
     _form.parse();
+    _receiver.cancelSurvey(_discipline.value(), _project.value());
   
   }
 

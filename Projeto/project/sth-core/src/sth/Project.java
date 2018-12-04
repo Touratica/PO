@@ -18,17 +18,12 @@ public class Project implements Serializable {
 	private String _name;
 	private String _description;
 	private Map<Integer, String> _submissions = new TreeMap<Integer, String>();
-	private Boolean _open = true;
+	private Boolean _open = true; //tells if a project is open
 	private Survey _survey;
 
-	public Project(String name){
+	public Project(String discipline, String name){
 		_name = name;
-	}
-	
-
-	public Project(String name, String description){
-		_name = name;
-		_description = description;
+		_description = discipline + " - " + name;
 	}
 	
 	/**
@@ -86,23 +81,32 @@ public class Project implements Serializable {
 		return _submissions.containsKey(id);
 	}
 
-	public String showSurveyResults(Person p){
-		return _survey.render(p);
-	}
-
+	
 	public void createSurvey(Course course, Discipline discipline){
 		_survey = new Survey(course, discipline, this);
 	}
-
+	
+	public void cancelSurvey(){
+		_survey.cancel();
+	}
+	
+	public void openSurvey(){
+		_survey.open();
+	}
+	
+	public void closeSurvey(){
+		_survey.close();
+	}
+	
 	/**
 	 * Closes project.
 	 */
 	public void close(){
 		_open = false;
 		if (_survey != null)
-			_survey.setState(new OpenState(this));
+		_survey.setState(new OpenState(this));
 	}
-
+	
 	public void deliverProject(Person person, String submission) throws ProjectAlreadyClosedException {
 		if (!isOpen()) {
 			throw new ProjectAlreadyClosedException();
@@ -116,17 +120,21 @@ public class Project implements Serializable {
 			}
 		} 
 	}
-
+	
 	public void submitSurveyAnswer(Student student, SurveyAnswer answer){
 		if (submittedProject(student.getId()))
-			_survey.submitAnswer(student, answer);
+		_survey.submitAnswer(student, answer);
 		// FIXME mandar execao para o aluno que tenta responder a um projeto q nao fez
 	}
-
+	
 	public void registerSurveyObserver(Observer o) {
 		_survey.registerObserver(o);
 	}
-
+	
+	public String showSurvey(Person person) {
+		return _survey.renderSurvey(person);
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Project) {
@@ -135,5 +143,5 @@ public class Project implements Serializable {
 		}
 		return false;
 	}
-
+	
 }
