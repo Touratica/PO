@@ -15,7 +15,6 @@ import java.util.Map;
  */
 public class Survey implements Subject {
 
-	// FIXME: Implement Survey class
 	private List<Observer> _observers = new ArrayList<Observer>();
 	private List<SurveyAnswer> _results = new ArrayList<SurveyAnswer>();
 	private List<Student> _students = new ArrayList<Student>();
@@ -104,7 +103,7 @@ public class Survey implements Subject {
 		return (int) averageHours/answersNumber;
 
 	}
-	
+
 	public int getSubmissionsNumber(){
 		return _project.getSubmissionsNumber();
 	}

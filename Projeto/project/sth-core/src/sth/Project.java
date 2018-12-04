@@ -2,10 +2,11 @@ package sth;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.SortedSet;
 
 import sth.exceptions.ProjectAlreadyClosedException;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * The Project class.
@@ -16,16 +17,19 @@ public class Project implements Serializable {
 
 	private String _name;
 	private String _description;
-	private Map<Integer, String> _submissions = new HashMap<Integer, String>();
+	private Map<Integer, String> _submissions = new TreeMap<Integer, String>();
 	private Boolean _open = true;
 	private Survey _survey;
 
+	public Project(String name){
+		_name = name;
+	}
+	
 
 	public Project(String name, String description){
 		_name = name;
 		_description = description;
 	}
-	
 	
 	/**
 	 * @return the project's name
@@ -47,6 +51,18 @@ public class Project implements Serializable {
 	public Map<Integer, String> getSubmissions() {
 		return _submissions;
 	}
+
+	public String showSubmissions(){
+		String s = "";
+		for(Map.Entry<Integer,String> entry: _submissions.entrySet()){
+			s+= "\n* " + entry.getKey() + " - " + entry.getValue();
+		}
+		return s;
+	}
+
+	/**
+	 * @return the number of project's submissions
+	 */
 	public int getSubmissionsNumber(){
 		return _submissions.size();
 	}
@@ -65,6 +81,7 @@ public class Project implements Serializable {
 	public void removeSurvey(){
 		_survey = null;
 	}
+
 	public boolean submittedProject(int id){
 		return _submissions.containsKey(id);
 	}
@@ -76,13 +93,10 @@ public class Project implements Serializable {
 	/**
 	 * Closes project.
 	 */
-	public void close() throws ProjectAlreadyClosedException {
-		if (!isOpen()) {
-			throw new ProjectAlreadyClosedException();
-		} else {
-			_open = false;
+	public void close(){
+		_open = false;
+		if (_survey != null)
 			_survey.setState(new OpenState(this));
-		}
 	}
 
 	public void submitProject(int id, String submission) throws ProjectAlreadyClosedException {

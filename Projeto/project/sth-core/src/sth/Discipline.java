@@ -24,9 +24,9 @@ public class Discipline implements Serializable {
 	private String _name;
 
 	/** The maximum number of students per discipline. */
-	private static final int MAX_STUDENTS = 300;
+	private static final int MAXSTUDENTS = 300;
 	private Map<Integer, Professor> _professors = new HashMap<Integer, Professor>();
-	private Map<Integer, Student> _students = new HashMap<Integer, Student>();
+	private Map<Integer, Student> _students = new TreeMap<Integer, Student>();
 	private Map<String, Project> _projects = new TreeMap<String, Project>();
 
 	public Discipline(String name){
@@ -56,7 +56,7 @@ public class Discipline implements Serializable {
 	}
 
 	public void addStudent(Student student) throws StudentLimitExceededException{
-		if (_students.size() < MAX_STUDENTS)
+		if (_students.size() < MAXSTUDENTS)
 			_students.put(student.getId(), student);
 		else throw new StudentLimitExceededException(student);
 	}
@@ -74,7 +74,14 @@ public class Discipline implements Serializable {
 
 	public Project getProject(String project){
 		return _projects.get(project);
+	}
 
+	public boolean hasProject(String project){
+		return getProject(project) != null;
+	}
+
+	public String showProject(String project){
+		return _name + " - " + project + getProject(project).showSubmissions();
 	}
 
 	public void submitProject(Student student, String project, String submission){
@@ -82,6 +89,11 @@ public class Discipline implements Serializable {
 		// FIXME se o projeto nao existir manda excecao
 
 	}
+	public void createProject(String project){ // FIXME mandar excecoes aqui ?
+		Project p = new Project(project);
+		_projects.put(project, p);
+	}
+
 
 	public void closeProject(String project) throws NoSuchProjectNameException, ProjectAlreadyClosedException {
 		Project proj;
