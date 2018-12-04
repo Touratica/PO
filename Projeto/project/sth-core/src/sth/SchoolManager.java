@@ -255,7 +255,6 @@ public class SchoolManager {
 	}
 
 	public String showNotifications() {
-		
 		return _loggedPerson.showNotifications();
 	}
 }
