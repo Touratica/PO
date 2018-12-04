@@ -197,16 +197,12 @@ public class SchoolManager {
 	public String showNotifications() {
 		return _loggedPerson.showNotifications();
 	}
-	public String showProjectSubmissions(String discipline, String project){
-		if (hasProfessor())
-			return _loggedPerson.showSubmissions(discipline , project);
-		return null; // FIXME manda excecao
+	public String showProjectSubmissions(String discipline, String project)throws UnsupportedOperationException{
+		return _loggedPerson.showSubmissions(discipline , project);
 	}
 
-	public String showSurveyResults(String discipline, String project){
-		if (hasStudent() || hasProfessor())
-			return _loggedPerson.showSurveyResults(discipline,project);
-		return null; // FIXME manda excecao
+	public String showSurveyResults(String discipline, String project ) throws UnsupportedOperationException{
+		return _loggedPerson.showSurveyResults(discipline,project);
 	}
 
 	public void answerSurvey(String discipline, String project , int hours, String comment)throws UnsupportedOperationException{

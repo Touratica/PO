@@ -150,12 +150,21 @@ public abstract class Person implements Serializable, Observer {
 		throw new UnsupportedOperationException();
 	}
 
-	
-	/*@Override
-	public String toString() {
-		return  _id + "|" + _phoneNumber + "|" +  _name;
+	public void cancelSurvey(Discipline discipline, Project project) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException();
 	}
-	*/
+
+	public void openSurvey(Discipline discipline, Project project) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException();
+	}
+
+	public void closeSurvey(Discipline discipline, Project project)throws UnsupportedOperationException{
+		throw new UnsupportedOperationException();
+	}
+
+	public String showSubmissions(String discipline, String project) throws UnsupportedOperationException{
+		throw new UnsopportedOperationException();
+	}
 
 	public String accept(PersonVisitor visitor){
 		return visitor.showPerson(this);

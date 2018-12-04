@@ -12,20 +12,22 @@ import sth.SchoolManager;
  */
 public class DoFinishSurvey extends Command<SchoolManager> {
 
-  //FIXME add input fields
+  private Input<String> _discipline;
+	private Input<String> _project; 
 
   /**
    * @param receiver
    */
   public DoFinishSurvey(SchoolManager receiver) {
     super(Label.FINISH_SURVEY, receiver);
-    //FIXME initialize input fields if needed
+    _discipline = _form.addStringInput(Message.requestDisciplineName());
+		_project = _form.addStringInput(Message.requestProjectName());
   }
 
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() throws DialogException {
-    //FIXME implement command
+    _form.parse();
   }
 
 }
