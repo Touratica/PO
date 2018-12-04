@@ -17,6 +17,9 @@ public class FinalState extends Survey.State{
     public void finalize(){
         // do nothing, already finalized
     }
+    public String render(){
+        return super.render() + "\n";
+    }
 
     @Override
     public String notifyState() {
