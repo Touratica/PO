@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 import sth.exceptions.DuplicateProjectException;
 import sth.exceptions.NoSuchPersonIdException;
+import sth.exceptions.NoSuchProjectNameException;
+import sth.exceptions.ProjectAlreadyClosedException;
 import sth.exceptions.StudentLimitExceededException;
 
 /**
@@ -74,10 +76,21 @@ public class Discipline implements Serializable {
 		return _projects.get(project);
 
 	}
+
 	public void submitProject(Student student, String project, String submission){
 		getProject(project).submitProject(id, submission);
 		// FIXME se o projeto nao existir manda excecao
 
+	}
+
+	public void closeProject(String project) throws NoSuchProjectNameException, ProjectAlreadyClosedException {
+		Project proj;
+		if ((proj = _projects.get(project)) != null) {
+			proj.close();
+		}
+		else {
+			throw new NoSuchProjectNameException();
+		}
 	}
 
 	public void registerSurveyObserver(Observer o) {

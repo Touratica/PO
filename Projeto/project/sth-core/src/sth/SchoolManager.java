@@ -37,7 +37,7 @@ import sth.exceptions.RepresentativeNumberExceeded;
 //FIXME import other classes if needed
 
 /**
- * The façade class.
+ * FIXME The façade class. 300
  */
 public class SchoolManager {
 
@@ -93,7 +93,6 @@ public class SchoolManager {
 	 */
 	public boolean hasAdministrative() {
 		return _loggedPerson.isAdministrative();
-
 	}
 
 	/**
@@ -101,7 +100,6 @@ public class SchoolManager {
 	 */
 	public boolean hasProfessor() {
 		return _loggedPerson.isProfessor();
-
 	}
 
 	/**
@@ -109,7 +107,6 @@ public class SchoolManager {
 	 */
 	public boolean hasStudent() {
 		return _loggedPerson.isStudent();
-
 	}
 
 	/**
@@ -155,15 +152,7 @@ public class SchoolManager {
 	}
 
 	public void changePhoneNumber(int phoneNumber) {
-		if (hasStudent()) {
-			_school.getStudents().get(_loggedId).setPhoneNumber(phoneNumber);
-		}
-		else if (hasProfessor()) {
-			_school.getProfessors().get(_loggedId).setPhoneNumber(phoneNumber);
-		}
-		else if (hasAdministrative()) {
-			_school.getAdministratives().get(_loggedId).setPhoneNumber(phoneNumber);
-		}
+		_loggedPerson.setPhoneNumber(phoneNumber);
 	}
 
 	public ArrayList<Person> searchPerson(String name) {
@@ -189,18 +178,7 @@ public class SchoolManager {
 	}
 
 	public String showPerson() {
-		if (_school.getStudents().containsKey(_loggedId)) {
-			return _school.getStudents().get(_loggedId).toString();
-		}
-		else if (_school.getProfessors().containsKey(_loggedId)) {
-			return _school.getProfessors().get(_loggedId).toString();
-		}
-		else if (_school.getAdministratives().containsKey(_loggedId)) {
-			return _school.getAdministratives().get(_loggedId).toString();
-		}
-		else {
-			return null;
-		}
+		return _loggedPerson.toString();
 	}
 
 	public ArrayList<Person> showAllPeople() {
@@ -219,20 +197,7 @@ public class SchoolManager {
 	}
 
 	public void closeProject(String discipline, String project) throws NoSuchProjectNameException, ProjectAlreadyClosedException, NoSuchDisciplineNameException {
-		Professor prof = (Professor) _school.getProfessors().get(_loggedId);
-		for (Map.Entry<String, ArrayList<Discipline>> entry: prof.getDisciplines().entrySet()) {
-			for (Discipline d: entry.getValue()) {
-				if (d.getDisciplineName().equals(discipline)) {
-					if (d.getProjects().containsKey(project)) {
-							d.getProjects().get(project).close();
-							return;
-						} else {
-							throw new NoSuchProjectNameException();
-						}
-				}
-			}
-		}
-		throw new NoSuchDisciplineNameException();
+		_loggedPerson.closeProject(discipline, project);
 	}
 
 	public void createProject(String discipline, String project) throws DuplicateProjectNameException, NoSuchDisciplineNameException {

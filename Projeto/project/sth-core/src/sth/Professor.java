@@ -7,7 +7,10 @@ import java.util.Map;
 import java.util.TreeMap;
 import sth.exceptions.DuplicateDisciplineException;
 import sth.exceptions.DuplicateIdException;
+import sth.exceptions.NoSuchDisciplineNameException;
+import sth.exceptions.NoSuchProjectNameException;
 import sth.exceptions.OutOfRangeIdException;
+import sth.exceptions.ProjectAlreadyClosedException;
 
 /**
  * Professor
@@ -44,6 +47,27 @@ public class Professor extends Person implements Observer {
 	 */
 	public Map<String, ArrayList<Discipline>> getDisciplines() {
 		return _disciplines;
+	}
+
+	public void closeProject(String discipline, String project) throws NoSuchProjectNameException, NoSuchDisciplineNameException, ProjectAlreadyClosedException {
+		int i = 0;
+		for (Map.Entry<String, ArrayList<Discipline>> entry: _disciplines.entrySet()) {
+			i++;
+			try {
+				for (Discipline dis: entry.getValue()) {
+					if (dis.getDisciplineName().equals(discipline)) {
+						dis.closeProject(project);
+						return;
+					}
+				}
+			} catch (NoSuchProjectNameException e) {
+				if (i != _disciplines.size()) {
+					continue;
+				}
+				throw e;
+			}
+		}
+		throw new NoSuchDisciplineNameException();
 	}
 
 	@Override
