@@ -136,11 +136,11 @@ public class SchoolManager {
 		setFilename(filename);
 		School newSchool = (School) in.readObject();
 		in.close();
-		if (newSchool.getStudents().containsKey(_loggedId) || newSchool.getProfessors().containsKey(_loggedId) || newSchool.getAdministratives().containsKey(_loggedId)) {
+		if (newSchool.getStudents().containsKey(_loggedPerson.getId()) || newSchool.getProfessors().containsKey(_loggedPerson.getId()) || newSchool.getAdministratives().containsKey(_loggedPerson.getId())) {
 			_school = newSchool;
 		}
 		else {
-			throw new NoSuchPersonIdException(_loggedId);
+			throw new NoSuchPersonIdException(_loggedPerson.getId());
 		}
 		
 	}
@@ -182,41 +182,23 @@ public class SchoolManager {
 	}
 
 	public ArrayList<Person> showAllPeople() { 
-		// FIXME a escola devia fazer isto 
-		ArrayList<Person> peopleList = new ArrayList<Person>();
-		for (Map.Entry<Integer, Administrative> entry: _school.getAdministratives().entrySet()) {
-			peopleList.add(entry.getValue());
-		}
-		for (Map.Entry<Integer, Professor> entry : _school.getProfessors().entrySet()) {
-			peopleList.add(entry.getValue());
-		}
-		for (Map.Entry<Integer, Student> entry : _school.getStudents().entrySet()) {
-			peopleList.add(entry.getValue());
-		}
-		Collections.sort(peopleList, Person.ID_COMPARATOR);	
-		return peopleList;
+		return _school.showAllPeople();
 	}
 
 	public void closeProject(String discipline, String project) throws NoSuchProjectNameException, ProjectAlreadyClosedException, NoSuchDisciplineNameException {
-		_loggedPerson.closeProject(discipline, project);
+		try {
+			_loggedPerson.closeProject(discipline, project);
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void createProject(String discipline, String project) throws DuplicateProjectNameException, NoSuchDisciplineNameException {
-		// FIXME
-		Professor prof = (Professor) _school.getProfessors().get(_loggedId);
-		for (Map.Entry<String, ArrayList<Discipline>> entry : prof.getDisciplines().entrySet()) {
-			for (Discipline d : entry.getValue()) {
-				if (d.getDisciplineName().equals(discipline)) {
-					if (d.getProjects().containsKey(project)) {
-						throw new DuplicateProjectNameException();
-					} else {
-						d.addProject(new Project(project, d.getDisciplineName() + " - " + project));;
-						return;
-					}
-				}
-			}
+		try {
+			_loggedPerson.createProject(discipline, project);
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
 		}
-		throw new NoSuchDisciplineNameException();
 	}
 
 	public ArrayList<Student> showDisciplineStudents (String disciplineName){

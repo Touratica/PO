@@ -297,4 +297,19 @@ public class School implements Serializable {
 		// "Id Lower than 100000."
 		return true;
 	}
+
+	public ArrayList<Person> showAllPeople() {
+		ArrayList<Person> peopleList = new ArrayList<Person>();
+		for (Map.Entry<Integer, Administrative> entry : getAdministratives().entrySet()) {
+			peopleList.add(entry.getValue());
+		}
+		for (Map.Entry<Integer, Professor> entry : getProfessors().entrySet()) {
+			peopleList.add(entry.getValue());
+		}
+		for (Map.Entry<Integer, Student> entry : getStudents().entrySet()) {
+			peopleList.add(entry.getValue());
+		}
+		Collections.sort(peopleList, Person.ID_COMPARATOR);
+		return peopleList;
+	}
 }

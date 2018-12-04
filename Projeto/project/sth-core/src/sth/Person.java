@@ -8,7 +8,11 @@ import java.util.List;
 
 import sth.exceptions.BadEntryException;
 import sth.exceptions.DuplicateIdException;
+import sth.exceptions.DuplicateProjectException;
+import sth.exceptions.NoSuchDisciplineNameException;
+import sth.exceptions.NoSuchProjectNameException;
 import sth.exceptions.OutOfRangeIdException;
+import sth.exceptions.ProjectAlreadyClosedException;
 
 /**
  * Every person in the school.
@@ -120,6 +124,14 @@ public abstract class Person implements Serializable, Observer {
 			notifications += str + "\n";
 		}
 		return notifications;
+	}
+
+	public void closeProject(String discipline, String Project) throws NoSuchProjectNameException, NoSuchDisciplineNameException, ProjectAlreadyClosedException, UnsupportedOperationException {
+		throw new UnsupportedOperationException();
+	}
+
+	public void createProject(String discipline, String Project) throws NoSuchDisciplineNameException, DuplicateProjectException, UnsupportedOperationException {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

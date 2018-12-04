@@ -62,7 +62,7 @@ public class Professor extends Person implements Observer {
 		return disciplines;
 	}
 
-	
+	@Override
 	public void createProject(String disciplineName, String projectName) throws NoSuchDisciplineNameException, DuplicateProjectException {
 		//this method is optimized to when multiple courses have the same discipline and some of those have the project, it searches for one that doesnt have that project and puts it there 
 		ArrayList<Discipline> _disciplines = getDiscipline(disciplineName);
@@ -79,26 +79,26 @@ public class Professor extends Person implements Observer {
 
 	}
 	
+	@Override
 	public void closeProject(String discipline, String project) throws NoSuchProjectNameException, NoSuchDisciplineNameException, ProjectAlreadyClosedException {
 		int i = 0;
-		for (Map.Entry<String, ArrayList<Discipline>> entry: _disciplines.entrySet()) {
-			i++;
-			try {
-				for (Discipline dis: entry.getValue()) {
-					if (dis.getDisciplineName().equals(discipline)) {
-						dis.closeProject(project);
-						return;
+		ArrayList<Discipline> disciplines = getDiscipline(discipline);
+		if (disciplines != null) {
+			for (Discipline dis: disciplines) {
+				try {
+					dis.closeProject(project);
+					return;
+				} catch (NoSuchProjectNameException e) {
+					if (i != disciplines.size()) {
+						continue;
 					}
+					throw e;
 				}
-			} catch (NoSuchProjectNameException e) {
-				if (i != _disciplines.size()) {
-					continue;
-				}
-				throw e;
 			}
 		}
-		throw new NoSuchDisciplineNameException();
-		
+		else {
+			throw new NoSuchDisciplineNameException();
+		}
 	}
 	
 	public String showSubmissions(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException{
