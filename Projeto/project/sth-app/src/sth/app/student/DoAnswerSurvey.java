@@ -33,7 +33,7 @@ public class DoAnswerSurvey extends Command<SchoolManager> {
   public final void execute() throws DialogException {
     _form.parse();
     _receiver.answerSurvey(_discipline.value(), _project.value(), _hours.value(), _comment.value());
-
+    // FIXME throw exceptions 
   }
 
 }

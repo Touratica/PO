@@ -117,15 +117,15 @@ public class Student extends Person {
 		}
 	}
 
-	public void cancelSurvey(Survey survey) {
+	public void cancelSurvey(Discipline discipline, Project project) {
 		survey.cancel();
 	}
 
-	public void openSurvey(Survey survey) {
+	public void openSurvey(Discipline discipline, Project project) {
 		survey.open();
 	}
 
-	public void closeSurvey(Survey survey) {
+	public void closeSurvey(Discipline discipline, Project project) {
 		survey.close();
 	}
 

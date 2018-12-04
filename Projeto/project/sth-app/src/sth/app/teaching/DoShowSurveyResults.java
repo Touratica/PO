@@ -26,7 +26,9 @@ public class DoShowSurveyResults extends Command<SchoolManager> {
   @Override
   public final void execute() throws DialogException {
     _form.parse();
-    _receiver.showSurveyResults(_discipline.value(), _project.value());
+    String s =_receiver.showSurveyResults(_discipline.value(), _project.value());
+    _display.addLine(s);
+    _display.display();
 
   }
 }
