@@ -37,7 +37,7 @@ public class Survey implements Subject {
 		public abstract void open();
 		public abstract void close();
 		public abstract void finalize();
-		public String render(){
+		public String render(Person p){
 			return _project.getName() + " - " + _discipline.getDisciplineName();
 		}
 		public abstract String notifyState();
@@ -59,8 +59,8 @@ public class Survey implements Subject {
 		_state.setState(s);
 	}
 
-	public String render(){
-		return _state.render();
+	public String render(Person p){
+		return _state.render(p);
 	}
 
 	public int getAnswersNumber(){

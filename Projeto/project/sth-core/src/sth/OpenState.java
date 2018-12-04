@@ -31,8 +31,8 @@ public class OpenState extends Survey.State{
         // FIXME mandar throw 
     }
 
-    public String render(){
-        return super.render() + " (aberto)";
+    public String render(Person p){
+        return super.render(p) + " (aberto)";
     }
 
     @Override

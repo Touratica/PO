@@ -17,18 +17,33 @@ public class FinalState extends Survey.State{
     public void finalize(){
         // do nothing, already finalized
     }
-    public String render(){
+    public String render(Person p){
         
         Survey survey = getSurvey(); //this way we only get the survey one time
+        
+        if (p.isProfessor()){
+            
+            String submissions ="* Número de submissões: " + survey.getSubmissionsNumber();
+            
+            String answers = "* Número de respostas: " + survey.getAnswersNumber();
 
-        String submissions ="* Número de submissões: " + survey.getSubmissionsNumber();
+            String hours = "* Tempos de resolução (horas) (mínimo, médio, máximo): "+ survey.getMinHours() + ", " + survey.getAverageHours() + ", " + survey.getMaxHours();
 
-        String answers = "* Número de respostas: " + survey.getAnswersNumber();
+            return super.render(p) + "\n" + submissions + "\n" + answers + "\n" + hours ;
 
-        String hours = "* Tempos de resolução (horas) (mínimo, médio, máximo): "+ survey.getMinHours() + ", " + survey.getAverageHours() + ", " + survey.getMaxHours();
+        } else if (p.isRepresentative()){
+            return super.render(p) + " - " + survey.getAnswersNumber() + " respostas - " + survey.getAverageHours() + " horas";
 
-        return super.render() + "\n" + submissions + "\n" + answers + "\n" + hours ;
+        }else if (p.isStudent()){
+            String answers = "* Número de respostas: " + survey.getAnswersNumber();
+
+            String hours = "* Tempos médio (horas): "+ survey.getAverageHours();
+
+            return super.render(p) + "\n" + answers + "\n" + hours;
+        }
+        return null;
     }
+
 
     @Override
     public String notifyState() {

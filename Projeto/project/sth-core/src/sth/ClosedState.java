@@ -20,8 +20,8 @@ public class ClosedState extends Survey.State{
         setState(new FinalState(getSurvey()));
     }
 
-    public String render(){
-        return super.render() + " (fechado)";
+    public String render(Person p){
+        return super.render(p) + " (fechado)";
     }
     
     @Override
