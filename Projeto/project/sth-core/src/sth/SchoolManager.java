@@ -154,10 +154,11 @@ public class SchoolManager {
 	}
 
 	public String showPerson() {
-		return _loggedPerson.toString();
+		PersonVisitor visitor = new PersonVisitor();
+		return _loggedPerson.accept(visitor);
 	}
 
-	public ArrayList<Person> showAllPeople() { 
+	public ArrayList<String> showAllPeople() { 
 		return _school.showAllPeople();
 	}
 

@@ -137,12 +137,17 @@ public class Professor extends Person implements Observer {
 		}
 		throw new NoSuchProjectNameException();
 	}
-
+	
 	@Override
 	public boolean isProfessor() {
 		return true;
 	}
 
+	@Override
+	public String accept(PersonVisitor visitor){
+		return visitor.showProfessor(this);
+	}
+	/*
 	@Override
 	public String toString() {
 		String s = "DOCENTE|" + super.toString();
@@ -160,6 +165,7 @@ public class Professor extends Person implements Observer {
 		}
 		return s;
 	}
+	*/
     
 
 }

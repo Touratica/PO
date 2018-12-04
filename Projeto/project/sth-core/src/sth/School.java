@@ -305,8 +305,10 @@ public class School implements Serializable {
 	 * 
 	 * @return everyone in the school
 	 */
-	public ArrayList<Person> showAllPeople() {
+	public ArrayList<String> showAllPeople() {
 		ArrayList<Person> peopleList = new ArrayList<Person>();
+		ArrayList<String> peopleVisited = new ArrayList<String>();
+		PersonVisitor visitor = new PersonVisitor();
 		for (Map.Entry<Integer, Administrative> entry : getAdministratives().entrySet()) {
 			peopleList.add(entry.getValue());
 		}
@@ -317,7 +319,12 @@ public class School implements Serializable {
 			peopleList.add(entry.getValue());
 		}
 		Collections.sort(peopleList, Person.ID_COMPARATOR);
-		return peopleList;
+
+		for (Person p: peopleList){
+			peopleVisited.add(p.accept(visitor));
+		}
+
+		return peopleVisited;
 	}
 
 	/**

@@ -68,6 +68,14 @@ public class Student extends Person {
 		return null;
 	}
 
+	public Discipline getDiscipline(int i){
+		return _disciplines.get(i);
+	}
+
+	public int getDisciplinesNumber(){
+		return _disciplines.size();
+	}
+
 	public void addDiscipline(Discipline discipline) throws DuplicateDisciplineException, DisciplineLimitExceededException {
 		for (Discipline d: _disciplines) {
 			if (d.equals(discipline)) {
@@ -146,6 +154,14 @@ public class Student extends Person {
 	}
 
 	@Override
+	public String accept(PersonVisitor visitor){
+		if (isRepresentative())
+			return "DELEGADO|" + visitor.showRepresentative(this);
+		else return "ALUNO|" +visitor.showStudent(this);
+	}
+	
+/*
+	@Override
 	public String toString() {
 		String s = "";
 		ArrayList<String> disciplines = new ArrayList<String>();
@@ -161,5 +177,6 @@ public class Student extends Person {
 		return s; 
 
 	}
+*/
     
 }

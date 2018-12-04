@@ -21,9 +21,9 @@ public class DoShowAllPersons extends Command<SchoolManager> {
   /** @see pt.tecnico.po.ui.Command#execute() */
   @Override
   public final void execute() {
-    Collection<Person> people = _receiver.showAllPeople();
-    for (Person person: people) {
-      _display.addLine(person.toString());
+    Collection<String> people = _receiver.showAllPeople();
+    for (String person: people) {
+      _display.addLine(person);
     }
     _display.display();
   }

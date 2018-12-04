@@ -64,6 +64,10 @@ public abstract class Person implements Serializable, Observer {
 
 	}
 
+	public int getPhoneNumber(){
+		return _phoneNumber;
+	}
+
 	/**
 	 * @return the person's name.
 	 */
@@ -141,10 +145,15 @@ public abstract class Person implements Serializable, Observer {
 	public void deliverProject(String discipline, String project, String submission) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, ProjectAlreadyClosedException	 {
 		throw new UnsupportedOperationException();
 	}
-
-	@Override
+	
+	/*@Override
 	public String toString() {
 		return  _id + "|" + _phoneNumber + "|" +  _name;
+	}
+	*/
+
+	public String accept(PersonVisitor visitor){
+		return visitor.showPerson(this);
 	}
 	
 	private static class NameComparator implements Comparator<Person> {
