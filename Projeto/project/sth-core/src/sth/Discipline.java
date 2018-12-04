@@ -136,6 +136,14 @@ public class Discipline implements Serializable {
 		}
 	}
 
+	public void addToNotificationList(Person person, String project) throws NoSuchProjectNameException {
+		getProject(project).addToNotificationList(person);
+	}
+
+	public void removeFromNotificationList(Person person, String project) throws NoSuchProjectNameException {
+		getProject(project).removeFromNotificationList(person);
+	}
+
 	@Override
 	public boolean equals(Object o){
 		if (o instanceof Discipline){

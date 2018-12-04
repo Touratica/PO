@@ -130,6 +130,15 @@ public abstract class Person implements Serializable, Observer {
 		return notifications;
 	}
 
+	public void addToNotificationList(String discipline, String project)
+			throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
+		throw new UnsupportedOperationException();
+	}
+
+	public void removeFromNotificationList(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
+		throw new UnsupportedOperationException();
+	}
+
 	public void closeProject(String discipline, String Project) throws NoSuchProjectNameException, NoSuchDisciplineNameException, ProjectAlreadyClosedException, UnsupportedOperationException {
 		throw new UnsupportedOperationException();
 	}
@@ -166,7 +175,7 @@ public abstract class Person implements Serializable, Observer {
 		throw new UnsupportedOperationException();
 	}
 
-	public String showSubmissions(String discipline, String project) throws UnsupportedOperationException{
+	public String showSubmissions(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
 		throw new UnsopportedOperationException();
 	}
 

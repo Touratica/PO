@@ -99,7 +99,7 @@ public class Professor extends Person implements Observer {
 		}
 	}
 	
-	public String showSubmissions(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException{
+	public String showSubmissions(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException {
 		ArrayList<Discipline> _disciplines = getDiscipline(discipline);
 		if (_disciplines.size() == 0){
 			throw new NoSuchDisciplineNameException();
@@ -151,6 +151,45 @@ public class Professor extends Person implements Observer {
 	@Override
 	public String accept(PersonVisitor visitor){
 		return visitor.showProfessor(this);
+	}
+
+	@Override
+	public void addToNotificationList(String discipline, String project)
+			throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
+		int i = 0;
+		ArrayList<Discipline> disciplines = getDiscipline(discipline);
+		for (Discipline dis : disciplines) {
+			try {
+				i++;
+				dis.addToNotificationList(this, project);
+				return;
+			} catch (NoSuchProjectNameException e) {
+				if (i != disciplines.size()) {
+					continue;
+				}
+				throw e;
+			}
+		}
+	}
+
+	@Override
+	public void removeFromNotificationList(String discipline, String project)
+			throws NoSuchDisciplineNameException, NoSuchProjectNameException {
+		int i = 0;
+		ArrayList<Discipline> disciplines = getDiscipline(discipline);
+			for (Discipline dis: disciplines) {
+				try {
+					i++;
+					dis.removeFromNotificationList(this, project);
+					return;
+				} catch (NoSuchProjectNameException e) {
+					if (i != disciplines.size()) {
+						continue;
+					}
+					throw e;
+				}
+			}
+		}
 	}
 	/*
 	@Override

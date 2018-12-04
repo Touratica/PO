@@ -175,7 +175,7 @@ public class Survey implements Subject {
 	}
 
 	@Override
-	public void removeOberserver(Observer o) {
+	public void removeObserver(Observer o) {
 		int i = _observers.indexOf(o);
      	if (i >= 0) {
 			_observers.remove(i);

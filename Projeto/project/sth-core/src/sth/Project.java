@@ -127,6 +127,14 @@ public class Project implements Serializable {
 		_survey.registerObserver(o);
 	}
 
+	public void addToNotificationList(Person person) {
+		_survey.registerObserver(person);
+	}
+
+	public void removeFromNotificationList(Person person) {
+		_survey.removeOberserver(person);
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Project) {
