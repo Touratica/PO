@@ -181,7 +181,8 @@ public class SchoolManager {
 		return _loggedPerson.toString();
 	}
 
-	public ArrayList<Person> showAllPeople() {
+	public ArrayList<Person> showAllPeople() { 
+		// FIXME a escola devia fazer isto 
 		ArrayList<Person> peopleList = new ArrayList<Person>();
 		for (Map.Entry<Integer, Administrative> entry: _school.getAdministratives().entrySet()) {
 			peopleList.add(entry.getValue());
@@ -201,7 +202,7 @@ public class SchoolManager {
 	}
 
 	public void createProject(String discipline, String project) throws DuplicateProjectNameException, NoSuchDisciplineNameException {
-
+		// FIXME
 		Professor prof = (Professor) _school.getProfessors().get(_loggedId);
 		for (Map.Entry<String, ArrayList<Discipline>> entry : prof.getDisciplines().entrySet()) {
 			for (Discipline d : entry.getValue()) {
@@ -256,5 +257,16 @@ public class SchoolManager {
 
 	public String showNotifications() {
 		return _loggedPerson.showNotifications();
+	}
+	public String showProjectSubmissions(String discipline, String project){
+		if (hasProfessor())
+			return _loggedPerson.showSubmissions(discipline , project);
+		return null; // FIXME manda excecao
+	}
+
+	public String showSurveyResults(String discipline, String project){
+		if (hasStudent() || hasProfessor())
+			return _loggedPerson.showSurveyResults(discipline,project);
+		return null; // FIXME manda excecao
 	}
 }

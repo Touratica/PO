@@ -101,20 +101,6 @@ public class Professor extends Person implements Observer {
 		
 	}
 	
-	public String showDisciplineStudents(String discipline) throws NoSuchDisciplineNameException{
-		List<Discipline> _disciplines = getDiscipline(discipline);
-		if (_disciplines.size() == 0){
-			throw new NoSuchDisciplineNameException();
-		}
-		Discipline d = _disciplines.get(0); //we are going to give the first (if there is more than 1) discipline's students as we dont know the course
-		Map<Integer, Student> _students = d.getStudents();
-		String s= "";
-		for (Map.Entry<Integer,Student> entry: _students.entrySet())
-			s+= entry.getValue().toString(); // FIXME not sure if getValue.toString or  only getValue
-		return s;
-
-	}
-	
 	public String showSubmissions(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException{
 		ArrayList<Discipline> _disciplines = getDiscipline(discipline);
 		if (_disciplines.size() == 0){
@@ -127,6 +113,36 @@ public class Professor extends Person implements Observer {
 		}
 		throw new NoSuchProjectNameException();
 	}
+
+
+	public String showDisciplineStudents(String discipline) throws NoSuchDisciplineNameException{
+		List<Discipline> _disciplines = getDiscipline(discipline);
+		if (_disciplines.size() == 0){
+			throw new NoSuchDisciplineNameException();
+		}
+		Discipline d = _disciplines.get(0); //we are going to give the first (if there is more than 1) discipline's students as we dont know the course
+		Map<Integer, Student> _students = d.getStudents();
+		String s= "";
+		for (Map.Entry<Integer,Student> entry: _students.entrySet())
+			s+= entry.getValue().toString(); // FIXME not sure if getValue.toString or  only getValue
+		return s;
+	}
+
+	public String showSurveyResults(String discipline, String project){
+		List<Discipline> _disciplines = getDiscipline(discipline);
+		if (_disciplines.size() == 0){
+			throw new NoSuchDisciplineNameException();
+		}
+		for (Discipline d : _disciplines){
+			if (d.hasProject(project)){
+				Project p = d.getProject(project);
+				return p.showSurveyResults(this); // FIXME I think this refers to professor as professor is the current object where this method is executed 
+			}
+		}
+		throw new NoSuchProjectNameException();
+
+	}
+	
 	
 
 	@Override

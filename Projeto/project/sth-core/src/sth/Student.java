@@ -111,6 +111,16 @@ public class Student extends Person {
 		survey.close();
 	}
 
+	public String showSurveyResults(String discipline, String project){
+		Discipline d = getDiscipline(discipline);
+		if (d != null){
+			Project p = d.getProject(project); 
+			return p.showSurveyResults(this); // FIXME I think this this is Student 
+		}
+		return null; // FIXME em vez de retornar null mandar excecao q disciplina n existe	
+
+	}
+
 	@Override
 	public boolean isRepresentative() {
 		return _course.getRepresentatives().containsKey(this.getId());
