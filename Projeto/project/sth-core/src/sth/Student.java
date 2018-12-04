@@ -98,7 +98,7 @@ public class Student extends Person {
 		// FIXME throw exception NAO INSCRITO
 	}
 	
-	public void submitSurveyAnswer(String discipline, String project, int hours, String comment){
+	public void answerSurvey(String discipline, String project, int hours, String comment){
 		Discipline d = getDiscipline(discipline);
 		SurveyAnswer answer = new SurveyAnswer(hours, comment);
 		d.submitSurveyAnswer(this, project, answer);
@@ -159,6 +159,8 @@ public class Student extends Person {
 			return "DELEGADO|" + visitor.showRepresentative(this);
 		else return "ALUNO|" +visitor.showStudent(this);
 	}
+
+
 	
 /*
 	@Override

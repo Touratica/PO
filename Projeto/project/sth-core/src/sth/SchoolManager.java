@@ -208,4 +208,9 @@ public class SchoolManager {
 			return _loggedPerson.showSurveyResults(discipline,project);
 		return null; // FIXME manda excecao
 	}
+
+	public void answerSurvey(String discipline, String project , int hours, String comment)throws UnsupportedOperationException{
+		_loggedPerson.answerSurvey(discipline,project,hours,comment);
+
+	}
 }
