@@ -31,6 +31,10 @@ public class OpenState extends Survey.State{
         // FIXME mandar throw 
     }
 
+    public String render(){
+        return super.render() + " (aberto)";
+    }
+
     @Override
     public String notifyState() {
         return "open";

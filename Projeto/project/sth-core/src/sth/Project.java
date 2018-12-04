@@ -47,6 +47,9 @@ public class Project implements Serializable {
 	public Map<Integer, String> getSubmissions() {
 		return _submissions;
 	}
+	public int getSubmissionsNumber(){
+		return _submissions.size();
+	}
 
 	/**
 	 * @return the _opened

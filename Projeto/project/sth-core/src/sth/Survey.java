@@ -38,6 +38,9 @@ public class Survey implements Subject {
 		public abstract void open();
 		public abstract void close();
 		public abstract void finalize();
+		public String render(){
+			return _project.getName() + " - " + _discipline.getDisciplineName();
+		}
 		public abstract String notifyState();
 	}
 
@@ -57,8 +60,53 @@ public class Survey implements Subject {
 		_state.setState(s);
 	}
 
+	public String render(){
+		return _state.render();
+	}
+
 	public int getAnswersNumber(){
 		return _results.size();
+	}
+	
+	public SurveyAnswer getAnswer(int i){
+		return _results.get(i);
+	}
+
+	public int getMaxHours(){
+		int answersNumber = getAnswersNumber();
+		int maxHours = getAnswer(0).getWorkHours();
+		for (int i=1; i < answersNumber ; i++){
+			SurveyAnswer answer = getAnswer(i);
+			if (answer.getWorkHours() > maxHours)
+				maxHours = answer.getWorkHours();
+		}
+		return maxHours;
+
+	}
+
+	public int getMinHours(){
+		int answersNumber = getAnswersNumber();
+		int minHours = getAnswer(0).getWorkHours();;
+		for (int i=1; i<answersNumber ; i++){
+			SurveyAnswer answer = getAnswer(i);
+			if (answer.getWorkHours() < minHours)
+				minHours = answer.getWorkHours();
+		}
+		return minHours;
+
+	}
+
+	public int getAverageHours(){
+		int answersNumber = getAnswersNumber();
+		int averageHours=0;
+		for (int i=0; i<answersNumber; i++){
+			averageHours+=getAnswer(i).getWorkHours();
+		}
+		return (int) averageHours/answersNumber;
+
+	}
+	public int getSubmissionsNumber(){
+		return _project.getSubmissionsNumber();
 	}
 
 	public Project getProject(){

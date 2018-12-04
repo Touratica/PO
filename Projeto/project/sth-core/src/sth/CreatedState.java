@@ -25,6 +25,9 @@ public class CreatedState extends Survey.State{
     public void finalize(){ //FIXME mandar throw
 
     }
+    public String render(){
+        return super.render() + " (por abrir)";
+    }
 
     @Override
     public String notifyState() {

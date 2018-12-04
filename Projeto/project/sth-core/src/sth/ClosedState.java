@@ -19,6 +19,10 @@ public class ClosedState extends Survey.State{
     public void finalize(){
         setState(new FinalState(getSurvey()));
     }
+
+    public String render(){
+        return super.render() + " (fechado)";
+    }
     
     @Override
     public String notifyState() {
