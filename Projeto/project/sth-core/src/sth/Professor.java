@@ -41,7 +41,6 @@ public class Professor extends Person implements Observer {
 		}
 	}
 
-
 	/**
 	 * @return the courses lectured by the professor.
 	 */
@@ -49,7 +48,6 @@ public class Professor extends Person implements Observer {
 		return _disciplines;
 	}
 	
-
 	public ArrayList<Discipline> getDiscipline(String disciplineName){
 		ArrayList<Discipline> disciplines = new ArrayList<Discipline>();
 		for (Map.Entry<String, ArrayList<Discipline>> entry: _disciplines.entrySet()) {
@@ -126,23 +124,19 @@ public class Professor extends Person implements Observer {
 		throw new NoSuchDisciplineNameException();
 	}
 
-
 	public String showSurveyResults(String discipline, String project){
 		List<Discipline> _disciplines = getDiscipline(discipline);
-		if (_disciplines.size() == 0){
+		if (_disciplines.size() == 0) {
 			throw new NoSuchDisciplineNameException();
 		}
-		for (Discipline d : _disciplines){
-			if (d.hasProject(project)){
+		for (Discipline d : _disciplines) {
+			if (d.hasProject(project)) {
 				Project p = d.getProject(project);
-				return p.showSurveyResults(this); // FIXME I think this refers to professor as professor is the current object where this method is executed 
+				return p.showSurveyResults(this);
 			}
 		}
 		throw new NoSuchProjectNameException();
-
 	}
-	
-	
 
 	@Override
 	public boolean isProfessor() {

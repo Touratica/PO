@@ -1,7 +1,5 @@
 package sth;
 
-//FIXME import other classes if needed
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -33,8 +31,6 @@ public class School implements Serializable {
 
 	/** Serial number for serialization. */
 	private static final long serialVersionUID = 201811151733L;
-
-	//FIXME define object fields (attributes and, possibly, associations)
 	
 	/** School's people. */
 	private Map<Integer, Student> _students = new HashMap<Integer, Student>();
@@ -163,6 +159,9 @@ public class School implements Serializable {
 		if (verifyId(id = Integer.parseInt(s[1]))) {
 			Student newStudent = new Student(id, Integer.parseInt(s[2]), s[3]);
 			_students.put(newStudent.getId(), newStudent);
+			if (id > _nextId) {
+				_nextId = id;
+			}
 			return newStudent;
 		}
 		return null;
@@ -180,6 +179,9 @@ public class School implements Serializable {
 		if (verifyId(id = Integer.parseInt(s[1]))) {
 			Administrative newAdministrative = new Administrative(id, Integer.parseInt(s[2]), s[3]);
 			_administratives.put(newAdministrative.getId(), newAdministrative);
+			if (id > _nextId) {
+				_nextId = id;
+			}
 			return newAdministrative;
 		}
 		return null;
@@ -197,6 +199,9 @@ public class School implements Serializable {
 		if (verifyId(id = Integer.parseInt(s[1]))) {
 			Professor newProfessor = new Professor(id, Integer.parseInt(s[2]), s[3]);
 			_professors.put(newProfessor.getId(), newProfessor);
+			if (id > _nextId) {
+				_nextId = id;
+			}
 			return newProfessor;
 		}
 		return null;
@@ -298,6 +303,10 @@ public class School implements Serializable {
 		return true;
 	}
 
+	/**
+	 * 
+	 * @return everyone in the school
+	 */
 	public ArrayList<Person> showAllPeople() {
 		ArrayList<Person> peopleList = new ArrayList<Person>();
 		for (Map.Entry<Integer, Administrative> entry : getAdministratives().entrySet()) {
@@ -313,6 +322,11 @@ public class School implements Serializable {
 		return peopleList;
 	}
 
+	/**
+	 * 
+	 * @param name the name to be searched for
+	 * @return everyone in the school whose name contains the search term
+	 */
 	public ArrayList<Person> searchPerson(String name) {
 		ArrayList<Person> filteredPeople = new ArrayList<Person>();
 		for (Map.Entry<Integer, Administrative> entry : getAdministratives().entrySet()) {
