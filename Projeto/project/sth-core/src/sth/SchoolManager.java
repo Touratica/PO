@@ -149,7 +149,7 @@ public class SchoolManager {
 		_loggedPerson.setPhoneNumber(phoneNumber);
 	}
 
-	public ArrayList<Person> searchPerson(String name) {
+	public ArrayList<String> searchPerson(String name) {
 		return _school.searchPerson(name);
 	}
 
@@ -178,7 +178,7 @@ public class SchoolManager {
 		}
 	}
 
-	public ArrayList<Student> showDisciplineStudents (String disciplineName) throws NoSuchDisciplineNameException {
+	public ArrayList<String> showDisciplineStudents (String disciplineName) throws NoSuchDisciplineNameException {
 		try {
 			return _loggedPerson.showDisciplineStudents(discipline);
 		} catch (UnsupportedOperationException e) {
@@ -207,5 +207,10 @@ public class SchoolManager {
 		if (hasStudent() || hasProfessor())
 			return _loggedPerson.showSurveyResults(discipline,project);
 		return null; // FIXME manda excecao
+	}
+
+	public void answerSurvey(String discipline, String project , int hours, String comment)throws UnsupportedOperationException{
+		_loggedPerson.answerSurvey(discipline,project,hours,comment);
+
 	}
 }

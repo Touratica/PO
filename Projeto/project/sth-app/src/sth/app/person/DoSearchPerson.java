@@ -26,9 +26,9 @@ public class DoSearchPerson extends Command<SchoolManager> {
 	@Override
 	public final void execute() {
 		_form.parse();
-		Collection<Person> people = _receiver.searchPerson(_name.value());
-		for (Person person: people) {
-			_display.addLine(person.toString()); // FIXME
+		Collection<String> people = _receiver.searchPerson(_name.value());
+		for (String person: people) {
+			_display.addLine(person); 
 		}
 		_display.display();
 		

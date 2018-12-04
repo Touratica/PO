@@ -332,8 +332,10 @@ public class School implements Serializable {
 	 * @param name the name to be searched for
 	 * @return everyone in the school whose name contains the search term
 	 */
-	public ArrayList<Person> searchPerson(String name) {
+	public ArrayList<String> searchPerson(String name) {
 		ArrayList<Person> filteredPeople = new ArrayList<Person>();
+		ArrayList<String> peopleVisited = new ArrayList<String>();
+		PersonVisitor visitor = new PersonVisitor();
 		for (Map.Entry<Integer, Administrative> entry : getAdministratives().entrySet()) {
 			if (entry.getValue().getName().toLowerCase().contains(name.toLowerCase())) {
 				filteredPeople.add(entry.getValue());
@@ -350,7 +352,11 @@ public class School implements Serializable {
 			}
 		}
 		Collections.sort(filteredPeople, Person.NAME_COMPARATOR);
+		
+		for (Person p: filteredPeople){
+			peopleVisited.add(p.accept(visitor));
+		}
 
-		return filteredPeople;
+		return peopleVisited;
 	}
 }

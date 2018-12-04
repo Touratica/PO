@@ -113,11 +113,16 @@ public class Professor extends Person implements Observer {
 	}
 
 	@Override
-	public ArrayList<Student> showDisciplineStudents(String discipline) throws NoSuchDisciplineNameException {
+	public ArrayList<String> showDisciplineStudents(String discipline) throws NoSuchDisciplineNameException {
+		ArrayList<String> studentsVisited = new ArrayList<String>();
+		PersonVisitor visitor = new PersonVisitor();
 		for (Map.Entry<String, ArrayList<Discipline>> entry: _disciplines.entrySet()) {
 			for (Discipline dis: entry.getValue()) {
 				if (dis.getDisciplineName().equals(discipline)) {
-					return dis.showStudents();
+					for (Student s: dis.showStudents()){
+						studentsVisited.add(s.accept(visitor));
+					}
+					return studentsVisited;
 				}
 			}
 		}
