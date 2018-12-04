@@ -93,7 +93,6 @@ public class Survey implements Subject {
 				minHours = answer.getWorkHours();
 		}
 		return minHours;
-
 	}
 
 	public int getAverageHours(){
@@ -105,6 +104,7 @@ public class Survey implements Subject {
 		return (int) averageHours/answersNumber;
 
 	}
+	
 	public int getSubmissionsNumber(){
 		return _project.getSubmissionsNumber();
 	}
