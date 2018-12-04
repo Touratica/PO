@@ -43,7 +43,7 @@ public class Survey implements Subject {
 		public abstract String notifyState();
 	}
 
-	public Survey(Discipline discipline, String project){
+	public Survey(Course course, Discipline discipline, Project project){
 		_discipline = discipline;
 		_project = project;
 		_state = new CreatedState(this);
@@ -51,6 +51,9 @@ public class Survey implements Subject {
 			registerObserver(entry.getValue());
 		}
 		for (Map.Entry<Integer, Professor> entry : discipline.getProfessors().entrySet()) {
+			registerObserver(entry.getValue());
+		}
+		for (Map.Entry<Integer, Student> entry: course.getRepresentatives().entrySet()) {
 			registerObserver(entry.getValue());
 		}
 	}
@@ -166,7 +169,9 @@ public class Survey implements Subject {
 
 	@Override
 	public void registerObserver(Observer o) {
-		_observers.add(o);
+		if (_observers.indexOf(o) < 0) {
+			_observers.add(o);
+		}
 	}
 
 	@Override

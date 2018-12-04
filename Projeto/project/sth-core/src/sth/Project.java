@@ -90,8 +90,8 @@ public class Project implements Serializable {
 		return _survey.render(p);
 	}
 
-	public void createSurvey(Discipline discipline, Project project){
-		_survey = new Survey(discipline, project);
+	public void createSurvey(Course course, Discipline discipline){
+		_survey = new Survey(course, discipline, this);
 	}
 
 	/**

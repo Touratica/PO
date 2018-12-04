@@ -213,4 +213,8 @@ public class SchoolManager {
 		_loggedPerson.answerSurvey(discipline,project,hours,comment);
 
 	}
+
+	public void createSurvey(String discipline, String project) {
+		_loggedPerson.createSurvey(discipline, project);
+	}
 }

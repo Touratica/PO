@@ -126,6 +126,16 @@ public class Discipline implements Serializable {
 		return students;
 	}
 
+	public void createSurvey(Course course, String project) {
+		Project proj = getProject(project);
+		if (proj != null) {
+			proj.createSurvey(course, this);
+		}
+		else {
+			throw new NoSuchProjectNameException();
+		}
+	}
+
 	@Override
 	public boolean equals(Object o){
 		if (o instanceof Discipline){

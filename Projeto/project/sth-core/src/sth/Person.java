@@ -146,7 +146,11 @@ public abstract class Person implements Serializable, Observer {
 		throw new UnsupportedOperationException();
 	}
 
-	public void answerSurvey(String discipline, String project , int hours, String comment)throws UnsupportedOperationException{
+	public void answerSurvey(String discipline, String project , int hours, String comment) throws UnsupportedOperationException{
+		throw new UnsupportedOperationException();
+	}
+
+	public void createSurvey(String discipline, String project) throws UnsupportedOperationException {
 		throw new UnsupportedOperationException();
 	}
 

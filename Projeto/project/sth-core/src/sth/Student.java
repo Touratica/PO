@@ -106,8 +106,15 @@ public class Student extends Person {
 		// FIXME se o student nao tiver disciplina mandar excecao 
 	}
 
-	public void createSurvey(Discipline discipline, Project project) {
-		project.createSurvey(discipline, project);
+	@Override
+	public void createSurvey(String discipline, String project) throws UnsupportedOperationException {
+		Discipline dis = getDiscipline(discipline);
+		if (dis != null) {
+			dis.createSurvey(_course, project);
+		}
+		else {
+			throw new NoSuchDisciplineNameException();
+		}
 	}
 
 	public void cancelSurvey(Survey survey) {

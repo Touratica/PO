@@ -81,7 +81,7 @@ public class Professor extends Person implements Observer {
 	public void closeProject(String discipline, String project) throws NoSuchProjectNameException, NoSuchDisciplineNameException, ProjectAlreadyClosedException {
 		int i = 0;
 		ArrayList<Discipline> disciplines = getDiscipline(discipline);
-		if (disciplines != null) {
+		if (disciplines.size() != 0) {
 			for (Discipline dis: disciplines) {
 				try {
 					dis.closeProject(project);
