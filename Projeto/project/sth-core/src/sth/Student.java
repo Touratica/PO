@@ -8,8 +8,11 @@ import sth.Survey.State;
 import sth.exceptions.DisciplineLimitExceededException;
 import sth.exceptions.DuplicateDisciplineException;
 import sth.exceptions.DuplicateIdException;
+import sth.exceptions.NoSuchDisciplineNameException;
+import sth.exceptions.NoSuchProjectNameException;
 import sth.exceptions.NotMatchingCourseException;
 import sth.exceptions.OutOfRangeIdException;
+import sth.exceptions.ProjectAlreadyClosedException;
 
 /**
  * The Student class.
@@ -119,6 +122,17 @@ public class Student extends Person {
 		}
 		return null; // FIXME em vez de retornar null mandar excecao q disciplina n existe	
 
+	}
+
+	@Override
+	public void deliverProject(String discipline, String project, String submission) throws NoSuchDisciplineNameException , NoSuchProjectNameException, ProjectAlreadyClosedException {
+		Discipline dis = getDiscipline(discipline);
+		if (dis != null) {
+			dis.deliverProject(this, project, submission);
+		}
+		else {
+			throw new NoSuchDisciplineNameException();
+		}
 	}
 
 	@Override

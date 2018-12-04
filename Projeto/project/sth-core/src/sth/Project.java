@@ -103,16 +103,16 @@ public class Project implements Serializable {
 			_survey.setState(new OpenState(this));
 	}
 
-	public void submitProject(int id, String submission) throws ProjectAlreadyClosedException {
+	public void deliverProject(Person person, String submission) throws ProjectAlreadyClosedException {
 		if (!isOpen()) {
 			throw new ProjectAlreadyClosedException();
 		}
 		else {
-			if (submittedProject(id)) {
+			if (submittedProject(person.getId())) {
 				_submissions.replace(id, submission);
 			}
 			else {
-				_submissions.put(id, submission);
+				_submissions.put(person.getId(), submission);
 			}
 		} 
 	}

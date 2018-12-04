@@ -312,4 +312,26 @@ public class School implements Serializable {
 		Collections.sort(peopleList, Person.ID_COMPARATOR);
 		return peopleList;
 	}
+
+	public ArrayList<Person> searchPerson(String name) {
+		ArrayList<Person> filteredPeople = new ArrayList<Person>();
+		for (Map.Entry<Integer, Administrative> entry : getAdministratives().entrySet()) {
+			if (entry.getValue().getName().toLowerCase().contains(name.toLowerCase())) {
+				filteredPeople.add(entry.getValue());
+			}
+		}
+		for (Map.Entry<Integer, Professor> entry : getProfessors().entrySet()) {
+			if (entry.getValue().getName().toLowerCase().contains(name.toLowerCase())) {
+				filteredPeople.add(entry.getValue());
+			}
+		}
+		for (Map.Entry<Integer, Student> entry : getStudents().entrySet()) {
+			if (entry.getValue().getName().toLowerCase().contains(name.toLowerCase())) {
+				filteredPeople.add(entry.getValue());
+			}
+		}
+		Collections.sort(filteredPeople, Person.NAME_COMPARATOR);
+
+		return filteredPeople;
+	}
 }

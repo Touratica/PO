@@ -134,6 +134,14 @@ public abstract class Person implements Serializable, Observer {
 		throw new UnsupportedOperationException();
 	}
 
+	public ArrayList<Student> showDisciplineStudents(String discipline) throws UnsupportedOperationException, NoSuchDisciplineNameException {
+		throw new UnsupportedOperationException();
+	}
+
+	public void deliverProject(String discipline, String project, String submission) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, ProjectAlreadyClosedException	 {
+		throw new UnsupportedOperationException();
+	}
+
 	@Override
 	public String toString() {
 		return  _id + "|" + _phoneNumber + "|" +  _name;

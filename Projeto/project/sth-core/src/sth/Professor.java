@@ -64,7 +64,7 @@ public class Professor extends Person implements Observer {
 
 	@Override
 	public void createProject(String disciplineName, String projectName) throws NoSuchDisciplineNameException, DuplicateProjectException {
-		//this method is optimized to when multiple courses have the same discipline and some of those have the project, it searches for one that doesnt have that project and puts it there 
+		// this method is optimized to when multiple courses have the same discipline and some of those have the project, it searches for one that doesnt have that project and puts it there 
 		ArrayList<Discipline> _disciplines = getDiscipline(disciplineName);
 		if (_disciplines.size() == 0){
 			throw new NoSuchDisciplineNameException();
@@ -114,19 +114,18 @@ public class Professor extends Person implements Observer {
 		throw new NoSuchProjectNameException();
 	}
 
-
-	public String showDisciplineStudents(String discipline) throws NoSuchDisciplineNameException{
-		List<Discipline> _disciplines = getDiscipline(discipline);
-		if (_disciplines.size() == 0){
-			throw new NoSuchDisciplineNameException();
+	@Override
+	public ArrayList<Student> showDisciplineStudents(String discipline) throws NoSuchDisciplineNameException {
+		for (Map.Entry<String, ArrayList<Discipline>> entry: _disciplines.entrySet()) {
+			for (Discipline dis: entry.getValue()) {
+				if (dis.getDisciplineName().equals(discipline)) {
+					return dis.showStudents();
+				}
+			}
 		}
-		Discipline d = _disciplines.get(0); //we are going to give the first (if there is more than 1) discipline's students as we dont know the course
-		Map<Integer, Student> _students = d.getStudents();
-		String s= "";
-		for (Map.Entry<Integer,Student> entry: _students.entrySet())
-			s+= entry.getValue().toString(); // FIXME not sure if getValue.toString or  only getValue
-		return s;
+		throw new NoSuchDisciplineNameException();
 	}
+
 
 	public String showSurveyResults(String discipline, String project){
 		List<Discipline> _disciplines = getDiscipline(discipline);

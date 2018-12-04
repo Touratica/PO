@@ -84,8 +84,8 @@ public class Discipline implements Serializable {
 		return _name + " - " + project + getProject(project).showSubmissions();
 	}
 
-	public void submitProject(Student student, String project, String submission){
-		getProject(project).submitProject(id, submission);
+	public void deliverProject(Person person, String project, String submission){
+		getProject(project).deliverProject(person, submission);
 		// FIXME se o projeto nao existir manda excecao
 
 	}
@@ -116,6 +116,14 @@ public class Discipline implements Serializable {
 		Project p = getProject(project);
 		p.submitSurveyAnswer(student, answer);
 
+	}
+
+	public ArrayList<Student> showStudents() {
+		ArrayList<Student> students = new ArrayList<Student>();
+		for (Map.Entry<Integer, Student> entry: _students.entrySet()) {
+			students.add(entry.getValue());
+		}
+		return students;
 	}
 
 	@Override

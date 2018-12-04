@@ -34,14 +34,11 @@ import sth.exceptions.OutOfRangeIdException;
 import sth.exceptions.ProjectAlreadyClosedException;
 import sth.exceptions.RepresentativeNumberExceeded;
 
-//FIXME import other classes if needed
-
 /**
- * FIXME The façade class. 300
+ * The façade class.
  */
 public class SchoolManager {
 
-	//FIXME add object attributes if needed
 	/** The university to be managed. */
 	private School _school = new School();
 
@@ -50,8 +47,6 @@ public class SchoolManager {
 
 	/** The logged in person */
 	private Person _loggedPerson;
-
-	//FIXME implement constructors if needed
 	
 	/**
 	 * @param datafile
@@ -86,7 +81,6 @@ public class SchoolManager {
 			throw new NoSuchPersonIdException(id);
 		}
 	}
-
 	
 	/**
 	 * @return true when the currently logged in person is an administrative
@@ -156,25 +150,7 @@ public class SchoolManager {
 	}
 
 	public ArrayList<Person> searchPerson(String name) {
-		ArrayList<Person> filteredPeople = new ArrayList<Person>();
-		for (Map.Entry<Integer, Administrative> entry: _school.getAdministratives().entrySet()) {
-			if (entry.getValue().getName().toLowerCase().contains(name.toLowerCase())) {
-				filteredPeople.add(entry.getValue());
-			}
-		}
-		for (Map.Entry<Integer, Professor> entry : _school.getProfessors().entrySet()) {
-			if (entry.getValue().getName().toLowerCase().contains(name.toLowerCase())) {
-				filteredPeople.add(entry.getValue());
-			}
-		}
-		for (Map.Entry<Integer, Student> entry : _school.getStudents().entrySet()) {
-			if (entry.getValue().getName().toLowerCase().contains(name.toLowerCase())) {
-				filteredPeople.add(entry.getValue());
-			}
-		}
-		Collections.sort(filteredPeople, Person.NAME_COMPARATOR);
-
-		return filteredPeople;
+		return _school.searchPerson(name);
 	}
 
 	public String showPerson() {
@@ -201,39 +177,19 @@ public class SchoolManager {
 		}
 	}
 
-	public ArrayList<Student> showDisciplineStudents (String disciplineName){
-		ArrayList<Student> disciplineStudents = new ArrayList<Student>();
-		
-		for (Map.Entry<String, ArrayList<Discipline>> entry: _school.getProfessors().get(_loggedId).getDisciplines().entrySet()) {
-			for (Discipline discipline: entry.getValue()) {
-				if (discipline.getDisciplineName().equals(disciplineName)){ 
-					for (Map.Entry<Integer,Student> s : discipline.getStudents().entrySet()){
-						disciplineStudents.add(s.getValue());
-					}
-					Collections.sort(disciplineStudents, Person.ID_COMPARATOR);
-					return disciplineStudents;	
-				}
-			}
-		} return null;
-		
+	public ArrayList<Student> showDisciplineStudents (String disciplineName) throws NoSuchDisciplineNameException {
+		try {
+			return _loggedPerson.showDisciplineStudents(discipline);
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void deliverProject(String discipline, String project, String submission) throws NoSuchDisciplineNameException, NoSuchProjectNameException, ProjectAlreadyClosedException {
-		if (_school.getStudents().get(_loggedId).getCourse().getDisciplines().containsKey(discipline)) {
-			if (_school.getStudents().get(_loggedId).getCourse().getDisciplines().get(discipline).getStudents().containsKey(_loggedId)) {
-				if (_school.getStudents().get(_loggedId).getCourse().getDisciplines().get(discipline).getProjects().containsKey(project)) {
-					_school.getStudents().get(_loggedId).getCourse().getDisciplines().get(discipline).getProjects().get(project).submitProject(_loggedId, submission);
-				}
-				else {
-					throw new NoSuchProjectNameException();
-				}
-			}
-			else {
-				throw new NoSuchDisciplineNameException();
-			}
-		}
-		else {
-			throw new NoSuchDisciplineNameException();
+		try {
+			_loggedPerson.deliverProject(discipline, project, submission);
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
 		}
 	}
 
