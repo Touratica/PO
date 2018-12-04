@@ -34,14 +34,14 @@ public class FinalState extends Survey.State{
         } else if (p.isRepresentative()){
             return super.render(p) + " - " + survey.getAnswersNumber() + " respostas - " + survey.getAverageHours() + " horas";
 
-        }else if (p.isStudent()){
+        } else if (p.isStudent()){
             String answers = "* Número de respostas: " + survey.getAnswersNumber();
 
             String hours = "* Tempos médio (horas): "+ survey.getAverageHours();
 
             return super.render(p) + "\n" + answers + "\n" + hours;
         }
-        return null;
+        return null; // FIXME mandar execao 
     }
 
 
