@@ -10,8 +10,6 @@ import sth.exceptions.NoSuchDisciplineNameException;
 import sth.exceptions.NoSuchProjectNameException;
 import sth.exceptions.ProjectAlreadyClosedException;
 
-//FIXME import other classes if needed
-
 /**
  * 4.4.1. Deliver project.
  */

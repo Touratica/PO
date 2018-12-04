@@ -6,8 +6,6 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.Input;
 import sth.SchoolManager;
 
-//FIXME import other classes if needed
-
 /**
  * 4.2.2. Change phone number.
  */

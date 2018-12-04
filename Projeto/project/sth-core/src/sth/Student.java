@@ -118,7 +118,7 @@ public class Student extends Person {
 		Discipline d = getDiscipline(discipline);
 		if (d != null){
 			Project p = d.getProject(project); 
-			return p.showSurveyResults(this); // FIXME I think this this is Student 
+			return p.showSurveyResults(this);
 		}
 		return null; // FIXME em vez de retornar null mandar excecao q disciplina n existe	
 

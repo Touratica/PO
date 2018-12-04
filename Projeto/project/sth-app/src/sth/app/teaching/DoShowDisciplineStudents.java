@@ -11,8 +11,6 @@ import sth.SchoolManager;
 import sth.Student;
 import sth.app.exceptions.NoSuchDisciplineException;
 
-//FIXME import other classes if needed
-
 /**
  * 4.3.4. Show course students.
  */
@@ -35,7 +33,7 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 		Collection<Student> students = _receiver.showDisciplineStudents(_discipline.value());
 		if (students != null) {
 			for (Student s : students)
-				_display.addLine(s.toString());
+				_display.addLine(s.toString()); // FIXME
 		}
 		else {
 			throw new NoSuchDisciplineException(_discipline.value());

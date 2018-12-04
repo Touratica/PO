@@ -29,5 +29,4 @@ public class DoOpenTeachingMenu extends Command<SchoolManager> {
     Menu menu = new TeachingMenu(_receiver);
     menu.open();
   }
-
 }

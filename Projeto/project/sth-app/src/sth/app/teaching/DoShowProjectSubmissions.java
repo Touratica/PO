@@ -5,8 +5,6 @@ import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.SchoolManager;
 
-//FIXME import other classes if needed
-
 /**
  * 4.3.3. Show project submissions.
  */

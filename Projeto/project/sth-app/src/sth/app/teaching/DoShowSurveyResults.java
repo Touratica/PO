@@ -5,8 +5,6 @@ import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.SchoolManager;
 
-//FIXME import other classes if needed
-
 /**
  * 4.3.5. Show survey results.
  */
@@ -31,5 +29,4 @@ public class DoShowSurveyResults extends Command<SchoolManager> {
     _receiver.showSurveyResults(_discipline.value(), _project.value());
 
   }
-
 }

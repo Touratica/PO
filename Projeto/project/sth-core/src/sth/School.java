@@ -42,8 +42,6 @@ public class School implements Serializable {
 
 	/** People counter. */
 	private int _nextId = 100000;
-
-	//FIXME implement constructors if needed
 	
 	/**
 	 * Imports School information from text file.
