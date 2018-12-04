@@ -138,7 +138,7 @@ public abstract class Person implements Serializable, Observer {
 		throw new UnsupportedOperationException();
 	}
 
-	public ArrayList<Student> showDisciplineStudents(String discipline) throws UnsupportedOperationException, NoSuchDisciplineNameException {
+	public ArrayList<String> showDisciplineStudents(String discipline) throws UnsupportedOperationException, NoSuchDisciplineNameException {
 		throw new UnsupportedOperationException();
 	}
 

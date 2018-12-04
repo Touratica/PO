@@ -30,10 +30,10 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 	@Override
 	public final void execute() throws DialogException {
 		_form.parse();
-		Collection<Student> students = _receiver.showDisciplineStudents(_discipline.value());
+		Collection<String> students = _receiver.showDisciplineStudents(_discipline.value());
 		if (students != null) {
 			for (Student s : students)
-				_display.addLine(s.toString()); // FIXME
+				_display.addLine(s); 
 		}
 		else {
 			throw new NoSuchDisciplineException(_discipline.value());

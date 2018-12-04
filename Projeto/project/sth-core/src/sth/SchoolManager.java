@@ -149,7 +149,7 @@ public class SchoolManager {
 		_loggedPerson.setPhoneNumber(phoneNumber);
 	}
 
-	public ArrayList<Person> searchPerson(String name) {
+	public ArrayList<String> searchPerson(String name) {
 		return _school.searchPerson(name);
 	}
 
@@ -178,7 +178,7 @@ public class SchoolManager {
 		}
 	}
 
-	public ArrayList<Student> showDisciplineStudents (String disciplineName) throws NoSuchDisciplineNameException {
+	public ArrayList<String> showDisciplineStudents (String disciplineName) throws NoSuchDisciplineNameException {
 		try {
 			return _loggedPerson.showDisciplineStudents(discipline);
 		} catch (UnsupportedOperationException e) {
