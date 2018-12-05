@@ -142,7 +142,7 @@ public class Survey implements Subject {
 		}
 	}
 
-	public void cancel(){
+	public void cancel() throws SurveyWithAnswersException, FinalizedSurveyException {
 		_state.cancel();
 	}
 
@@ -151,7 +151,7 @@ public class Survey implements Subject {
 		notifyObservers();
 	}
 
-	public void close() throws SurveyNotOpenException, FinalizedSurveyException{
+	public void close() throws SurveyNotOpenException, FinalizedSurveyException {
 		_state.close();
 	}
 

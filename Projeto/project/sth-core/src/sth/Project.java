@@ -4,9 +4,14 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.SortedSet;
 
+import sth.exceptions.DuplicateSurveyException;
+import sth.exceptions.FinalizedSurveyException;
 import sth.exceptions.NoSuchProjectNameException;
 import sth.exceptions.ProjectAlreadyClosedException;
+import sth.exceptions.ProjectNotClosedException;
+import sth.exceptions.SurveyNotClosedException;
 import sth.exceptions.SurveyNotOpenException;
+import sth.exceptions.SurveyWithAnswersException;
 
 import java.util.TreeMap;
 
@@ -82,22 +87,30 @@ public class Project implements Serializable {
 	public boolean submittedProject(int id){
 		return _submissions.containsKey(id);
 	}
-
 	
-	public void createSurvey(Course course, Discipline discipline){
-		_survey = new Survey(course, discipline, this);
+	public void createSurvey(Course course, Discipline discipline) throws DuplicateSurveyException {
+		if (_survey != null) {
+			_survey = new Survey(course, discipline, this);
+		}
+		else {
+			throw new DuplicateSurveyException();
+		}
 	}
 	
-	public void cancelSurvey(){
+	public void cancelSurvey() throws SurveyWithAnswersException, FinalizedSurveyException {
 		_survey.cancel();
 	}
 	
-	public void openSurvey(){
+	public void openSurvey() throws ProjectNotClosedException, SurveyNotClosedException, FinalizedSurveyException {
 		_survey.open();
 	}
 	
-	public void closeSurvey(){
+	public void closeSurvey() throws SurveyNotOpenException, FinalizedSurveyException {
 		_survey.close();
+	}
+
+	public void finalizeSurvey() throws SurveyNotClosedException {
+		_survey.finalize();
 	}
 	
 	/**

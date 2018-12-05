@@ -42,7 +42,7 @@ public class FinalState extends Survey.State {
     @Override
     public void finalize() {}
 
-    public String renderResults(Person p) {
+    public String renderResults(Person p) throws UnsupportedOperationException {
         Survey survey = getSurvey(); //this way we only get the survey one time
         
         if (p.isProfessor()) {
@@ -62,7 +62,7 @@ public class FinalState extends Survey.State {
 
             return super.render(p) + "\n" + answers + "\n" + hours;
         }
-        return null; // FIXME mandar execao 
+        throw new UnsupportedOperationException(); 
     }
 
     @Override
