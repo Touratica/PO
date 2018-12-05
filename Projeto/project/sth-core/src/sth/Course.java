@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import sth.exceptions.AlreadyRepresentativeException;
 import sth.exceptions.DuplicateDisciplineException;
+import sth.exceptions.NoSuchDisciplineNameException;
 import sth.exceptions.RepresentativeNumberExceeded;
 
 /**
@@ -29,6 +30,16 @@ public class Course	implements Serializable {
 		return _name;
 	}
 
+	public Discipline getDiscipline(String discipline) throws NoSuchDisciplineNameException {
+		Discipline d =_disciplines.get(discipline);
+		if (d != null){
+			return d;
+		}
+		else {
+			throw new NoSuchDisciplineNameException();
+		}
+	}
+	
 	/**
 	 * @return the the course's representatives list
 	 */
@@ -42,6 +53,8 @@ public class Course	implements Serializable {
 	public Map<String, Discipline> getDisciplines() {
 		return _disciplines;
 	}
+
+	
 
 	public void setRepresentative(Student student) throws AlreadyRepresentativeException, RepresentativeNumberExceeded {
 		if (_representatives.containsKey(student.getId())) {

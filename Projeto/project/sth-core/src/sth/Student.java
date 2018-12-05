@@ -65,7 +65,7 @@ public class Student extends Person {
 	}
 	
 
-	public Discipline getDiscipline(String discipline)throws NoSuchDisciplineNameException{
+	public Discipline getDiscipline(String discipline) throws NoSuchDisciplineNameException{
 		for (Discipline d : _disciplines){
 			if (discpline.equals(d.getDisciplineName())) {
 				return d;
@@ -76,6 +76,10 @@ public class Student extends Person {
 
 	public Discipline getDiscipline(int i){
 		return _disciplines.get(i);
+	}
+
+	public Discipline getCourseDiscipline(String discipline) throws NoSuchDisciplineNameException{
+		return _course.getDiscipline(discipline);
 	}
 
 	public int getDisciplinesNumber(){
@@ -139,7 +143,7 @@ public class Student extends Person {
 	@Override
 	public String showDisciplineSurveys(String discipline) throws UnsupportedOperationException, NoSuchDisciplineNameException {
 		if (isRepresentative()) {
-			Discipline d = getDiscipline(discipline);
+			Discipline d = getCourseDiscipline(discipline);
 			return d.showDisciplineSurveys(this);
 		}
 		else {
