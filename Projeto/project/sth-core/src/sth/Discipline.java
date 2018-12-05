@@ -7,10 +7,15 @@ import java.util.TreeMap;
 import java.io.Serializable;
 
 import sth.exceptions.DuplicateProjectException;
+import sth.exceptions.DuplicateSurveyException;
+import sth.exceptions.FinalizedSurveyException;
 import sth.exceptions.NoSuchPersonIdException;
 import sth.exceptions.NoSuchProjectNameException;
+import sth.exceptions.NoSuchSurveyException;
 import sth.exceptions.ProjectAlreadyClosedException;
 import sth.exceptions.StudentLimitExceededException;
+import sth.exceptions.SurveyNotClosedException;
+import sth.exceptions.SurveyWithAnswersException;
 
 /**
  * The Discipline class.
@@ -131,41 +136,45 @@ public class Discipline implements Serializable {
 	public String showDisciplineSurveys(Person person) {
 		String str = "";
 		for (Map.Entry<String, Project> entry: _projects.entrySet()) {
-			str += entry.getValue().showSurvey(person) + "\n";
+			try {
+				str += entry.getValue().showSurvey(person) + "\n";
+			} catch (NoSuchSurveyException e) {
+				continue;
+			}
 		}
 		return str;
 	}
 
-	public void createSurvey(Course course, String project) throws NoSuchProjectNameException {
+	public void createSurvey(Course course, String project) throws NoSuchProjectNameException , DuplicateSurveyException {
 		Project proj = getProject(project);
 		proj.createSurvey(course, this);
 	}
 
-	public void cancelSurvey(String project) throws NoSuchProjectNameException {
+	public void cancelSurvey(String project) throws NoSuchProjectNameException, SurveyWithAnswersException, FinalizedSurveyException, NoSuchSurveyException {
 		Project proj = getProject(project);
 		proj.cancelSurvey();
 	}
 	
-	public void openSurvey(String project) throws NoSuchProjectNameException {
+	public void openSurvey(String project) throws NoSuchProjectNameException, ProjectNotClosedException, SurveyNotClosedException, FinalizedSurveyException, NoSuchSurveyException {
 		Project proj = getProject(project);
 		proj.openSurvey();
 	}
 	
-	public void closeSurvey(String project) throws NoSuchProjectNameException {
+	public void closeSurvey(String project) throws NoSuchProjectNameException, FinalizedSurveyException, NoSuchSurveyException {
 		Project proj = getProject(project);
 		proj.closeSurvey();
 	}
 	
-	public void finalizeSurvey(String project) throws NoSuchProjectNameException {
+	public void finalizeSurvey(String project) throws NoSuchProjectNameException, SurveyNotClosedException, NoSuchSurveyException {
 		Project proj = getProject(project);
 		proj.finalizeSurvey();
 	}
 	
-	public void addToNotificationList(Person person, String project) throws NoSuchProjectNameException {
+	public void addToNotificationList(Person person, String project) throws NoSuchProjectNameException, NoSuchSurveyException {
 		getProject(project).addToNotificationList(person);
 	}
 
-	public void removeFromNotificationList(Person person, String project) throws NoSuchProjectNameException {
+	public void removeFromNotificationList(Person person, String project) throws NoSuchProjectNameException, NoSuchSurveyException {
 		getProject(project).removeFromNotificationList(person);
 	}
 	

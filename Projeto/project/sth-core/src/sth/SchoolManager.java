@@ -11,28 +11,28 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
-
-import javax.sound.midi.SysexMessage;
-
 import sth.exceptions.BadEntryException;
-import sth.exceptions.DuplicateProjectNameException;
 import sth.exceptions.ImportFileException;
 import sth.exceptions.NoSuchPersonIdException;
 import sth.exceptions.NoSuchProjectNameException;
-
-
+import sth.exceptions.NoSuchSurveyException;
 import sth.exceptions.AlreadyRepresentativeException;
 import sth.exceptions.DisciplineLimitExceededException;
 import sth.exceptions.DuplicateCourseException;
 import sth.exceptions.DuplicateDisciplineException;
 import sth.exceptions.DuplicateIdException;
 import sth.exceptions.DuplicateProjectException;
+import sth.exceptions.DuplicateSurveyException;
+import sth.exceptions.FinalizedSurveyException;
 import sth.exceptions.InexistentCourseException;
 import sth.exceptions.NoSuchDisciplineNameException;
 import sth.exceptions.NotMatchingCourseException;
 import sth.exceptions.OutOfRangeIdException;
 import sth.exceptions.ProjectAlreadyClosedException;
+import sth.exceptions.ProjectNotClosedException;
 import sth.exceptions.RepresentativeNumberExceeded;
+import sth.exceptions.SurveyNotClosedException;
+import sth.exceptions.SurveyWithAnswersException;
 
 /**
  * The façade class.
@@ -170,7 +170,7 @@ public class SchoolManager {
 		}
 	}
 
-	public void createProject(String discipline, String project) throws DuplicateProjectNameException, NoSuchDisciplineNameException {
+	public void createProject(String discipline, String project) throws DuplicateProjectException, NoSuchDisciplineNameException {
 		try {
 			_loggedPerson.createProject(discipline, project);
 		} catch (UnsupportedOperationException e) {
@@ -205,8 +205,12 @@ public class SchoolManager {
 		return _loggedPerson.showSurveyResults(discipline,project);
 	}
 
-	public String showDisciplineSurveys(String discipline){
-		return _loggedPerson.showDisciplineSurveys(discipline);
+	public String showDisciplineSurveys(String discipline) throws NoSuchDisciplineNameException {
+		try {
+			return _loggedPerson.showDisciplineSurveys(discipline);
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
+		} 
 	}
 
 	/**
@@ -226,23 +230,43 @@ public class SchoolManager {
 		}
 	}
 
-	public void createSurvey(String discipline, String project){
-		_loggedPerson.createSurvey(discipline, project);
+	public void createSurvey(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException, DuplicateSurveyException {
+		try {
+			_loggedPerson.createSurvey(discipline, project);
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
+		} 
 	}
 
-	public void cancelSurvey(String discipline, String project){
-		_loggedPerson.cancelSurvey(discipline, project);
+	public void cancelSurvey(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException, SurveyWithAnswersException, FinalizedSurveyException, NoSuchSurveyException {
+		try {
+			_loggedPerson.cancelSurvey(discipline, project);
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void openSurvey(String discipline, String project) {
-		_loggedPerson.openSurvey(discipline, project);
+	public void openSurvey(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException, ProjectNotClosedException, SurveyNotClosedException, FinalizedSurveyException, NoSuchSurveyException {
+		try {
+			_loggedPerson.openSurvey(discipline, project);
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void closeSurvey(String discipline, String project) {
-		_loggedPerson.closeSurvey(discipline, project);
+	public void closeSurvey(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException, FinalizedSurveyException, NoSuchSurveyException {
+		try {
+			_loggedPerson.closeSurvey(discipline, project);
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void finalizeSurvey(String discipline, String project) {
-		_loggedPerson.finalizeSurvey(discipline, project);
+	public void finalizeSurvey(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException, SurveyNotClosedException, NoSuchSurveyException {
+		try {
+			_loggedPerson.finalizeSurvey(discipline, project);
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
+		}
 	}
 }

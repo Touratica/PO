@@ -10,6 +10,7 @@ import sth.exceptions.DuplicateIdException;
 import sth.exceptions.DuplicateProjectException;
 import sth.exceptions.NoSuchDisciplineNameException;
 import sth.exceptions.NoSuchProjectNameException;
+import sth.exceptions.NoSuchSurveyException;
 import sth.exceptions.OutOfRangeIdException;
 import sth.exceptions.ProjectAlreadyClosedException;
 
@@ -163,7 +164,7 @@ public class Professor extends Person implements Observer {
 				i++;
 				dis.addToNotificationList(this, project);
 				return;
-			} catch (NoSuchProjectNameException e) {
+			} catch (NoSuchProjectNameException | NoSuchSurveyException e) {
 				if (i != disciplines.size()) {
 					continue;
 				}
@@ -182,7 +183,7 @@ public class Professor extends Person implements Observer {
 					i++;
 					dis.removeFromNotificationList(this, project);
 					return;
-				} catch (NoSuchProjectNameException e) {
+				} catch (NoSuchProjectNameException | NoSuchSurveyException e) {
 					if (i != disciplines.size()) {
 						continue;
 					}

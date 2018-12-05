@@ -8,11 +8,17 @@ import sth.Survey.State;
 import sth.exceptions.DisciplineLimitExceededException;
 import sth.exceptions.DuplicateDisciplineException;
 import sth.exceptions.DuplicateIdException;
+import sth.exceptions.DuplicateSurveyException;
+import sth.exceptions.FinalizedSurveyException;
 import sth.exceptions.NoSuchDisciplineNameException;
 import sth.exceptions.NoSuchProjectNameException;
+import sth.exceptions.NoSuchSurveyException;
 import sth.exceptions.NotMatchingCourseException;
 import sth.exceptions.OutOfRangeIdException;
 import sth.exceptions.ProjectAlreadyClosedException;
+import sth.exceptions.ProjectNotClosedException;
+import sth.exceptions.SurveyNotClosedException;
+import sth.exceptions.SurveyWithAnswersException;
 
 /**
  * The Student class.
@@ -105,27 +111,27 @@ public class Student extends Person {
 	}
 
 	@Override
-	public void createSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException {
+	public void createSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, DuplicateSurveyException {
 		Discipline dis = getDiscipline(discipline);
 		dis.createSurvey(_course, project);
 	}
-
-	public void cancelSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException{
+	
+	public void cancelSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException, SurveyWithAnswersException, FinalizedSurveyException, NoSuchSurveyException {
 		Discipline dis = getDiscipline(discipline);
 		dis.cancelSurvey(project);	
-	}
-
-	public void openSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException{
+	}	
+	
+	public void openSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException, ProjectNotClosedException, SurveyNotClosedException, FinalizedSurveyException, NoSuchSurveyException {
 		Discipline dis = getDiscipline(discipline);
 		dis.openSurvey(project);	
 	}
 
-	public void closeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException {
-		Discipline dis = getDiscipline(discipline);
+	public void closeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException, FinalizedSurveyException, NoSuchSurveyException {
+	Discipline dis = getDiscipline(discipline);
 		dis.closeSurvey(project);	
 	}
 
-	public void finalizeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException {
+	public void finalizeSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException, SurveyNotClosedException, NoSuchSurveyException {
 		Discipline dis = getDiscipline(discipline);
 		dis.finalizeSurvey(project);	
 	}
@@ -176,7 +182,11 @@ public class Student extends Person {
 		else return "ALUNO|" + visitor.showStudent(this);
 	}
 
-
+	@Override
+	public void addToNotificationList(String discipline, String project)
+			throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
+		getDiscipline(discipline).addToNotificationList(this, project);
+	}
 	
 /*
 	@Override

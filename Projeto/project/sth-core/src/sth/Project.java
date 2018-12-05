@@ -7,6 +7,7 @@ import java.util.SortedSet;
 import sth.exceptions.DuplicateSurveyException;
 import sth.exceptions.FinalizedSurveyException;
 import sth.exceptions.NoSuchProjectNameException;
+import sth.exceptions.NoSuchSurveyException;
 import sth.exceptions.ProjectAlreadyClosedException;
 import sth.exceptions.ProjectNotClosedException;
 import sth.exceptions.SurveyNotClosedException;
@@ -20,6 +21,7 @@ import java.util.TreeMap;
  */
 public class Project implements Serializable {
 
+	/** Serial number for serialization. */
 	private static final long serialVersionUID = 201811151744L;
 
 	private String _name;
@@ -28,7 +30,7 @@ public class Project implements Serializable {
 	private Boolean _open = true; //tells if a project is open
 	private Survey _survey;
 
-	public Project(String discipline, String name){
+	public Project(String discipline, String name) {
 		_name = name;
 		_description = discipline + " - " + name;
 	}
@@ -54,7 +56,7 @@ public class Project implements Serializable {
 		return _submissions;
 	}
 
-	public String showSubmissions(){
+	public String showSubmissions() {
 		String s = "";
 		for(Map.Entry<Integer,String> entry: _submissions.entrySet()){
 			s+= "\n* " + entry.getKey() + " - " + entry.getValue();
@@ -65,7 +67,7 @@ public class Project implements Serializable {
 	/**
 	 * @return the number of project's submissions
 	 */
-	public int getSubmissionsNumber(){
+	public int getSubmissionsNumber() {
 		return _submissions.size();
 	}
 
@@ -80,16 +82,16 @@ public class Project implements Serializable {
 		_survey = survey;
 	}
 
-	public void removeSurvey(){
+	public void removeSurvey() {
 		_survey = null;
 	}
 
-	public boolean submittedProject(int id){
+	public boolean submittedProject(int id) {
 		return _submissions.containsKey(id);
 	}
 	
 	public void createSurvey(Course course, Discipline discipline) throws DuplicateSurveyException {
-		if (_survey != null) {
+		if (_survey == null) {
 			_survey = new Survey(course, discipline, this);
 		}
 		else {
@@ -97,20 +99,38 @@ public class Project implements Serializable {
 		}
 	}
 	
-	public void cancelSurvey() throws SurveyWithAnswersException, FinalizedSurveyException {
-		_survey.cancel();
+	public void cancelSurvey() throws SurveyWithAnswersException, FinalizedSurveyException, NoSuchSurveyException {
+		if (_survey != null) {
+			_survey.cancel();
+		}
+		else {
+			throw new NoSuchSurveyException();
+		}
 	}
 	
-	public void openSurvey() throws ProjectNotClosedException, SurveyNotClosedException, FinalizedSurveyException {
-		_survey.open();
+	public void openSurvey() throws ProjectNotClosedException, SurveyNotClosedException, FinalizedSurveyException, NoSuchSurveyException {
+		if (_survey != null) {
+			_survey.open();
+		}
+		else {
+			throw new NoSuchSurveyException();
+		}
 	}
 	
-	public void closeSurvey() throws SurveyNotOpenException, FinalizedSurveyException {
-		_survey.close();
+	public void closeSurvey() throws SurveyNotOpenException, FinalizedSurveyException, NoSuchSurveyException {
+		if (_survey != null) {
+			_survey.close();
+		} else {
+			throw new NoSuchSurveyException();
+		}
 	}
 
-	public void finalizeSurvey() throws SurveyNotClosedException {
-		_survey.finalize();
+	public void finalizeSurvey() throws SurveyNotClosedException, NoSuchSurveyException {
+		if (_survey != null) {
+			_survey.finalize();
+		} else {
+			throw new NoSuchSurveyException();
+		}
 	}
 	
 	/**
@@ -153,17 +173,32 @@ public class Project implements Serializable {
 		_survey.registerObserver(o);
 	}
 
-	public void addToNotificationList(Person person) {
-		_survey.registerObserver(person);
+	public void addToNotificationList(Person person) throws NoSuchSurveyException {
+		if (_survey != null) {
+			_survey.registerObserver(person);
+		}
+		else {
+			throw new NoSuchSurveyException();
+		}
 	}
 
-	public void removeFromNotificationList(Person person) {
-		_survey.removeOberserver(person);
+	public void removeFromNotificationList(Person person) throws NoSuchSurveyException {
+		if (_survey != null) {
+			_survey.removeOberserver(person);
+		}
+		else {
+			throw new NoSuchSurveyException();
+		}
 	}
 
 	
-	public String showSurvey(Person person) {
-		return _survey.renderSurvey(person);
+	public String showSurvey(Person person) throws NoSuchSurveyException {
+		if (_survey != null){
+			return _survey.renderSurvey(person);
+		}
+		else {
+			throw new NoSuchSurveyException();
+		}
 	}
 	
 	public boolean hasSurvey(){
