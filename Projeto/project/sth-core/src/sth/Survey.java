@@ -18,7 +18,10 @@ public class Survey implements Subject {
 
 	private List<Observer> _observers = new ArrayList<Observer>();
 	private List<SurveyAnswer> _results = new ArrayList<SurveyAnswer>();
-	private List<Student> _students = new ArrayList<Student>(); //the students who answered the survey
+
+	/** The students who answered the survey. */
+	private List<Student> _students = new ArrayList<Student>();
+	
 	private Project _project; 
 	private Discipline _discipline;
 	private State _state;
