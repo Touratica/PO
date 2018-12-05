@@ -32,7 +32,7 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 		_form.parse();
 		Collection<String> students = _receiver.showDisciplineStudents(_discipline.value());
 		if (students != null) {
-			for (Student s : students)
+			for (String s: students)
 				_display.addLine(s); 
 		}
 		else {
