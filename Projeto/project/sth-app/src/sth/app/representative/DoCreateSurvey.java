@@ -5,7 +5,6 @@ import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.SchoolManager;
 
-//FIXME import other classes if needed
 
 /**
  * 4.5.1. Create survey.
@@ -28,6 +27,7 @@ public class DoCreateSurvey extends Command<SchoolManager> {
   @Override
   public final void execute() throws DialogException {
     _form.parse();
+    _receiver.createSurvey(_discipline.value(), _project.value());
   }
 
 }

@@ -28,6 +28,7 @@ public class DoOpenSurvey extends Command<SchoolManager> {
   @Override
   public final void execute() throws DialogException {
     _form.parse();
+    _receiver.openSurvey(_discipline.value(), _project.value());
   }
 
 }

@@ -72,8 +72,11 @@ public class Discipline implements Serializable {
 		return _projects;
 	}
 
-	public Project getProject(String project){
-		return _projects.get(project);
+	public Project getProject(String project) throws NoSuchProjectNameException{
+		Project p = _projects.get(project);
+		if (p != null)
+			return p;
+		else throw new NoSuchProjectNameException();
 	}
 
 	public boolean hasProject(String project){
@@ -90,7 +93,7 @@ public class Discipline implements Serializable {
 
 	}
 	public void createProject(String project){ // FIXME mandar excecoes aqui ?
-		Project p = new Project(project);
+		Project p = new Project(_name, project);
 		_projects.put(project, p);
 	}
 
@@ -111,8 +114,7 @@ public class Discipline implements Serializable {
 		}
 	}
 
-	public void submitSurveyAnswer(Student student, String project, SurveyAnswer answer){ 
-		// FIXME se a disciplina nao tiver o projeto
+	public void submitSurveyAnswer(Student student, String project, SurveyAnswer answer) throws NoSuchProjectNameException{ 
 		Project p = getProject(project);
 		p.submitSurveyAnswer(student, answer);
 
@@ -126,16 +128,39 @@ public class Discipline implements Serializable {
 		return students;
 	}
 
-	public void createSurvey(Course course, String project) {
-		Project proj = getProject(project);
-		if (proj != null) {
-			proj.createSurvey(course, this);
+	public String showDisciplineSurveys(Person person) {
+		String str = "";
+		for (Map.Entry<String, Project> entry: _projects.entrySet()) {
+			str += entry.getValue().showSurvey(person) + "\n";
 		}
-		else {
-			throw new NoSuchProjectNameException();
-		}
+		return str;
 	}
 
+	public void createSurvey(Course course, String project) throws NoSuchProjectNameException {
+		Project proj = getProject(project);
+		proj.createSurvey(course, this);
+	}
+
+	public void cancelSurvey(String project) throws NoSuchProjectNameException {
+		Project proj = getProject(project);
+		proj.cancelSurvey();
+	}
+	
+	public void openSurvey(String project) throws NoSuchProjectNameException {
+		Project proj = getProject(project);
+		proj.openSurvey();
+	}
+	
+	public void closeSurvey(String project) throws NoSuchProjectNameException {
+		Project proj = getProject(project);
+		proj.closeSurvey();
+	}
+	
+	public void finalizeSurvey(String project) throws NoSuchProjectNameException {
+		Project proj = getProject(project);
+		proj.finalizeSurvey();
+	}
+	
 	public void addToNotificationList(Person person, String project) throws NoSuchProjectNameException {
 		getProject(project).addToNotificationList(person);
 	}
@@ -143,6 +168,7 @@ public class Discipline implements Serializable {
 	public void removeFromNotificationList(Person person, String project) throws NoSuchProjectNameException {
 		getProject(project).removeFromNotificationList(person);
 	}
+	
 
 	@Override
 	public boolean equals(Object o){

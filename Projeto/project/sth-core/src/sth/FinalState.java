@@ -17,7 +17,7 @@ public class FinalState extends Survey.State{
     public void finalize(){
         // do nothing, already finalized
     }
-    public String render(Person p){
+    public String renderResults(Person p){
         
         Survey survey = getSurvey(); //this way we only get the survey one time
         
@@ -31,9 +31,6 @@ public class FinalState extends Survey.State{
 
             return super.render(p) + "\n" + submissions + "\n" + answers + "\n" + hours ;
 
-        } else if (p.isRepresentative()){
-            return super.render(p) + " - " + survey.getAnswersNumber() + " respostas - " + survey.getAverageHours() + " horas";
-
         } else if (p.isStudent()){
             String answers = "* Número de respostas: " + survey.getAnswersNumber();
 
@@ -42,6 +39,12 @@ public class FinalState extends Survey.State{
             return super.render(p) + "\n" + answers + "\n" + hours;
         }
         return null; // FIXME mandar execao 
+    }
+
+    @Override
+    public String renderSurvey(Person p) {
+        Survey survey = getSurvey();
+        return survey.getDisciplineName() + " - " + survey.getAnswersNumber() + " - " + survey.getAverageHours() + " horas";
     }
 
 

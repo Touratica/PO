@@ -197,20 +197,40 @@ public class SchoolManager {
 	public String showNotifications() {
 		return _loggedPerson.showNotifications();
 	}
-	public String showProjectSubmissions(String discipline, String project)throws UnsupportedOperationException{
+	public String showProjectSubmissions(String discipline, String project) {
 		return _loggedPerson.showSubmissions(discipline , project);
 	}
 
-	public String showSurveyResults(String discipline, String project ) throws UnsupportedOperationException{
+	public String showSurveyResults(String discipline, String project )  {
 		return _loggedPerson.showSurveyResults(discipline,project);
 	}
 
-	public void answerSurvey(String discipline, String project , int hours, String comment)throws UnsupportedOperationException{
+	public String showDisciplineSurveys(String discipline){
+		return _loggedPerson.showDisciplineSurveys(discipline);
+	}
+
+	public void answerSurvey(String discipline, String project, int hours, String comment) {
 		_loggedPerson.answerSurvey(discipline,project,hours,comment);
 
 	}
 
-	public void createSurvey(String discipline, String project) {
+	public void createSurvey(String discipline, String project){
 		_loggedPerson.createSurvey(discipline, project);
+	}
+
+	public void cancelSurvey(String discipline, String project){
+		_loggedPerson.cancelSurvey(discipline, project);
+	}
+
+	public void openSurvey(String discipline, String project) {
+		_loggedPerson.openSurvey(discipline, project);
+	}
+
+	public void closeSurvey(String discipline, String project) {
+		_loggedPerson.closeSurvey(discipline, project);
+	}
+
+	public void finalizeSurvey(String discipline, String project) {
+		_loggedPerson.finalizeSurvey(discipline, project);
 	}
 }

@@ -17,7 +17,7 @@ public class DoShowPerson extends Command<SchoolManager> {
 
 	/** @see pt.tecnico.po.ui.Command#execute() */
 	@Override
-	public final void execute() { // FIXME isnt it supposed to throw something ?
+	public final void execute() {
 		_display.popup(_receiver.showPerson());
 	}
 

@@ -129,7 +129,7 @@ public class Professor extends Person implements Observer {
 		throw new NoSuchDisciplineNameException();
 	}
 
-	public String showSurveyResults(String discipline, String project){
+	public String showSurveyResults(String discipline, String project)throws NoSuchDisciplineNameException, NoSuchProjectNameException{
 		List<Discipline> _disciplines = getDiscipline(discipline);
 		if (_disciplines.size() == 0) {
 			throw new NoSuchDisciplineNameException();
