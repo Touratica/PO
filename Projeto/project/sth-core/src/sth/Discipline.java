@@ -114,7 +114,7 @@ public class Discipline implements Serializable {
 		}
 	}
 
-	public void submitSurveyAnswer(Student student, String project, SurveyAnswer answer) throws NoSuchProjectNameException{ 
+	public void submitSurveyAnswer(Student student, String project, SurveyAnswer answer) throws NoSuchProjectNameException { 
 		Project p = getProject(project);
 		p.submitSurveyAnswer(student, answer);
 

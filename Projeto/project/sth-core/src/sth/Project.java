@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.SortedSet;
 
+import sth.exceptions.NoSuchProjectNameException;
 import sth.exceptions.ProjectAlreadyClosedException;
+import sth.exceptions.SurveyNotOpenException;
 
 import java.util.TreeMap;
 
@@ -121,10 +123,17 @@ public class Project implements Serializable {
 		} 
 	}
 	
-	public void submitSurveyAnswer(Student student, SurveyAnswer answer){
+	public void submitSurveyAnswer(Student student, SurveyAnswer answer) throws NoSuchProjectNameException, SurveyNotOpenException {
 		if (submittedProject(student.getId()))
-		_survey.submitAnswer(student, answer);
-		// FIXME mandar execao para o aluno que tenta responder a um projeto q nao fez
+			if (hasSurvey()){
+				_survey.submitAnswer(student, answer);
+			}
+			else {
+				throw new SurveyNotOpenException();
+			}
+		else {
+			throw new NoSuchProjectNameException();
+		}
 	}
 	
 	public void registerSurveyObserver(Observer o) {
@@ -144,6 +153,10 @@ public class Project implements Serializable {
 		return _survey.renderSurvey(person);
 	}
 	
+	public boolean hasSurvey(){
+		return _survey != null;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Project) {

@@ -4,23 +4,38 @@ public class ClosedState extends Survey.State{
     public ClosedState(Survey survey){
         survey.super();
     }
-    public void cancel(){
+
+    /**
+     * Reopens the survey.
+     */
+    @Override
+    public void cancel() {
         setState(new OpenState(getSurvey()));
     }
 
-    public void open(){
+    /**
+     * Reopens the survey.
+     */
+    @Override
+    public void open() {
         setState(new OpenState(getSurvey()));
     }
 
-    public void close(){ 
-        //do nothing; already closed
-    }
+    /**
+     * Does nothing, survey is already closed.
+     */
+    @Override
+    public void close() {}
 
-    public void finalize(){
+    /**
+     * Finalizes the survey.
+     */
+    @Override
+    public void finalize() {
         setState(new FinalState(getSurvey()));
     }
 
-    public String renderResults(Person p){
+    public String renderResults(Person p) {
         return super.renderResults(p) + " (fechado)";
     }
     

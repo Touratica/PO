@@ -1,37 +1,64 @@
 package sth;
 
+import sth.exceptions.ProjectNotClosedException;
+import sth.exceptions.SurveyNotClosedException;
+import sth.exceptions.SurveyNotOpenException;
 import sth.exceptions.SurveyWithAnswersException;
 
-public class CreatedState extends Survey.State{
-    public CreatedState(Survey survey) {
-        survey.super(); 
-    }
+public class CreatedState extends Survey.State {
+	
+	public CreatedState(Survey survey) {
+		survey.super(); 
+	}
 
-    public void cancel() {
-        if (getSurvey().getAnswersNumber() == 0){
-			getSurvey().remove();
-		} else {
-			throw new SurveyWithAnswersException();
-		}     //FIXME isto pode dar erro 
-    }
-    public void open() { // FIXME mandar throw;ler enunciado   
-        
-    }
+	/** 
+	 * Removes the created survey.
+	*/
+	@Override
+	public void cancel() {
+		getSurvey().remove();
+	}
+	
+	/**
+	 * Opens the survey if it's associated project has been closed.
+	 * @throws ProjectNotClosedException
+	 */
+	@Override
+	public void open() throws ProjectNotClosedException {   
+		if (getSurvey().getProject().isOpen()) {
+			throw new ProjectNotClosedException();
+		}
+		else {
+			setState(new OpenState(getSurvey()));
+		}
+	}
 
-    public void close() { // FIXME mandar throw
+	/**
+	 * Throws an exception, created projects can't be closed.
+	 * @throws SurveyNotOpenException
+	 */
+	@Override
+	public void close() throws SurveyNotOpenException {
+		throw new SurveyNotOpenException();
+	}
+	
+	/**
+	 * Throws an exception, created projects can't be finalized.
+	 * @throws SurveyNotOpenException
+	 */
+	@Override
+	public void finalize() throws SurveyNotClosedException {
+		throw new SurveyNotClosedException();
+	}
 
-    }
-    
-    public void finalize() { //FIXME mandar throw
+	@Override
+	public String renderResults(Person p){
+		return super.renderResults(p) + " (por abrir)";
+	}
 
-    }
-    public String renderResults(Person p){
-        return super.renderResults(p) + " (por abrir)";
-    }
-
-    @Override
-    public String notifyState() {
-        return "created";
-    }
-    
+	@Override
+	public String notifyState() {
+		return "created";
+	}
+	
 }

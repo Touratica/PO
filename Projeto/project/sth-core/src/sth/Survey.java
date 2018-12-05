@@ -3,12 +3,13 @@ package sth;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.TreeMap;
-
-import sth.exceptions.SurveyAlreadyOpenedException;
-import sth.exceptions.SurveyWithAnswersException;
-
 import java.util.List;
 import java.util.Map;
+import sth.exceptions.FinalizedSurveyException;
+import sth.exceptions.ProjectNotClosedException;
+import sth.exceptions.SurveyNotClosedException;
+import sth.exceptions.SurveyNotOpenException;
+import sth.exceptions.SurveyWithAnswersException;
 
 /**
  * The project Survey class.
@@ -31,12 +32,13 @@ public class Survey implements Subject {
 			return Survey.this;
 		}
 
-		public void submitAnswer(Student s, SurveyAnswer answer){ // FIXME throw exception except when is open
+		public void submitAnswer(Student s, SurveyAnswer answer) throws SurveyNotOpenException {
+			throw new SurveyNotOpenException();
 		}
-		public abstract void cancel();
-		public abstract void open();
-		public abstract void close();
-		public abstract void finalize();
+		public abstract void cancel() throws SurveyWithAnswersException, FinalizedSurveyException;
+		public abstract void open() throws ProjectNotClosedException, SurveyNotClosedException, FinalizedSurveyException;
+		public abstract void close() throws SurveyNotOpenException, FinalizedSurveyException;
+		public abstract void finalize() throws SurveyNotClosedException;
 		public String renderResults(Person p){
 			return _project.getName() + " - " + _discipline.getDisciplineName();
 		}
@@ -46,7 +48,7 @@ public class Survey implements Subject {
 		public abstract String notifyState();
 	}
 
-	public Survey(Course course, Discipline discipline, Project project){
+	public Survey(Course course, Discipline discipline, Project project) {
 		_discipline = discipline;
 		_project = project;
 		_state = new CreatedState(this);
@@ -141,12 +143,12 @@ public class Survey implements Subject {
 		_state.cancel();
 	}
 
-	public void open() throws SurveyAlreadyOpenedException {
+	public void open() throws ProjectNotClosedException, SurveyNotClosedException, FinalizedSurveyException {
 		_state.open();
 		notifyObservers();
 	}
 
-	public void close() {
+	public void close() throws SurveyNotOpenException, FinalizedSurveyException{
 		_state.close();
 	}
 
@@ -163,7 +165,7 @@ public class Survey implements Subject {
 		return _state.notifyState().equals("final");
 	}
 
-	public void submitAnswer(Student student, SurveyAnswer answer) {
+	public void submitAnswer(Student student, SurveyAnswer answer) throws SurveyNotOpenException {
 		for (Student s : _students)
 			if (Student.ID_COMPARATOR.compare(student, s) == 0) 
 				return ; //posterior answers should be ignored
@@ -173,6 +175,7 @@ public class Survey implements Subject {
 	public List<SurveyAnswer> getResults() {
 		return _results;
 	}
+
 	public String renderSurvey(Person p){
 		return _state.renderSurvey(p);
 	}

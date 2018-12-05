@@ -98,16 +98,14 @@ public class Student extends Person {
 		// FIXME throw exception NAO INSCRITO
 	}
 	
-	public void answerSurvey(String discipline, String project, int hours, String comment){
+	public void answerSurvey(String discipline, String project, int hours, String comment) throws NoSuchDisciplineNameException, NoSuchProjectNameException {
 		Discipline d = getDiscipline(discipline);
 		SurveyAnswer answer = new SurveyAnswer(hours, comment);
 		d.submitSurveyAnswer(this, project, answer);
-
-		// FIXME se o student nao tiver disciplina mandar excecao 
 	}
 
 	@Override
-	public void createSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException{
+	public void createSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException {
 		Discipline dis = getDiscipline(discipline);
 		dis.createSurvey(_course, project);
 	}
@@ -122,16 +120,16 @@ public class Student extends Person {
 		dis.openSurvey(project);	
 	}
 
-	public void closeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException{
+	public void closeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException {
 		Discipline dis = getDiscipline(discipline);
 		dis.closeSurvey(project);	
 	}
 
-	public void finalizeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException{
+	public void finalizeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException {
 		Discipline dis = getDiscipline(discipline);
 		dis.finalizeSurvey(project);	
 	}
-
+	
 	@Override
 	public String showDisciplineSurveys(String discipline) throws UnsupportedOperationException, NoSuchDisciplineNameException {
 		if (isRepresentative()) {
@@ -175,7 +173,7 @@ public class Student extends Person {
 	public String accept(PersonVisitor visitor){
 		if (isRepresentative())
 			return "DELEGADO|" + visitor.showRepresentative(this);
-		else return "ALUNO|" +visitor.showStudent(this);
+		else return "ALUNO|" + visitor.showStudent(this);
 	}
 
 

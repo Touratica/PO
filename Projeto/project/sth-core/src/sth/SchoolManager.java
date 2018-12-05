@@ -209,9 +209,21 @@ public class SchoolManager {
 		return _loggedPerson.showDisciplineSurveys(discipline);
 	}
 
-	public void answerSurvey(String discipline, String project, int hours, String comment) {
-		_loggedPerson.answerSurvey(discipline,project,hours,comment);
-
+	/**
+	 * Requests the _loggedPerson to submit an answer to a specific survey
+	 * @param discipline the discipline whose project has the survey
+	 * @param project the project whose survey will be answered
+	 * @param hours the person's spent hours on the project
+	 * @param comment the person's comment about the project
+	 * @throws NoSuchDisciplineNameException
+	 * @throws NoSuchProjectNameException
+	 */
+	public void answerSurvey(String discipline, String project, int hours, String comment) throws NoSuchDisciplineNameException, NoSuchProjectNameException {
+		try {
+			_loggedPerson.answerSurvey(discipline, project, hours, comment);
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void createSurvey(String discipline, String project){

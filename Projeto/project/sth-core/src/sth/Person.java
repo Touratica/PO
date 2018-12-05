@@ -155,23 +155,23 @@ public abstract class Person implements Serializable, Observer {
 		throw new UnsupportedOperationException();
 	}
 
-	public void answerSurvey(String discipline, String project , int hours, String comment) throws UnsupportedOperationException{
+	public void answerSurvey(String discipline, String project , int hours, String comment) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
 		throw new UnsupportedOperationException();
 	}
 
-	public void createSurvey(String discipline, String project) throws UnsupportedOperationException{
+	public void createSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
 		throw new UnsupportedOperationException();
 	}
 
-	public void cancelSurvey(Discipline discipline, Project project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException{
+	public void cancelSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException{
 		throw new UnsupportedOperationException();
 	}
 
-	public void openSurvey(Discipline discipline, Project project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException{
+	public void openSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException{
 		throw new UnsupportedOperationException();
 	}
 
-	public void closeSurvey(Discipline discipline, Project project)throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException{
+	public void closeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException{
 		throw new UnsupportedOperationException();
 	}
 

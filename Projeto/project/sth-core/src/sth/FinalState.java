@@ -1,27 +1,51 @@
 package sth;
 
-public class FinalState extends Survey.State{
-    public FinalState(Survey survey){
+import sth.exceptions.FinalizedSurveyException;
+
+public class FinalState extends Survey.State {
+    public FinalState(Survey survey) {
         survey.super();
     }
-    public void cancel() throws FinalizedSurveyException{
+    
+    /**
+     * Throws an exception, finalized surveys can't be canceled.
+     * @throws FinalizedSurveyException
+     */
+    @Override
+    public void cancel() throws FinalizedSurveyException {
         throw new FinalizedSurveyException();
     }
-    public void open(){ // FIXME mandar throw ler enunciado 
 
-    }
-    public void close(){
-        // FIXME mandar throw 
+    /**
+     * Throws an exception, finalized surveys can't be open.
+     * 
+     * @throws FinalizedSurveyException
+     */
+    @Override
+    public void open() throws FinalizedSurveyException {
+        throw new FinalizedSurveyException();
     }
 
-    public void finalize(){
-        // do nothing, already finalized
+    /**
+     * Throws an exception, finalized surveys can't be closed.
+     * 
+     * @throws FinalizedSurveyException
+     */
+    @Override
+    public void close() throws FinalizedSurveyException {
+        throw new FinalizedSurveyException();
     }
-    public String renderResults(Person p){
-        
+
+    /**
+     * Does nothing, survey is already finalized.
+     */
+    @Override
+    public void finalize() {}
+
+    public String renderResults(Person p) {
         Survey survey = getSurvey(); //this way we only get the survey one time
         
-        if (p.isProfessor()){
+        if (p.isProfessor()) {
             
             String submissions ="* Número de submissões: " + survey.getSubmissionsNumber();
             
