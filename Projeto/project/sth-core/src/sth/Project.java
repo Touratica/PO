@@ -90,8 +90,11 @@ public class Project implements Serializable {
 		return _submissions.containsKey(id);
 	}
 	
-	public void createSurvey(Course course, Discipline discipline) throws DuplicateSurveyException {
-		if (_survey == null) {
+	public void createSurvey(Course course, Discipline discipline) throws DuplicateSurveyException, ProjectAlreadyClosedException {
+		if (!isOpen()) {
+			throw new ProjectAlreadyClosedException();
+		}
+		else if (_survey == null) {
 			_survey = new Survey(course, discipline, this);
 		}
 		else {
@@ -139,7 +142,7 @@ public class Project implements Serializable {
 	public void close(){
 		_open = false;
 		if (_survey != null)
-		_survey.setState(new OpenState(_survey));
+			_survey.setState(new OpenState(_survey));
 	}
 	
 	public void deliverProject(Person person, String submission) throws ProjectAlreadyClosedException {

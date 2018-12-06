@@ -152,7 +152,7 @@ public class Discipline implements Serializable {
 		return str;
 	}
 
-	public void createSurvey(Course course, String project) throws NoSuchProjectNameException , DuplicateSurveyException {
+	public void createSurvey(Course course, String project) throws NoSuchProjectNameException , DuplicateSurveyException, ProjectAlreadyClosedException {
 		Project proj = getProject(project);
 		proj.createSurvey(course, this);
 	}

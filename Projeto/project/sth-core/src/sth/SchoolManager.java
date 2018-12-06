@@ -69,16 +69,8 @@ public class SchoolManager {
 	 * @throws NoSuchPersonIdException
 	 */
 	public void login(int id) throws NoSuchPersonIdException {
-		if ((_loggedPerson = _school.getStudents().get(id)) != null) {
-			return;
-		}
-		else if ((_loggedPerson = _school.getProfessors().get(id)) != null) {
-			return;
-		}
-		else if ((_loggedPerson = _school.getAdministratives().get(id)) != null) {
-			return;
-		}
-		else {
+		_loggedPerson = _school.getPerson(id);
+		if (_loggedPerson == null) {
 			throw new NoSuchPersonIdException(id);
 		}
 	}
@@ -133,7 +125,7 @@ public class SchoolManager {
 		in.close();
 		if (newSchool.containsPerson(_loggedPerson.getId())) {
 			_school = newSchool;
-			_loggedPerson = _school.getPerson(_loggedPerson.getId());
+			login(_loggedPerson.getId());
 		}
 		else {
 			throw new NoSuchPersonIdException(_loggedPerson.getId());
@@ -224,7 +216,7 @@ public class SchoolManager {
 		}
 	}
 
-	public void createSurvey(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException, DuplicateSurveyException {
+	public void createSurvey(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException, DuplicateSurveyException, ProjectAlreadyClosedException {
 		try {
 			_loggedPerson.createSurvey(discipline, project);
 		} catch (UnsupportedOperationException e) {

@@ -37,10 +37,8 @@ public class DoDeliverProject extends Command<SchoolManager> {
 			_receiver.deliverProject(_discipline.value(), _project.value(), _submission.value());
 		} catch (NoSuchDisciplineNameException e) {
 			throw new NoSuchDisciplineException(_discipline.value());
-		} catch (NoSuchProjectNameException e) {
+		} catch (NoSuchProjectNameException | ProjectAlreadyClosedException e) {
 			throw new NoSuchProjectException(_discipline.value(), _project.value());
-		} catch (ProjectAlreadyClosedException e) {
-			e.printStackTrace();
 		}
 	}
 

@@ -117,7 +117,7 @@ public abstract class Person implements Serializable, Observer {
 	}
 
 	@Override
-	public void update(String discipline, String project, Survey survey) {
+	public void update(String discipline, String project, Survey survey) throws UnsupportedOperationException {
 		String notification = "";
 		if (survey.isOpen()) {
 			notification += "Pode preencher inquérito do projecto " + project + " da disciplina " + discipline;
@@ -166,7 +166,7 @@ public abstract class Person implements Serializable, Observer {
 		throw new UnsupportedOperationException();
 	}
 
-	public void createSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, DuplicateSurveyException {
+	public void createSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, DuplicateSurveyException, ProjectAlreadyClosedException {
 		throw new UnsupportedOperationException();
 	}
 

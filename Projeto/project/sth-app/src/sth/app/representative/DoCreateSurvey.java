@@ -9,6 +9,7 @@ import sth.app.exceptions.NoSuchProjectException;
 import sth.exceptions.DuplicateSurveyException;
 import sth.exceptions.NoSuchDisciplineNameException;
 import sth.exceptions.NoSuchProjectNameException;
+import sth.exceptions.ProjectAlreadyClosedException;
 
 
 /**
@@ -36,7 +37,7 @@ public class DoCreateSurvey extends Command<SchoolManager> {
 			_receiver.createSurvey(_discipline.value(), _project.value());
 		} catch (NoSuchDisciplineNameException e) {
 			throw new NoSuchDisciplineException(_discipline.value());
-		} catch (NoSuchProjectNameException e) {
+		} catch (NoSuchProjectNameException | ProjectAlreadyClosedException e) {
 			throw new NoSuchProjectException(_discipline.value(), _project.value());
 		} catch (DuplicateSurveyException e) {
 			throw new sth.app.exceptions.DuplicateSurveyException(_discipline.value(), _project.value());

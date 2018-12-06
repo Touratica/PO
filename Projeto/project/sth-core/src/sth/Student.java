@@ -109,29 +109,29 @@ public class Student extends Person {
 	}
 
 	@Override
-	public void createSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, DuplicateSurveyException {
-		Discipline dis = getDiscipline(discipline);
+	public void createSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, DuplicateSurveyException, ProjectAlreadyClosedException {
+		Discipline dis = getCourseDiscipline(discipline);
 		dis.createSurvey(_course, project);
 	}
 	
 	public void cancelSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException, SurveyWithAnswersException, FinalizedSurveyException, NoSuchSurveyException {
-		Discipline dis = getDiscipline(discipline);
+		Discipline dis = getCourseDiscipline(discipline);
 		dis.cancelSurvey(project);	
 	}	
 	
 	public void openSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException, ProjectNotClosedException, SurveyNotClosedException, FinalizedSurveyException, NoSuchSurveyException {
-		Discipline dis = getDiscipline(discipline);
+		Discipline dis = getCourseDiscipline(discipline);
 		dis.openSurvey(project);	
 	}
 
 	@Override
 	public void closeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException, FinalizedSurveyException, NoSuchSurveyException, SurveyNotOpenException {
-	Discipline dis = getDiscipline(discipline);
+	Discipline dis = getCourseDiscipline(discipline);
 		dis.closeSurvey(project);	
 	}
 
 	public void finalizeSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException, SurveyNotClosedException, NoSuchSurveyException {
-		Discipline dis = getDiscipline(discipline);
+		Discipline dis = getCourseDiscipline(discipline);
 		dis.finalizeSurvey(project);
 	}
 	

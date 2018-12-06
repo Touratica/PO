@@ -5,5 +5,5 @@ package sth;
  */
 public interface Observer {
 
-	public void update(String discipline, String project, Survey survey);
+	public void update(String discipline, String project, Survey survey) throws UnsupportedOperationException;
 }

@@ -32,6 +32,7 @@ public class DoOpen extends Command<SchoolManager> {
 		try {
 			_form.parse(); // clears previous input
 			_receiver.open(_filename.value());
+			_display.popup(_receiver.showNotifications());
 		} catch (FileNotFoundException fnfe) {
 			_display.popup(Message.fileNotFound());
 		} catch (NoSuchPersonIdException e) {
