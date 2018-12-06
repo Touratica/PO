@@ -33,6 +33,7 @@ public class CreatedState extends Survey.State {
 		}
 		else {
 			setState(new OpenState(getSurvey()));
+			getSurvey().notifyObservers();
 		}
 	}
 

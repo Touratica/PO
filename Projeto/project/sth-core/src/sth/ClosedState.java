@@ -15,6 +15,7 @@ public class ClosedState extends Survey.State {
     @Override
     public void cancel() {
         setState(new OpenState(getSurvey()));
+        getSurvey().notifyObservers();
     }
 
     /**
@@ -23,6 +24,7 @@ public class ClosedState extends Survey.State {
     @Override
     public void open() {
         setState(new OpenState(getSurvey()));
+        getSurvey().notifyObservers();
     }
 
     /**
@@ -37,12 +39,13 @@ public class ClosedState extends Survey.State {
     @Override
     public void finalize() {
         setState(new FinalState(getSurvey()));
+        getSurvey().notifyObservers();
     }
 
     public String renderResults(Person p) {
         return super.renderResults(p) + " (fechado)";
     }
-    
+
     @Override
     public String notifyState() {
         return "closed";

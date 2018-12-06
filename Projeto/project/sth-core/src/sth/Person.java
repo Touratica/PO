@@ -134,6 +134,7 @@ public abstract class Person implements Serializable, Observer {
 		for (String str: _notifications) {
 			notifications += str + "\n";
 		}
+		_notifications.clear();
 		return notifications;
 	}
 

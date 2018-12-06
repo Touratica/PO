@@ -142,7 +142,11 @@ public class Project implements Serializable {
 	public void close(){
 		_open = false;
 		if (_survey != null)
-			_survey.setState(new OpenState(_survey));
+			try {
+				_survey.open();
+			} catch (ProjectNotClosedException | SurveyNotClosedException | FinalizedSurveyException e) {
+				// this exceptions will never be thrown in this situation
+			}
 	}
 	
 	public void deliverProject(Person person, String submission) throws ProjectAlreadyClosedException {

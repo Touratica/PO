@@ -141,9 +141,10 @@ public class Survey implements Serializable, Subject {
 	}
 
 	public void remove() throws SurveyWithAnswersException {
-		if (_results.size() == 0){
+		if (_results.size() == 0) {
 			_project.removeSurvey();
-		} else {
+		}
+		else {
 			throw new SurveyWithAnswersException();
 		}
 	}
@@ -154,7 +155,6 @@ public class Survey implements Serializable, Subject {
 
 	public void open() throws ProjectNotClosedException, SurveyNotClosedException, FinalizedSurveyException {
 		_state.open();
-		notifyObservers();
 	}
 
 	public void close() throws SurveyNotOpenException, FinalizedSurveyException {
@@ -163,7 +163,6 @@ public class Survey implements Serializable, Subject {
 
 	public void finalize() throws SurveyNotClosedException {
 		_state.finalize();
-		notifyObservers();
 	}
 
 	public boolean isOpen() {
