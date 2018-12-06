@@ -102,7 +102,6 @@ public class Survey implements Serializable, Subject {
 				maxHours = answer.getWorkHours();
 		}
 		return maxHours;
-
 	}
 
 	public int getMinHours(){
@@ -123,7 +122,6 @@ public class Survey implements Serializable, Subject {
 			averageHours+=getAnswer(i).getWorkHours();
 		}
 		return (int) averageHours/answersNumber;
-
 	}
 
 	public int getSubmissionsNumber(){
@@ -133,6 +131,7 @@ public class Survey implements Serializable, Subject {
 	public Project getProject(){
 		return _project;
 	}
+
 	public void addResult(SurveyAnswer answer){
 		_results.add(answer);
 	}
@@ -178,7 +177,7 @@ public class Survey implements Serializable, Subject {
 	public void submitAnswer(Student student, SurveyAnswer answer) throws SurveyNotOpenException {
 		for (Student s : _students)
 			if (Student.ID_COMPARATOR.compare(student, s) == 0) 
-				return ; //posterior answers should be ignored
+				return ; // posterior answers should be ignored
 		_state.submitAnswer(student, answer);
 	}
 	

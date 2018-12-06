@@ -68,12 +68,9 @@ public class Course	implements Serializable {
 		}
 	}
 
-	public void addDiscipline(Discipline discipline) throws DuplicateDisciplineException {
+	public void addDiscipline(Discipline discipline) {
 		if (!hasDiscipline(discipline)) {
 			_disciplines.put(discipline.getDisciplineName(), discipline);
-		}
-		else {
-			throw new DuplicateDisciplineException(discipline);
 		}
 	}
 

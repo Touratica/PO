@@ -3,7 +3,6 @@ package sth;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import sth.Survey.State;
 import sth.exceptions.DisciplineLimitExceededException;
 import sth.exceptions.DuplicateDisciplineException;
@@ -187,7 +186,6 @@ public class Student extends Person {
 		getDiscipline(discipline).addToNotificationList(this, project);
 	}
 	
-
 	@Override
 	public String toString() {
 		String s = "";
@@ -202,8 +200,5 @@ public class Student extends Person {
 		for (String d : disciplines) //disciplines is already sorted
 			s+= "\n* " + _course.toString() + " - " + d;
 		return s; 
-
 	}
-
-    
 }

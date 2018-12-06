@@ -63,17 +63,6 @@ public class Professor extends Person implements Observer {
 		return disciplines;
 	}
 
-	/*public Discipline getFirstDiscipline(String disciplineName)throws NoSuchDisciplineNameException{
-		for (Map.Entry<String, ArrayList<Discipline>> entry: _disciplines.entrySet()) {
-			for (Discipline discipline: entry.getValue()) {
-				if (disciplineName.equals(discipline.getDisciplineName()))
-					return discipline;
-			}
-		}
-		throw new NoSuchDisciplineNameException();
-
-	} */
-
 	@Override
 	public void createProject(String disciplineName, String projectName) throws NoSuchDisciplineNameException, DuplicateProjectException {
 		ArrayList<Discipline> disciplines = getDiscipline(disciplineName);

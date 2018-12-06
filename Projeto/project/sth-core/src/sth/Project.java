@@ -219,6 +219,7 @@ public class Project implements Serializable {
 	public String toString() {
 		return _name;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Project) {
@@ -227,5 +228,4 @@ public class Project implements Serializable {
 		}
 		return false;
 	}
-	
 }

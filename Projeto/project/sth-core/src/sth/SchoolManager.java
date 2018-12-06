@@ -129,8 +129,7 @@ public class SchoolManager {
 		}
 		else {
 			throw new NoSuchPersonIdException(_loggedPerson.getId());
-		}
-		
+		}	
 	}
 	
 	public void save() throws IOException {

@@ -98,11 +98,7 @@ public class School implements Serializable {
 							split[0] = split[0].replaceAll("#\\ ", "");
 							Course course = addCourse(split[0]);
 							Discipline discipline = new Discipline(split[1], 300);
-							try {
-								course.addDiscipline(discipline);
-							} catch (DuplicateDisciplineException e) {
-								// do nothing- its fine to import disciplines with the same name
-							}
+							course.addDiscipline(discipline);
 							// grabs the discipline from the course with this name
 							discipline = course.getDisciplines().get(discipline.getDisciplineName());
 							professor.addDiscipline(course, discipline);
@@ -167,7 +163,7 @@ public class School implements Serializable {
 	}
 
 	/**
-	 *  Creates new administrative.
+	 * Creates new administrative.
 	 * @param s the array with the administrative's type, id, phone number and name
 	 * @return the created administrative
 	 * @throws DuplicateIdException
@@ -239,24 +235,19 @@ public class School implements Serializable {
 					}
 					Course course = addCourse(split[0]);
 					Discipline discipline = new Discipline(split[1], 300);
-					try {
-						course.addDiscipline(discipline);
-					} catch (DuplicateDisciplineException e) {
-						// do nothing- its fine to import disciplines with the same name
-					}
+					course.addDiscipline(discipline);
 					student.setCourse(course);
-					// grabs the discipline from the course with this name
 					discipline = course.getDisciplines().get(discipline.getDisciplineName());
 					student.addDiscipline(discipline);
-					try{
+					try {
 						discipline.addStudent(student);
-					}catch (StudentLimitExceededException e){}
-		
+					} catch (StudentLimitExceededException e){}
 				} catch (NotMatchingCourseException e) {
 					e.printStackTrace();
 					break;
 				}
-			} else {
+			}
+			else {
 				break;
 			}
 		}
@@ -324,7 +315,6 @@ public class School implements Serializable {
 		for (Person p: peopleList){
 			peopleVisited.add(p.accept(visitor));
 		}
-
 		return peopleVisited;
 	}
 
@@ -357,7 +347,6 @@ public class School implements Serializable {
 		for (Person p: filteredPeople){
 			peopleVisited.add(p.accept(visitor));
 		}
-
 		return peopleVisited;
 	}
 

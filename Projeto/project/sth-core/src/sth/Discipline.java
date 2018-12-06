@@ -185,7 +185,6 @@ public class Discipline implements Serializable {
 		getProject(project).removeFromNotificationList(person);
 	}
 	
-
 	@Override
 	public boolean equals(Object o){
 		if (o instanceof Discipline){
@@ -198,6 +197,5 @@ public class Discipline implements Serializable {
 	@Override
 	public String toString() {
 		return  _name;
-	}
-    
+	} 
 }
