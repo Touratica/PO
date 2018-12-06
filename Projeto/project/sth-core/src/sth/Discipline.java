@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.io.Serializable;
 import java.text.Collator;
-
 import sth.exceptions.DuplicateProjectException;
 import sth.exceptions.DuplicateSurveyException;
 import sth.exceptions.FinalizedSurveyException;
@@ -38,7 +37,7 @@ public class Discipline implements Serializable {
 	private Map<String, Project> _projects = new TreeMap<String, Project>();
 
 	public Discipline(String name){
-			_name = name;
+		_name = name;
 	}
 
 	public String getDisciplineName(){
@@ -60,7 +59,7 @@ public class Discipline implements Serializable {
 	}
 
 	public void addProfessor(Professor prof) {
-			_professors.put(prof.getId(), prof);
+		_professors.put(prof.getId(), prof);
 	}
 
 	public void addStudent(Student student) throws StudentLimitExceededException{
@@ -100,11 +99,10 @@ public class Discipline implements Serializable {
 			throw new DuplicateProjectException();
 		}
 		else {
-			Project p = new Project(_name, project);
+			Project p = new Project(project, _name + " - " + project);
 			_projects.put(project, p);
 		}
 	}
-
 
 	public void closeProject(String project) throws NoSuchProjectNameException, ProjectAlreadyClosedException {
 		Project proj;

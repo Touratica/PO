@@ -30,9 +30,9 @@ public class Project implements Serializable {
 	private Boolean _open = true; //tells if a project is open
 	private Survey _survey;
 
-	public Project(String discipline, String name) {
+	public Project(String name, String description) {
 		_name = name;
-		_description = discipline + " - " + name;
+		_description = description;
 	}
 	
 	/**
