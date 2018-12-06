@@ -50,7 +50,7 @@ public class Survey implements Serializable, Subject {
 		public abstract void close() throws SurveyNotOpenException, FinalizedSurveyException;
 		public abstract void finalize() throws SurveyNotClosedException;
 		public String renderResults(Person p){
-			return _project.getName() + " - " + _discipline.getDisciplineName();
+			return  _discipline.getDisciplineName() + " - " +  _project.getName();
 		}
 		public String renderSurvey(Person p){
 			return renderResults(p);
