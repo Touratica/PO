@@ -178,9 +178,7 @@ public class Student extends Person {
 
 	@Override
 	public String accept(PersonVisitor visitor){
-		if (isRepresentative())
-			return "DELEGADO|" + visitor.showStudent(this);
-		else return "ALUNO|" + visitor.showStudent(this);
+		 return visitor.showStudent(this);
 	}
 
 	@Override
@@ -189,7 +187,7 @@ public class Student extends Person {
 		getDiscipline(discipline).addToNotificationList(this, project);
 	}
 	
-/*
+
 	@Override
 	public String toString() {
 		String s = "";
@@ -206,6 +204,6 @@ public class Student extends Person {
 		return s; 
 
 	}
-*/
+
     
 }

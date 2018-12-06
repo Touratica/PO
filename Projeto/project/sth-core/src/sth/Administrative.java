@@ -20,11 +20,11 @@ public class Administrative extends Person {
 		return true;
 	}
 	
-	/*@Override
+	@Override
 	public String toString() {
 		return  "FUNCIONÁRIO|" + super.toString() ;
 	}
-	*/
+	
 	@Override
 	public String accept(PersonVisitor visitor){
 		return visitor.showAdministrative(this);

@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Map;
 
 public class PersonVisitor{
-    String showPerson(Person p){
+   /* String showPerson(Person p){
         return p.getId() + "|" + p.getPhoneNumber() + "|" +  p.getName();
     }
 
@@ -43,5 +43,21 @@ public class PersonVisitor{
     String showAdministrative(Administrative administrative){
         return "FUNCIONÁRIO|"+  ((Person)administrative).accept(this); 
         
-    }
+	}*/
+
+	String showPerson(Person p){
+		return p.toString();
+	}
+	String showStudent(Student student){
+		return student.toString();
+	}
+
+	String showProfessor(Professor professor){
+		return professor.toString();
+	}
+
+	String showAdministrative(Administrative adm){
+		return adm.toString();
+	}
+	
 }
