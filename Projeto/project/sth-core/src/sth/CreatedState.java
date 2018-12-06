@@ -6,6 +6,9 @@ import sth.exceptions.SurveyNotOpenException;
 import sth.exceptions.SurveyWithAnswersException;
 
 public class CreatedState extends Survey.State {
+
+	/** Serial number for serialization. */
+	private static final long serialVersionUID = 201812060204L;
 	
 	public CreatedState(Survey survey) {
 		survey.super(); 

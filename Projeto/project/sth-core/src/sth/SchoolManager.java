@@ -140,7 +140,7 @@ public class SchoolManager {
 		
 	}
 	
-	public void save() throws IOException{
+	public void save() throws IOException {
 		ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(_filename)));
 		out.writeObject(_school);
 		out.close();

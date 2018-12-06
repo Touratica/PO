@@ -4,6 +4,10 @@ import sth.exceptions.SurveyNotClosedException;
 import sth.exceptions.SurveyWithAnswersException;
 
 public class OpenState extends Survey.State {
+    
+    /** Serial number for serialization. */
+    private static final long serialVersionUID = 201812060202L;
+
     public OpenState(Survey survey) {
         survey.super();
     }

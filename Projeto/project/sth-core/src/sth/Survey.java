@@ -1,5 +1,6 @@
 package sth;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.TreeMap;
@@ -14,7 +15,10 @@ import sth.exceptions.SurveyWithAnswersException;
 /**
  * The project Survey class.
  */
-public class Survey implements Subject {
+public class Survey implements Serializable, Subject {
+
+	/** Serial number for serialization. */
+	private static final long serialVersionUID = 201812060156L;
 
 	private List<Observer> _observers = new ArrayList<Observer>();
 	private List<SurveyAnswer> _results = new ArrayList<SurveyAnswer>();
@@ -26,7 +30,10 @@ public class Survey implements Subject {
 	private Discipline _discipline;
 	private State _state;
 	
-	public abstract class State {
+	public abstract class State implements Serializable {
+
+		/** Serial number for serialization. */
+		private static final long serialVersionUID = 201812060157L;
 
 		protected void setState(State state){
 			_state = state;

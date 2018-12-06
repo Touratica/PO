@@ -22,7 +22,7 @@ import java.util.TreeMap;
 public class Project implements Serializable {
 
 	/** Serial number for serialization. */
-	private static final long serialVersionUID = 201811151744L;
+	private static final long serialVersionUID = 201812060158L;
 
 	private String _name;
 	private String _description;

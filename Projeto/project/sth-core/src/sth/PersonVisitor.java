@@ -1,11 +1,16 @@
 package sth;
 
+import java.io.Serializable;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
-public class PersonVisitor{
+public class PersonVisitor implements Serializable {
+
+	/** Serial number for serialization. */
+	private static final long serialVersionUID = 201812060201L;
+
    /* String showPerson(Person p){
         return p.getId() + "|" + p.getPhoneNumber() + "|" +  p.getName();
     }

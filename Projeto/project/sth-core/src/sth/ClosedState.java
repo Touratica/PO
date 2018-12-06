@@ -1,6 +1,10 @@
 package sth;
 
-public class ClosedState extends Survey.State{
+public class ClosedState extends Survey.State {
+
+    /** Serial number for serialization. */
+    private static final long serialVersionUID = 201812060205L;
+
     public ClosedState(Survey survey){
         survey.super();
     }

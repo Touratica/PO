@@ -64,18 +64,11 @@ public class Professor extends Person implements Observer {
 
 	@Override
 	public void createProject(String disciplineName, String projectName) throws NoSuchDisciplineNameException, DuplicateProjectException {
-		// this method is optimized to when multiple courses have the same discipline and some of those have the project, it searches for one that doesnt have that project and puts it there 
-		ArrayList<Discipline> _disciplines = getDiscipline(disciplineName);
-		if (_disciplines.size() == 0) {
+		ArrayList<Discipline> disciplines = getDiscipline(disciplineName);
+		if (disciplines.size() == 0) {
 			throw new NoSuchDisciplineNameException();
 		}
-		for (Discipline d : _disciplines) {
-			if (!d.hasProject(projectName)) {
-				d.createProject(projectName);
-				return;
-			} 
-		}
-		throw new DuplicateProjectException();
+		disciplines.get(0).createProject(projectName);
 	}
 	
 	@Override

@@ -31,10 +31,10 @@ public class DoCreateProject extends Command<SchoolManager> {
 		_form.parse();
 		try {
 			_receiver.createProject(_discipline.value(), _project.value());
-		} catch (DuplicateProjectException e) {
-			throw new sth.app.exceptions.DuplicateProjectException(_discipline.value(), _project.value());
 		} catch (NoSuchDisciplineNameException e) {
 			throw new NoSuchDisciplineException(_discipline.value());
+		} catch (DuplicateProjectException e) {
+			throw new sth.app.exceptions.DuplicateProjectException(_discipline.value(), _project.value());
 		}
 	}
 

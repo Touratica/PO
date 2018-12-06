@@ -88,11 +88,7 @@ public class Discipline implements Serializable {
 	}
 
 	public boolean hasProject(String project){
-		try {
-			return getProject(project) != null;
-		} catch (NoSuchProjectNameException e) {
-			return false;
-		}
+		return _projects.containsKey(project);
 	}
 
 	public String showProject(String project) throws NoSuchProjectNameException {
@@ -103,9 +99,14 @@ public class Discipline implements Serializable {
 		getProject(project).deliverProject(person, submission);
 	}
 	
-	public void createProject(String project) {
-		Project p = new Project(_name, project);
-		_projects.put(project, p);
+	public void createProject(String project) throws DuplicateProjectException {
+		if (hasProject(project)) {
+			throw new DuplicateProjectException();
+		}
+		else {
+			Project p = new Project(_name, project);
+			_projects.put(project, p);
+		}
 	}
 
 

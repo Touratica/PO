@@ -3,6 +3,10 @@ package sth;
 import sth.exceptions.FinalizedSurveyException;
 
 public class FinalState extends Survey.State {
+
+    /** Serial number for serialization. */
+    private static final long serialVersionUID = 201812060203L;
+
     public FinalState(Survey survey) {
         survey.super();
     }

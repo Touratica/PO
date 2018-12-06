@@ -1,6 +1,12 @@
 package sth;
 
-public class SurveyAnswer{
+import java.io.Serializable;
+
+public class SurveyAnswer implements Serializable {
+
+  /** Serial number for serialization. */
+  private static final long serialVersionUID = 201812060159L;
+
   private String _comment;
   private int _totalWorkHours;
     
