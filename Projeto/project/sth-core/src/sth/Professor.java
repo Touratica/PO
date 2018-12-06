@@ -194,7 +194,7 @@ public class Professor extends Person implements Observer {
 			}
 		}
 	}
-	/*
+	
 	@Override
 	public String toString() {
 		String s = "DOCENTE|" + super.toString();
@@ -212,5 +212,5 @@ public class Professor extends Person implements Observer {
 		}
 		return s;
 	}
-	*/
+	
 }

@@ -217,4 +217,9 @@ public abstract class Person implements Serializable, Observer {
 			return person1.getId() - person2.getId();
 		}
 	}
+
+	@Override
+	public String toString() {
+		return _id + "|" + _phoneNumber + "|" +  _name;
+	}
 }
