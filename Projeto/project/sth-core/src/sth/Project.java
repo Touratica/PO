@@ -213,6 +213,10 @@ public class Project implements Serializable {
 	}
 
 	@Override
+	public String toString() {
+		return _name;
+	}
+	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Project) {
 			Project project = (Project) obj;

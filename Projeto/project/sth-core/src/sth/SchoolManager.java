@@ -133,6 +133,7 @@ public class SchoolManager {
 		in.close();
 		if (newSchool.containsPerson(_loggedPerson.getId())) {
 			_school = newSchool;
+			_loggedPerson = _school.getPerson(_loggedPerson.getId());
 		}
 		else {
 			throw new NoSuchPersonIdException(_loggedPerson.getId());
