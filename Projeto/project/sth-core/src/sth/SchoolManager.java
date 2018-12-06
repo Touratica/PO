@@ -131,7 +131,7 @@ public class SchoolManager {
 		setFilename(filename);
 		School newSchool = (School) in.readObject();
 		in.close();
-		if (newSchool.getStudents().containsKey(_loggedPerson.getId()) || newSchool.getProfessors().containsKey(_loggedPerson.getId()) || newSchool.getAdministratives().containsKey(_loggedPerson.getId())) {
+		if (newSchool.containsPerson(_loggedPerson.getId())) {
 			_school = newSchool;
 		}
 		else {

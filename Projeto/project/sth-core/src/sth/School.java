@@ -360,4 +360,13 @@ public class School implements Serializable {
 
 		return peopleVisited;
 	}
+
+	/**
+	 * Checks if a person exists in the school.
+	 * @param id of the person to be checked for
+	 * @return true if person exists
+	 */
+	public boolean containsPerson(int id) {
+		return (_students.containsKey(id) || _professors.containsKey(id) || _administratives.containsKey(id));
+	}
 }

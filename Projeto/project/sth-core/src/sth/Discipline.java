@@ -69,10 +69,6 @@ public class Discipline implements Serializable {
 		else throw new StudentLimitExceededException(student);
 	}
 
-	public void addProject(Project project) {
-		_projects.put(project.getName(), project);
-	}
-
 	/**
 	 * @return the discipline associated projects
 	 */
