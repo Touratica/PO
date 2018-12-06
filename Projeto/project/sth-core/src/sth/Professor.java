@@ -84,6 +84,7 @@ public class Professor extends Person implements Observer {
 		ArrayList<Discipline> disciplines = getDiscipline(discipline);
 		if (disciplines.size() != 0) {
 			for (Discipline dis: disciplines) {
+				i++;
 				try {
 					dis.closeProject(project);
 					return;
