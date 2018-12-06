@@ -32,6 +32,7 @@ import sth.exceptions.ProjectAlreadyClosedException;
 import sth.exceptions.ProjectNotClosedException;
 import sth.exceptions.RepresentativeNumberExceeded;
 import sth.exceptions.SurveyNotClosedException;
+import sth.exceptions.SurveyNotOpenException;
 import sth.exceptions.SurveyWithAnswersException;
 
 /**
@@ -178,12 +179,8 @@ public class SchoolManager {
 		}
 	}
 
-	public ArrayList<String> showDisciplineStudents (String disciplineName) throws NoSuchDisciplineNameException {
-		try {
-			return _loggedPerson.showDisciplineStudents(discipline);
-		} catch (UnsupportedOperationException e) {
-			e.printStackTrace();
-		}
+	public ArrayList<String> showDisciplineStudents (String discipline) throws NoSuchDisciplineNameException, UnsupportedOperationException {
+		return _loggedPerson.showDisciplineStudents(discipline);
 	}
 
 	public void deliverProject(String discipline, String project, String submission) throws NoSuchDisciplineNameException, NoSuchProjectNameException, ProjectAlreadyClosedException {
@@ -197,20 +194,16 @@ public class SchoolManager {
 	public String showNotifications() {
 		return _loggedPerson.showNotifications();
 	}
-	public String showProjectSubmissions(String discipline, String project) {
-		return _loggedPerson.showSubmissions(discipline , project);
+	public String showProjectSubmissions(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
+		return _loggedPerson.showProjectSubmissions(discipline , project);
 	}
 
-	public String showSurveyResults(String discipline, String project )  {
-		return _loggedPerson.showSurveyResults(discipline,project);
+	public String showSurveyResults(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, NoSuchSurveyException {
+		return _loggedPerson.showSurveyResults(discipline, project);
 	}
 
-	public String showDisciplineSurveys(String discipline) throws NoSuchDisciplineNameException {
-		try {
-			return _loggedPerson.showDisciplineSurveys(discipline);
-		} catch (UnsupportedOperationException e) {
-			e.printStackTrace();
-		} 
+	public String showDisciplineSurveys(String discipline) throws UnsupportedOperationException {
+		return _loggedPerson.showDisciplineSurveys(discipline);
 	}
 
 	/**
@@ -222,7 +215,7 @@ public class SchoolManager {
 	 * @throws NoSuchDisciplineNameException
 	 * @throws NoSuchProjectNameException
 	 */
-	public void answerSurvey(String discipline, String project, int hours, String comment) throws NoSuchDisciplineNameException, NoSuchProjectNameException {
+	public void answerSurvey(String discipline, String project, int hours, String comment) throws NoSuchDisciplineNameException, NoSuchProjectNameException, SurveyNotOpenException {
 		try {
 			_loggedPerson.answerSurvey(discipline, project, hours, comment);
 		} catch (UnsupportedOperationException e) {
@@ -254,7 +247,7 @@ public class SchoolManager {
 		}
 	}
 
-	public void closeSurvey(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException, FinalizedSurveyException, NoSuchSurveyException {
+	public void closeSurvey(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException, FinalizedSurveyException, NoSuchSurveyException, SurveyNotOpenException {
 		try {
 			_loggedPerson.closeSurvey(discipline, project);
 		} catch (UnsupportedOperationException e) {

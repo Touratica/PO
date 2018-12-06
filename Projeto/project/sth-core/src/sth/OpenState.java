@@ -1,6 +1,7 @@
 package sth;
 
 import sth.exceptions.SurveyNotClosedException;
+import sth.exceptions.SurveyWithAnswersException;
 
 public class OpenState extends Survey.State {
     public OpenState(Survey survey) {

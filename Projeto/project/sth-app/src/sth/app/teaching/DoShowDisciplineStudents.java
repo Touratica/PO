@@ -10,6 +10,7 @@ import pt.tecnico.po.ui.Messages;
 import sth.SchoolManager;
 import sth.Student;
 import sth.app.exceptions.NoSuchDisciplineException;
+import sth.exceptions.NoSuchDisciplineNameException;
 
 /**
  * 4.3.4. Show course students.
@@ -30,15 +31,17 @@ public class DoShowDisciplineStudents extends Command<SchoolManager> {
 	@Override
 	public final void execute() throws DialogException {
 		_form.parse();
-		Collection<String> students = _receiver.showDisciplineStudents(_discipline.value());
-		if (students != null) {
-			for (String s: students)
+		try {
+			Collection<String> students = _receiver.showDisciplineStudents(_discipline.value());
+			for (String s: students) {
 				_display.addLine(s); 
-		}
-		else {
+			}
+			_display.display();
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
+		} catch (NoSuchDisciplineNameException e) {
 			throw new NoSuchDisciplineException(_discipline.value());
 		}
-		_display.display();
 	}
 
 }

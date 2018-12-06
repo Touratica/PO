@@ -6,8 +6,10 @@ import pt.tecnico.po.ui.Input;
 import sth.SchoolManager;
 import sth.app.exceptions.NoSuchDisciplineException;
 import sth.app.exceptions.NoSuchProjectException;
+import sth.app.exceptions.NoSurveyException;
 import sth.exceptions.NoSuchDisciplineNameException;
 import sth.exceptions.NoSuchProjectNameException;
+import sth.exceptions.SurveyNotOpenException;
 
 /**
  * 4.4.2. Answer survey.
@@ -26,7 +28,7 @@ public class DoAnswerSurvey extends Command<SchoolManager> {
 		super(Label.ANSWER_SURVEY, receiver);
 		_discipline = _form.addStringInput(Message.requestDisciplineName());
 		_project = _form.addStringInput(Message.requestProjectName());
-		_hours = _form.addStringInput(Message.requestProjectHours());
+		_hours = _form.addIntegerInput(Message.requestProjectHours());
 		_comment = _form.addStringInput(Message.requestComment());
 	}
 
@@ -40,6 +42,8 @@ public class DoAnswerSurvey extends Command<SchoolManager> {
 			throw new NoSuchDisciplineException(_discipline.value());
 		} catch (NoSuchProjectNameException e) {
 			throw new NoSuchProjectException(_discipline.value(), _project.value());
+		} catch (SurveyNotOpenException e) {
+			throw new NoSurveyException(_discipline.value(), _project.value());
 		}
 	}
 

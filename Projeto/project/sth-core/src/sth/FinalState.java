@@ -53,14 +53,14 @@ public class FinalState extends Survey.State {
 
             String hours = "* Tempos de resolução (horas) (mínimo, médio, máximo): "+ survey.getMinHours() + ", " + survey.getAverageHours() + ", " + survey.getMaxHours();
 
-            return super.render(p) + "\n" + submissions + "\n" + answers + "\n" + hours ;
+            return super.renderResults(p) + "\n" + submissions + "\n" + answers + "\n" + hours ;
 
         } else if (p.isStudent()){
             String answers = "* Número de respostas: " + survey.getAnswersNumber();
 
             String hours = "* Tempos médio (horas): "+ survey.getAverageHours();
 
-            return super.render(p) + "\n" + answers + "\n" + hours;
+            return super.renderResults(p) + "\n" + answers + "\n" + hours;
         }
         throw new UnsupportedOperationException(); 
     }

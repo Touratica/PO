@@ -139,7 +139,7 @@ public class Project implements Serializable {
 	public void close(){
 		_open = false;
 		if (_survey != null)
-		_survey.setState(new OpenState(this));
+		_survey.setState(new OpenState(_survey));
 	}
 	
 	public void deliverProject(Person person, String submission) throws ProjectAlreadyClosedException {
@@ -148,7 +148,7 @@ public class Project implements Serializable {
 		}
 		else {
 			if (submittedProject(person.getId())) {
-				_submissions.replace(id, submission);
+				_submissions.replace(person.getId(), submission);
 			}
 			else {
 				_submissions.put(person.getId(), submission);
@@ -184,14 +184,21 @@ public class Project implements Serializable {
 
 	public void removeFromNotificationList(Person person) throws NoSuchSurveyException {
 		if (_survey != null) {
-			_survey.removeOberserver(person);
+			_survey.removeObserver(person);
 		}
 		else {
 			throw new NoSuchSurveyException();
 		}
 	}
 
-	
+	public String showSurveyResults(Person person) throws NoSuchSurveyException {
+		if (_survey != null) {
+			return _survey.renderResults(person);
+		} else {
+			throw new NoSuchSurveyException();
+		}
+	}
+
 	public String showSurvey(Person person) throws NoSuchSurveyException {
 		if (_survey != null){
 			return _survey.renderSurvey(person);

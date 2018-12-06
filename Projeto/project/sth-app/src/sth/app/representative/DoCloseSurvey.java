@@ -12,6 +12,7 @@ import sth.exceptions.FinalizedSurveyException;
 import sth.exceptions.NoSuchDisciplineNameException;
 import sth.exceptions.NoSuchProjectNameException;
 import sth.exceptions.NoSuchSurveyException;
+import sth.exceptions.SurveyNotOpenException;
 
 /**
  * 4.5.4. Close survey.
@@ -42,7 +43,7 @@ public class DoCloseSurvey extends Command<SchoolManager> {
 			throw new NoSuchProjectException(_discipline.value(), _project.value());
 		} catch (NoSuchSurveyException e) {
 			throw new NoSurveyException(_discipline.value(), _project.value());
-		} catch (FinalizedSurveyException e) {
+		} catch (FinalizedSurveyException | SurveyNotOpenException e) {
 			throw new ClosingSurveyException(_discipline.value(), _project.value());
 		}
 	}

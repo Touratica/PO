@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.io.Serializable;
+import java.text.Collator;
 
 import sth.exceptions.DuplicateProjectException;
 import sth.exceptions.DuplicateSurveyException;
@@ -13,8 +14,10 @@ import sth.exceptions.NoSuchPersonIdException;
 import sth.exceptions.NoSuchProjectNameException;
 import sth.exceptions.NoSuchSurveyException;
 import sth.exceptions.ProjectAlreadyClosedException;
+import sth.exceptions.ProjectNotClosedException;
 import sth.exceptions.StudentLimitExceededException;
 import sth.exceptions.SurveyNotClosedException;
+import sth.exceptions.SurveyNotOpenException;
 import sth.exceptions.SurveyWithAnswersException;
 
 /**
@@ -85,19 +88,22 @@ public class Discipline implements Serializable {
 	}
 
 	public boolean hasProject(String project){
-		return getProject(project) != null;
+		try {
+			return getProject(project) != null;
+		} catch (NoSuchProjectNameException e) {
+			return false;
+		}
 	}
 
-	public String showProject(String project){
+	public String showProject(String project) throws NoSuchProjectNameException {
 		return _name + " - " + project + getProject(project).showSubmissions();
 	}
 
-	public void deliverProject(Person person, String project, String submission){
+	public void deliverProject(Person person, String project, String submission) throws NoSuchProjectNameException, ProjectAlreadyClosedException {
 		getProject(project).deliverProject(person, submission);
-		// FIXME se o projeto nao existir manda excecao
-
 	}
-	public void createProject(String project){ // FIXME mandar excecoes aqui ?
+	
+	public void createProject(String project) {
 		Project p = new Project(_name, project);
 		_projects.put(project, p);
 	}
@@ -119,7 +125,7 @@ public class Discipline implements Serializable {
 		}
 	}
 
-	public void submitSurveyAnswer(Student student, String project, SurveyAnswer answer) throws NoSuchProjectNameException { 
+	public void submitSurveyAnswer(Student student, String project, SurveyAnswer answer) throws NoSuchProjectNameException, SurveyNotOpenException { 
 		Project p = getProject(project);
 		p.submitSurveyAnswer(student, answer);
 
@@ -134,13 +140,18 @@ public class Discipline implements Serializable {
 	}
 
 	public String showDisciplineSurveys(Person person) {
-		String str = "";
+		ArrayList<String> disciplines = new ArrayList<String>();
 		for (Map.Entry<String, Project> entry: _projects.entrySet()) {
 			try {
-				str += entry.getValue().showSurvey(person) + "\n";
+				disciplines.add(entry.getValue().showSurvey(person));
 			} catch (NoSuchSurveyException e) {
 				continue;
 			}
+		}
+		disciplines.sort(Collator.getInstance());
+		String str = "";
+		for (String discipline: disciplines) {
+			str += discipline + "\n";
 		}
 		return str;
 	}
@@ -160,7 +171,7 @@ public class Discipline implements Serializable {
 		proj.openSurvey();
 	}
 	
-	public void closeSurvey(String project) throws NoSuchProjectNameException, FinalizedSurveyException, NoSuchSurveyException {
+	public void closeSurvey(String project) throws NoSuchProjectNameException, FinalizedSurveyException, NoSuchSurveyException, SurveyNotOpenException {
 		Project proj = getProject(project);
 		proj.closeSurvey();
 	}

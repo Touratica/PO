@@ -3,6 +3,7 @@ package sth;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import sth.exceptions.DuplicateDisciplineException;
@@ -65,17 +66,16 @@ public class Professor extends Person implements Observer {
 	public void createProject(String disciplineName, String projectName) throws NoSuchDisciplineNameException, DuplicateProjectException {
 		// this method is optimized to when multiple courses have the same discipline and some of those have the project, it searches for one that doesnt have that project and puts it there 
 		ArrayList<Discipline> _disciplines = getDiscipline(disciplineName);
-		if (_disciplines.size() == 0){
+		if (_disciplines.size() == 0) {
 			throw new NoSuchDisciplineNameException();
 		}
-		for (Discipline d : _disciplines){
-			if (!d.hasProject(projectName)){
+		for (Discipline d : _disciplines) {
+			if (!d.hasProject(projectName)) {
 				d.createProject(projectName);
 				return;
 			} 
 		}
 		throw new DuplicateProjectException();
-
 	}
 	
 	@Override
@@ -100,7 +100,9 @@ public class Professor extends Person implements Observer {
 		}
 	}
 	
-	public String showSubmissions(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException {
+	@Override
+	public String showProjectSubmissions(String discipline, String project)
+			throws NoSuchDisciplineNameException, NoSuchProjectNameException {
 		ArrayList<Discipline> _disciplines = getDiscipline(discipline);
 		if (_disciplines.size() == 0){
 			throw new NoSuchDisciplineNameException();
@@ -130,7 +132,7 @@ public class Professor extends Person implements Observer {
 		throw new NoSuchDisciplineNameException();
 	}
 
-	public String showSurveyResults(String discipline, String project)throws NoSuchDisciplineNameException, NoSuchProjectNameException{
+	public String showSurveyResults(String discipline, String project)throws NoSuchDisciplineNameException, NoSuchProjectNameException, NoSuchSurveyException {
 		List<Discipline> _disciplines = getDiscipline(discipline);
 		if (_disciplines.size() == 0) {
 			throw new NoSuchDisciplineNameException();
@@ -156,7 +158,7 @@ public class Professor extends Person implements Observer {
 
 	@Override
 	public void addToNotificationList(String discipline, String project)
-			throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
+			throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, NoSuchSurveyException {
 		int i = 0;
 		ArrayList<Discipline> disciplines = getDiscipline(discipline);
 		for (Discipline dis : disciplines) {
@@ -175,20 +177,19 @@ public class Professor extends Person implements Observer {
 
 	@Override
 	public void removeFromNotificationList(String discipline, String project)
-			throws NoSuchDisciplineNameException, NoSuchProjectNameException {
+			throws NoSuchDisciplineNameException, NoSuchProjectNameException, NoSuchSurveyException {
 		int i = 0;
 		ArrayList<Discipline> disciplines = getDiscipline(discipline);
-			for (Discipline dis: disciplines) {
-				try {
-					i++;
-					dis.removeFromNotificationList(this, project);
-					return;
-				} catch (NoSuchProjectNameException | NoSuchSurveyException e) {
-					if (i != disciplines.size()) {
-						continue;
-					}
-					throw e;
+		for (Discipline dis: disciplines) {
+			try {
+				i++;
+				dis.removeFromNotificationList(this, project);
+				return;
+			} catch (NoSuchProjectNameException | NoSuchSurveyException e) {
+				if (i != disciplines.size()) {
+					continue;
 				}
+				throw e;
 			}
 		}
 	}
@@ -211,6 +212,4 @@ public class Professor extends Person implements Observer {
 		return s;
 	}
 	*/
-    
-
 }

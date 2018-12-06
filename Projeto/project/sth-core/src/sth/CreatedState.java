@@ -15,7 +15,7 @@ public class CreatedState extends Survey.State {
 	 * Removes the created survey.
 	*/
 	@Override
-	public void cancel() {
+	public void cancel() throws SurveyWithAnswersException {
 		getSurvey().remove();
 	}
 	

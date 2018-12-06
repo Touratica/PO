@@ -18,6 +18,7 @@ import sth.exceptions.OutOfRangeIdException;
 import sth.exceptions.ProjectAlreadyClosedException;
 import sth.exceptions.ProjectNotClosedException;
 import sth.exceptions.SurveyNotClosedException;
+import sth.exceptions.SurveyNotOpenException;
 import sth.exceptions.SurveyWithAnswersException;
 
 /**
@@ -67,7 +68,7 @@ public class Student extends Person {
 
 	public Discipline getDiscipline(String discipline) throws NoSuchDisciplineNameException{
 		for (Discipline d : _disciplines){
-			if (discpline.equals(d.getDisciplineName())) {
+			if (discipline.equals(d.getDisciplineName())) {
 				return d;
 			}
 		}
@@ -99,16 +100,9 @@ public class Student extends Person {
 			throw new DisciplineLimitExceededException(discipline,this);
 		}
 	}
-
-	public void submitProject(String discipline, String project, String submission){
-		for (Discipline d : disciplines)
-			if (discipline.equals(d.getDisciplineName())){
-				d.submitProject(this, project, submission);
-			}
-		// FIXME throw exception NAO INSCRITO
-	}
 	
-	public void answerSurvey(String discipline, String project, int hours, String comment) throws NoSuchDisciplineNameException, NoSuchProjectNameException {
+	@Override
+	public void answerSurvey(String discipline, String project, int hours, String comment) throws NoSuchDisciplineNameException, NoSuchProjectNameException, SurveyNotOpenException {
 		Discipline d = getDiscipline(discipline);
 		SurveyAnswer answer = new SurveyAnswer(hours, comment);
 		d.submitSurveyAnswer(this, project, answer);
@@ -130,43 +124,46 @@ public class Student extends Person {
 		dis.openSurvey(project);	
 	}
 
-	public void closeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException, FinalizedSurveyException, NoSuchSurveyException {
+	@Override
+	public void closeSurvey(String discipline, String project)throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException, FinalizedSurveyException, NoSuchSurveyException, SurveyNotOpenException {
 	Discipline dis = getDiscipline(discipline);
 		dis.closeSurvey(project);	
 	}
 
 	public void finalizeSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException,NoSuchProjectNameException, SurveyNotClosedException, NoSuchSurveyException {
 		Discipline dis = getDiscipline(discipline);
-		dis.finalizeSurvey(project);	
+		dis.finalizeSurvey(project);
 	}
 	
 	@Override
-	public String showDisciplineSurveys(String discipline) throws UnsupportedOperationException, NoSuchDisciplineNameException {
+	public String showDisciplineSurveys(String discipline) throws UnsupportedOperationException {
 		if (isRepresentative()) {
-			Discipline d = getCourseDiscipline(discipline);
-			return d.showDisciplineSurveys(this);
+			try {
+				Discipline d = getCourseDiscipline(discipline);
+				return d.showDisciplineSurveys(this);
+			} catch (NoSuchDisciplineNameException e) {
+				return "";
+			}
 		}
 		else {
 			return super.showDisciplineSurveys(discipline);
 		}
 	}
 
-	public String showSurveyResults(String discipline, String project) throws NoSuchDisciplineNameException {
+	public String showSurveyResults(String discipline, String project) throws NoSuchDisciplineNameException, NoSuchProjectNameException, NoSuchSurveyException {
 		Discipline d = getDiscipline(discipline);
-		Project p = d.getProject(project); 
-		return p.showSurveyResults(this);
-
+		Project p = d.getProject(project);
+		if (p.submittedProject(getId())) {
+			return p.showSurveyResults(this);
+		}
+		else {
+			throw new NoSuchProjectNameException();
+		}
 	}
 
 	@Override
 	public void deliverProject(String discipline, String project, String submission) throws NoSuchDisciplineNameException , NoSuchProjectNameException, ProjectAlreadyClosedException {
-		Discipline dis = getDiscipline(discipline);
-		if (dis != null) {
-			dis.deliverProject(this, project, submission);
-		}
-		else {
-			throw new NoSuchDisciplineNameException();
-		}
+		getDiscipline(discipline).deliverProject(this, project, submission);
 	}
 
 	@Override
@@ -182,13 +179,13 @@ public class Student extends Person {
 	@Override
 	public String accept(PersonVisitor visitor){
 		if (isRepresentative())
-			return "DELEGADO|" + visitor.showRepresentative(this);
+			return "DELEGADO|" + visitor.showStudent(this);
 		else return "ALUNO|" + visitor.showStudent(this);
 	}
 
 	@Override
 	public void addToNotificationList(String discipline, String project)
-			throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
+			throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, NoSuchSurveyException {
 		getDiscipline(discipline).addToNotificationList(this, project);
 	}
 	

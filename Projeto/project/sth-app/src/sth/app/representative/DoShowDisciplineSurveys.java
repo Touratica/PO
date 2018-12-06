@@ -4,8 +4,6 @@ import pt.tecnico.po.ui.Command;
 import pt.tecnico.po.ui.DialogException;
 import pt.tecnico.po.ui.Input;
 import sth.SchoolManager;
-import sth.app.exceptions.NoSuchDisciplineException;
-import sth.exceptions.NoSuchDisciplineNameException;
 
 /**
  * 4.5.6. Show discipline surveys.
@@ -30,8 +28,8 @@ public class DoShowDisciplineSurveys extends Command<SchoolManager> {
 			String s =_receiver.showDisciplineSurveys(_discipline.value()); 
 			_display.addLine(s);
 			_display.display();			
-		} catch (NoSuchDisciplineNameException e) {
-			throw new NoSuchDisciplineException(_discipline.value());
+		} catch (UnsupportedOperationException e) {
+			e.printStackTrace();
 		}
 	}
 }

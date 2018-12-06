@@ -18,6 +18,7 @@ import sth.exceptions.OutOfRangeIdException;
 import sth.exceptions.ProjectAlreadyClosedException;
 import sth.exceptions.ProjectNotClosedException;
 import sth.exceptions.SurveyNotClosedException;
+import sth.exceptions.SurveyNotOpenException;
 import sth.exceptions.SurveyWithAnswersException;
 
 /**
@@ -141,7 +142,7 @@ public abstract class Person implements Serializable, Observer {
 		throw new UnsupportedOperationException();
 	}
 
-	public void removeFromNotificationList(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
+	public void removeFromNotificationList(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, NoSuchSurveyException {
 		throw new UnsupportedOperationException();
 	}
 
@@ -157,11 +158,11 @@ public abstract class Person implements Serializable, Observer {
 		throw new UnsupportedOperationException();
 	}
 
-	public void deliverProject(String discipline, String project, String submission) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, ProjectAlreadyClosedException{
+	public void deliverProject(String discipline, String project, String submission) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, ProjectAlreadyClosedException {
 		throw new UnsupportedOperationException();
 	}
 
-	public void answerSurvey(String discipline, String project , int hours, String comment) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
+	public void answerSurvey(String discipline, String project , int hours, String comment) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, SurveyNotOpenException {
 		throw new UnsupportedOperationException();
 	}
 
@@ -177,7 +178,7 @@ public abstract class Person implements Serializable, Observer {
 		throw new UnsupportedOperationException();
 	}
 
-	public void closeSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, FinalizedSurveyException, NoSuchSurveyException {
+	public void closeSurvey(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, FinalizedSurveyException, NoSuchSurveyException, SurveyNotOpenException {
 		throw new UnsupportedOperationException();
 	}
 
@@ -185,12 +186,16 @@ public abstract class Person implements Serializable, Observer {
 		throw new UnsupportedOperationException();
 	}
 
-	public String showSubmissions(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
-		throw new UnsopportedOperationException();
+	public String showProjectSubmissions(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException {
+		throw new UnsupportedOperationException();
 	}
 
-	public String showDisciplineSurveys(String discipline) throws UnsupportedOperationException, NoSuchDisciplineNameException {
-		throw new UnsopportedOperationException();
+	public String showSurveyResults(String discipline, String project) throws UnsupportedOperationException, NoSuchDisciplineNameException, NoSuchProjectNameException, NoSuchSurveyException {
+		throw new UnsupportedOperationException();
+	}
+
+	public String showDisciplineSurveys(String discipline) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException();
 	}
 
 	public String accept(PersonVisitor visitor){
