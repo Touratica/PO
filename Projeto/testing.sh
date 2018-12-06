@@ -1,6 +1,12 @@
 #!/bin/bash
 
-(cd project && make && reset)
+(cd project && make > ../log.txt)
+if [ $? -eq 0 ]; then
+		rm log.txt
+	else
+		cat log.txt
+		exit
+	fi
 for test in Tests-ef-daily-201812032309/auto-tests/*.in
 do
 	test=${test##*/}
@@ -17,4 +23,4 @@ do
 done
 
 echo ""
-(cd project && make clean)
+(cd project && make clean > /dev/null)
