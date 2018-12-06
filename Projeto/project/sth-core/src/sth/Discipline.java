@@ -31,13 +31,14 @@ public class Discipline implements Serializable {
 	private String _name;
 
 	/** The maximum number of students per discipline. */
-	private static final int MAXSTUDENTS = 300;
+	private int _maxStudents = 300;
 	private Map<Integer, Professor> _professors = new HashMap<Integer, Professor>();
 	private Map<Integer, Student> _students = new TreeMap<Integer, Student>();
 	private Map<String, Project> _projects = new TreeMap<String, Project>();
 
-	public Discipline(String name){
+	public Discipline(String name, int maxStudents){
 		_name = name;
+		_maxStudents = maxStudents;
 	}
 
 	public String getDisciplineName(){
@@ -63,7 +64,7 @@ public class Discipline implements Serializable {
 	}
 
 	public void addStudent(Student student) throws StudentLimitExceededException{
-		if (_students.size() < MAXSTUDENTS)
+		if (_students.size() < _maxStudents)
 			_students.put(student.getId(), student);
 		else throw new StudentLimitExceededException(student);
 	}
