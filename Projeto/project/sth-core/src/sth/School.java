@@ -97,7 +97,7 @@ public class School implements Serializable {
 							split = line.split("\\|");
 							split[0] = split[0].replaceAll("#\\ ", "");
 							Course course = addCourse(split[0]);
-							Discipline discipline = new Discipline(split[1]);
+							Discipline discipline = new Discipline(split[1], 300);
 							try {
 								course.addDiscipline(discipline);
 							} catch (DuplicateDisciplineException e) {
@@ -238,7 +238,7 @@ public class School implements Serializable {
 						throw new NotMatchingCourseException();
 					}
 					Course course = addCourse(split[0]);
-					Discipline discipline = new Discipline(split[1]);
+					Discipline discipline = new Discipline(split[1], 300);
 					try {
 						course.addDiscipline(discipline);
 					} catch (DuplicateDisciplineException e) {
