@@ -101,7 +101,7 @@ public class Discipline implements Serializable {
 		}
 		else {
 			Project p = new Project(project, _name + " - " + project);
-			_projects.put(project, p);
+			_projects.put(p.getName(), p);
 		}
 	}
 

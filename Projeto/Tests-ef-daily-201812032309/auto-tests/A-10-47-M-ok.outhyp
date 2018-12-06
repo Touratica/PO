@@ -20,15 +20,7 @@ Escolha uma opção: Portal do Delegado
 5 - Finalizar inquérito
 6 - Mostrar inquéritos de uma disciplina
 0 - Sair
-Escolha uma opção: Nome da disciplina: Portal do Delegado
-1 - Criar inquérito
-2 - Cancelar inquérito
-3 - Abrir inquérito
-4 - Fechar inquérito
-5 - Finalizar inquérito
-6 - Mostrar inquéritos de uma disciplina
-0 - Sair
-Escolha uma opção: Nome da disciplina: Nome do projecto: Criar inquérito: Operação inválida: O projecto 'P2' não existe na disciplina 'D1'.
+Escolha uma opção: Nome da disciplina: D1 - P1 (aberto)
 Portal do Delegado
 1 - Criar inquérito
 2 - Cancelar inquérito
@@ -37,8 +29,15 @@ Portal do Delegado
 5 - Finalizar inquérito
 6 - Mostrar inquéritos de uma disciplina
 0 - Sair
-Escolha uma opção: Nome da disciplina: Nome do projecto: Criar inquérito: Operação inválida: O projecto 'P4' não existe na disciplina 'D1'.
-Portal do Delegado
+Escolha uma opção: Nome da disciplina: Nome do projecto: Portal do Delegado
+1 - Criar inquérito
+2 - Cancelar inquérito
+3 - Abrir inquérito
+4 - Fechar inquérito
+5 - Finalizar inquérito
+6 - Mostrar inquéritos de uma disciplina
+0 - Sair
+Escolha uma opção: Nome da disciplina: Nome do projecto: Portal do Delegado
 1 - Criar inquérito
 2 - Cancelar inquérito
 3 - Abrir inquérito

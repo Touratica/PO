@@ -369,4 +369,15 @@ public class School implements Serializable {
 	public boolean containsPerson(int id) {
 		return (_students.containsKey(id) || _professors.containsKey(id) || _administratives.containsKey(id));
 	}
+
+	public Person getPerson(int id){
+		Person person = _students.get(id);
+		if (person == null){
+			person = _professors.get(id);
+			if (person == null){
+				person = _administratives.get(id);
+			}
+		}
+		return person;
+	}
 }

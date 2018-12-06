@@ -17,8 +17,7 @@ Escolha uma opção: Portal do Estudante
 2 - Preencher inquérito
 3 - Ver resultados de inquérito
 0 - Sair
-Escolha uma opção: Nome da disciplina: Nome do projecto: Número de horas de trabalho: Comentário ao projecto: Preencher inquérito: Operação inválida: O projecto 'P1' não existe na disciplina 'D1'.
-Portal do Estudante
+Escolha uma opção: Nome da disciplina: Nome do projecto: Número de horas de trabalho: Comentário ao projecto: Portal do Estudante
 1 - Entregar projecto
 2 - Preencher inquérito
 3 - Ver resultados de inquérito
@@ -55,7 +54,7 @@ Escolha uma opção: Portal do Estudante
 2 - Preencher inquérito
 3 - Ver resultados de inquérito
 0 - Sair
-Escolha uma opção: Nome da disciplina: Nome do projecto: Ver resultados de inquérito: Operação inválida: O projecto 'P1' não existe na disciplina 'D1'.
+Escolha uma opção: Nome da disciplina: Nome do projecto: D1 - P1 (aberto)
 Portal do Estudante
 1 - Entregar projecto
 2 - Preencher inquérito
@@ -76,7 +75,7 @@ Escolha uma opção: Portal do Delegado
 5 - Finalizar inquérito
 6 - Mostrar inquéritos de uma disciplina
 0 - Sair
-Escolha uma opção: Nome da disciplina: Nome do projecto: Cancelar inquérito: Operação inválida: O projecto 'P1' não existe na disciplina 'D1'.
+Escolha uma opção: Nome da disciplina: Nome do projecto: Cancelar inquérito: Operação inválida: O inquérito do projecto 'P1' da disciplina 'D1' já tem respostas.
 Portal do Delegado
 1 - Criar inquérito
 2 - Cancelar inquérito
@@ -97,7 +96,7 @@ Escolha uma opção: Portal do Estudante
 2 - Preencher inquérito
 3 - Ver resultados de inquérito
 0 - Sair
-Escolha uma opção: Nome da disciplina: Nome do projecto: Ver resultados de inquérito: Operação inválida: O projecto 'P1' não existe na disciplina 'D1'.
+Escolha uma opção: Nome da disciplina: Nome do projecto: D1 - P1 (aberto)
 Portal do Estudante
 1 - Entregar projecto
 2 - Preencher inquérito

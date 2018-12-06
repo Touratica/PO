@@ -78,12 +78,13 @@ public class Course	implements Serializable {
 	}
 
 	public boolean hasDiscipline(Discipline discipline) {
-		for (Map.Entry<String, Discipline> entry: _disciplines.entrySet()) {
+		/*	for (Map.Entry<String, Discipline> entry: _disciplines.entrySet()) {
 			if (entry.getKey().equals(discipline.getDisciplineName())) {
 				return true;
 			}
 		}
 		return false;
+		*/return _disciplines.containsKey(discipline.getDisciplineName());
 	}
 
 	@Override 

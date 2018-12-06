@@ -29,7 +29,7 @@ public class Professor extends Person implements Observer {
 		super(id, phoneNumber, name);
 	}
 
-	//add Discipline may throw this exception from the addDiscipline
+	
 	public void addDiscipline(Course course, Discipline discipline) {
 		if (_disciplines.containsKey(course.getName())) {
 			if (!_disciplines.get(course.getName()).contains(discipline)) {
@@ -41,6 +41,7 @@ public class Professor extends Person implements Observer {
 			disciplines.add(discipline);
 			_disciplines.put(course.getName(), disciplines);
 		}
+		discipline.addProfessor(this);
 	}
 
 	/**
@@ -61,6 +62,17 @@ public class Professor extends Person implements Observer {
 		}
 		return disciplines;
 	}
+
+	/*public Discipline getFirstDiscipline(String disciplineName)throws NoSuchDisciplineNameException{
+		for (Map.Entry<String, ArrayList<Discipline>> entry: _disciplines.entrySet()) {
+			for (Discipline discipline: entry.getValue()) {
+				if (disciplineName.equals(discipline.getDisciplineName()))
+					return discipline;
+			}
+		}
+		throw new NoSuchDisciplineNameException();
+
+	} */
 
 	@Override
 	public void createProject(String disciplineName, String projectName) throws NoSuchDisciplineNameException, DuplicateProjectException {
